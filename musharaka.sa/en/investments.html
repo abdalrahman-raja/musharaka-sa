@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Investments | Musharaka Financial</title>
+  <link rel="icon" href="../wp-content/uploads/2025/03/faviconV2.png" sizes="32x32">
+  <link rel="stylesheet" href="../wp-content/litespeed/css/a0062117fd9d72362afee7da555070cd.css">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold:       #b5985a;
+      --gold-light: #eed3a6;
+      --gold-dark:  #8c7340;
+      --gold-pale:  rgba(181,152,90,0.12);
+      --dark:       #1a1a1a;
+      --dark-2:     #231f20;
+      --bg:         #f5f0e8;
+      --white:      #ffffff;
+      --text:       #2c2c2c;
+      --muted:      #6c6c6c;
+      --border:     #ddd0b8;
+      --border-light: #ebe4d6;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      direction: ltr;
+      line-height: 1.7;
+    }
+
+    /* ══════════════════════════════
+       SITE HEADER
+    ══════════════════════════════ */
+    .site-header {
+      background: var(--dark-2);
+      padding: 0 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.4);
+    }
+    .site-header .logo img { height: 52px; }
+    .site-header nav { display: flex; gap: 28px; align-items: center; }
+    .site-header nav a {
+      color: rgba(255,255,255,0.8);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .site-header nav a:hover,
+    .site-header nav a.active { color: var(--gold-light); }
+    .site-header .btn-header {
+      background: var(--gold);
+      color: #fff !important;
+      padding: 7px 18px;
+      border-radius: 8px;
+      font-weight: 700 !important;
+      transition: background 0.2s !important;
+    }
+    .site-header .btn-header:hover { background: var(--gold-dark) !important; }
+
+    /* ══════════════════════════════
+       HERO
+    ══════════════════════════════ */
+    .hero {
+      background: var(--dark-2);
+      position: relative;
+      overflow: hidden;
+      padding: 90px 40px 80px;
+      text-align: center;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url('../wp-content/uploads/2025/04/ad0dd98ee54f5c1cc0ad82aed29e0605.png') center/cover no-repeat;
+      opacity: 0.08;
+    }
+    .hero-grid-overlay {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(181,152,90,0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(181,152,90,0.06) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 760px; margin: 0 auto; }
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(181,152,90,0.15);
+      border: 1px solid rgba(181,152,90,0.4);
+      color: var(--gold-light);
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 6px 18px;
+      border-radius: 100px;
+      margin-bottom: 28px;
+      letter-spacing: 0.05em;
+    }
+    .hero-tag i { font-size: 0.78rem; }
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 3.2rem);
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1.25;
+      margin-bottom: 20px;
+    }
+    .hero h1 span { color: var(--gold-light); }
+    .hero p {
+      font-size: 1.05rem;
+      color: rgba(255,255,255,0.72);
+      max-width: 600px;
+      margin: 0 auto 36px;
+      line-height: 1.85;
+    }
+    .hero-cta { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .btn-gold {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--gold); color: #fff;
+      text-decoration: none; padding: 13px 28px;
+      border-radius: 10px; font-size: 0.95rem; font-weight: 700;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-gold:hover { background: var(--gold-dark); transform: translateY(-1px); }
+    .btn-outline-white {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: transparent; color: rgba(255,255,255,0.85);
+      border: 1.5px solid rgba(255,255,255,0.3);
+      text-decoration: none; padding: 12px 24px;
+      border-radius: 10px; font-size: 0.95rem; font-weight: 500;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-outline-white:hover { border-color: var(--gold-light); color: var(--gold-light); }
+
+    /* divider wave */
+    .wave-divider {
+      background: var(--dark-2);
+      line-height: 0;
+    }
+    .wave-divider svg { display: block; width: 100%; }
+
+    /* ══════════════════════════════
+       SECTIONS COMMON
+    ══════════════════════════════ */
+    section { padding: 80px 40px; }
+    .container { max-width: 1120px; margin: 0 auto; }
+    .section-label {
+      display: inline-flex; align-items: center; gap: 8px;
+      color: var(--gold-dark); font-size: 0.8rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.1em;
+      margin-bottom: 12px;
+    }
+    .section-label::before {
+      content: '';
+      width: 24px; height: 2px;
+      background: var(--gold);
+      border-radius: 2px;
+    }
+    .section-title {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 800;
+      color: var(--dark);
+      line-height: 1.3;
+      margin-bottom: 14px;
+    }
+    .section-sub {
+      font-size: 0.95rem;
+      color: var(--muted);
+      max-width: 620px;
+      line-height: 1.8;
+    }
+    .section-header { margin-bottom: 52px; }
+
+    /* ══════════════════════════════
+       STRATEGIC DIRECTION
+    ══════════════════════════════ */
+    .strategic { background: var(--white); }
+    .strategic-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+    .strategic-text p {
+      color: var(--muted);
+      font-size: 0.96rem;
+      line-height: 1.9;
+      margin-top: 16px;
+    }
+    .strategic-visual {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    /* principle cards */
+    .principle-card {
+      background: var(--bg);
+      border: 1px solid var(--border-light);
+      border-radius: 14px;
+      padding: 24px 20px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .principle-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 28px rgba(181,152,90,0.14);
+    }
+    .principle-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px; height: 100%;
+      background: var(--gold);
+      border-radius: 14px 0 0 14px;
+    }
+    .principle-icon {
+      width: 42px; height: 42px;
+      background: var(--gold-pale);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 14px;
+      color: var(--gold);
+      font-size: 1.1rem;
+    }
+    .principle-card h3 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 7px;
+    }
+    .principle-card p {
+      font-size: 0.8rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* ══════════════════════════════
+       INVESTMENT TYPES
+    ══════════════════════════════ */
+    .inv-types { background: var(--bg); }
+    .inv-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+    .inv-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .inv-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 40px rgba(181,152,90,0.15);
+    }
+    .inv-card-head {
+      background: var(--dark-2);
+      padding: 28px 28px 22px;
+      position: relative;
+      overflow: hidden;
+    }
+    .inv-card-head::after {
+      content: '';
+      position: absolute;
+      bottom: -20px; right: -20px;
+      width: 100px; height: 100px;
+      border-radius: 50%;
+      background: rgba(181,152,90,0.12);
+    }
+    .inv-card-icon {
+      width: 52px; height: 52px;
+      background: rgba(181,152,90,0.2);
+      border: 1px solid rgba(181,152,90,0.4);
+      border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem;
+      color: var(--gold-light);
+      margin-bottom: 14px;
+      position: relative; z-index: 1;
+    }
+    .inv-card-head h3 {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--white);
+      margin-bottom: 8px;
+      position: relative; z-index: 1;
+    }
+    .inv-card-head p {
+      font-size: 0.83rem;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.6;
+      position: relative; z-index: 1;
+    }
+    .inv-card-body { padding: 24px 28px 28px; }
+    .inv-features-title {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--gold-dark);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 12px;
+    }
+    .inv-features { list-style: none; margin-bottom: 22px; }
+    .inv-features li {
+      display: flex; align-items: flex-start; gap: 9px;
+      font-size: 0.85rem;
+      color: var(--text);
+      padding: 5px 0;
+      border-bottom: 1px solid var(--border-light);
+      line-height: 1.5;
+    }
+    .inv-features li:last-child { border-bottom: none; }
+    .inv-features li i {
+      color: var(--gold);
+      font-size: 0.75rem;
+      margin-top: 4px;
+      flex-shrink: 0;
+    }
+    .inv-sectors { display: flex; flex-wrap: wrap; gap: 7px; }
+    .inv-sector {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.76rem;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 100px;
+    }
+
+    /* ══════════════════════════════
+       SUCCESS STORIES / STATS
+    ══════════════════════════════ */
+    .success { background: var(--dark-2); position: relative; overflow: hidden; }
+    .success::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url('../wp-content/uploads/2025/04/ad0dd98ee54f5c1cc0ad82aed29e0605.png') center/cover no-repeat;
+      opacity: 0.04;
+    }
+    .success .container { position: relative; z-index: 1; }
+    .success .section-label { color: var(--gold-light); }
+    .success .section-title { color: var(--white); }
+    .success .section-sub { color: rgba(255,255,255,0.6); }
+
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 52px;
+    }
+    .stat-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(181,152,90,0.25);
+      border-radius: 16px;
+      padding: 36px 28px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.25s;
+    }
+    .stat-card:hover { background: rgba(181,152,90,0.1); }
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--gold-dark), var(--gold-light));
+    }
+    .stat-num {
+      font-size: 3rem;
+      font-weight: 800;
+      color: var(--gold-light);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .stat-label {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 6px;
+    }
+    .stat-desc { font-size: 0.82rem; color: rgba(255,255,255,0.5); }
+
+    .achievements {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-top: 32px;
+    }
+    .achievement {
+      background: rgba(181,152,90,0.1);
+      border: 1px solid rgba(181,152,90,0.2);
+      border-radius: 12px;
+      padding: 20px 16px;
+      text-align: center;
+      color: rgba(255,255,255,0.75);
+      font-size: 0.88rem;
+      font-weight: 600;
+    }
+    .achievement i {
+      display: block;
+      font-size: 1.4rem;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+
+    /* ══════════════════════════════
+       STRATEGIC FOCUS
+    ══════════════════════════════ */
+    .focus { background: var(--white); }
+    .focus-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+    .focus-card {
+      border: 1px solid var(--border-light);
+      border-radius: 16px;
+      padding: 36px 28px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .focus-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 36px rgba(181,152,90,0.14);
+      border-color: var(--gold);
+    }
+    .focus-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--gold-dark), var(--gold-light));
+      transform: scaleX(0);
+      transition: transform 0.25s;
+    }
+    .focus-card:hover::after { transform: scaleX(1); }
+    .focus-icon {
+      width: 64px; height: 64px;
+      background: var(--gold-pale);
+      border-radius: 16px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.6rem;
+      color: var(--gold);
+      margin: 0 auto 20px;
+    }
+    .focus-card h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 12px;
+    }
+    .focus-card p {
+      font-size: 0.86rem;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    /* ══════════════════════════════
+       CTA
+    ══════════════════════════════ */
+    .cta-section {
+      background: linear-gradient(135deg, var(--dark-2) 0%, #2e2520 100%);
+      padding: 80px 40px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle at 20% 50%, rgba(181,152,90,0.12) 0%, transparent 60%),
+        radial-gradient(circle at 80% 50%, rgba(181,152,90,0.08) 0%, transparent 50%);
+    }
+    .cta-section .container { position: relative; z-index: 1; max-width: 680px; }
+    .cta-section h2 {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 800;
+      color: var(--white);
+      margin-bottom: 16px;
+      line-height: 1.3;
+    }
+    .cta-section h2 span { color: var(--gold-light); }
+    .cta-section > .container > p {
+      font-size: 0.97rem;
+      color: rgba(255,255,255,0.65);
+      margin-bottom: 36px;
+      line-height: 1.8;
+    }
+    .cta-box {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(181,152,90,0.3);
+      border-radius: 16px;
+      padding: 32px 28px;
+      margin-top: 40px;
+    }
+    .cta-box h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 10px;
+    }
+    .cta-box p {
+      font-size: 0.86rem;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 22px;
+      line-height: 1.7;
+    }
+    .btn-wa {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: #25d366; color: #fff;
+      text-decoration: none; padding: 14px 32px;
+      border-radius: 10px; font-size: 1rem; font-weight: 700;
+      transition: background 0.2s, transform 0.15s;
+      box-shadow: 0 4px 18px rgba(37,211,102,0.35);
+    }
+    .btn-wa:hover { background: #1da851; transform: translateY(-1px); }
+    .btn-wa i { font-size: 1.2rem; }
+
+    /* ══════════════════════════════
+       FOOTER BAR
+    ══════════════════════════════ */
+    .page-footer {
+      background: #111;
+      padding: 20px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .page-footer p {
+      color: rgba(255,255,255,0.4);
+      font-size: 0.8rem;
+    }
+    .page-footer a {
+      color: rgba(255,255,255,0.4);
+      text-decoration: none;
+      font-size: 0.8rem;
+      transition: color 0.2s;
+    }
+    .page-footer a:hover { color: var(--gold-light); }
+
+    /* floating buttons on mobile */
+    .float-wa {
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 999;
+      gap: 10px;
+      flex-direction: column;
+    }
+    .float-wa a {
+      width: 52px; height: 52px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-size: 1.4rem; text-decoration: none;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+    }
+    .float-wa a.wa  { background: #25d366; }
+    .float-wa a.tel { background: var(--gold); font-size: 1.1rem; }
+
+    /* ══════════════════════════════
+       RESPONSIVE
+    ══════════════════════════════ */
+    @media (max-width: 900px) {
+      .strategic-inner { grid-template-columns: 1fr; gap: 36px; }
+      .inv-grid { grid-template-columns: 1fr; }
+      .focus-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
+      .stats-row { grid-template-columns: 1fr 1fr; }
+      .achievements { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 600px) {
+      section { padding: 52px 20px; }
+      .site-header { padding: 0 20px; }
+      .site-header nav { display: none; }
+      .hero { padding: 60px 20px 50px; }
+      .strategic-visual { grid-template-columns: 1fr; }
+      .focus-grid { grid-template-columns: 1fr; }
+      .stats-row { grid-template-columns: 1fr; }
+      .achievements { grid-template-columns: 1fr 1fr; }
+      .float-wa { display: flex; }
+      .cta-section { padding: 52px 20px; }
+      .page-footer { padding: 20px; }
+    }
+
+    .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+  </style>
+</head>
+<body>
+
+<!-- ════════════ HEADER ════════════ -->
+<header class="site-header">
+  <a href="index.htm" class="logo">
+    <img src="../wp-content/uploads/2025/04/ad0dd98ee54f5c1cc0ad82aed29e0605-153x86-c-default.png" alt="Musharaka Financial">
+  </a>
+  <nav>
+    <a href="index.htm">Home</a>
+    <a href="investments.html" class="active">Investments</a>
+    <a href="account-requirements.html">Account Requirements</a>
+    <a href="open-account.html" class="btn-header">Open Account</a>
+  </nav>
+</header>
+
+<!-- ════════════ HERO ════════════ -->
+<section class="hero">
+  <div class="hero-grid-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-tag">
+      <i class="fa-solid fa-chart-line"></i>
+      Musharaka Financial &mdash; Investments
+    </div>
+    <h1>
+      Investments<br>
+      <span>Strategic &amp; Sustainable Opportunities</span>
+    </h1>
+    <p>Strategic and sustainable investment opportunities designed to drive economic growth and support the development journey of Saudi Arabia.</p>
+    <div class="hero-cta">
+      <a href="#inv-types" class="btn-gold">
+        <i class="fa-solid fa-layer-group"></i>
+        Explore Investment Types
+      </a>
+      <a href="open-account.html" class="btn-outline-white">
+        <i class="fa-solid fa-arrow-right"></i>
+        Start Investing Now
+      </a>
+    </div>
+  </div>
+</section>
+
+<div class="wave-divider">
+  <svg viewBox="0 0 1440 54" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+    <path d="M0 54L1440 54L1440 18C1200 54 960 0 720 18C480 36 240 0 0 18L0 54Z" fill="#f5f0e8"/>
+  </svg>
+</div>
+
+<!-- ════════════ STRATEGIC DIRECTION ════════════ -->
+<section class="strategic">
+  <div class="container">
+    <div class="strategic-inner">
+      <div class="strategic-text">
+        <span class="section-label">Our Vision</span>
+        <h2 class="section-title">Our Strategic Direction</h2>
+        <p>
+          Our strategic direction paves the way for our evolution into an active strategic financial investor. Through our investments, we contribute to supporting Saudi Arabia's development journey by aligning with strategic plans and investment pillars across key sectors.
+        </p>
+        <p style="margin-top:14px;">
+          We believe that successful investment is one that creates sustainable value for both investors and society, contributing to building a diverse and competitive national economy.
+        </p>
+      </div>
+
+      <div class="strategic-visual">
+        <div class="principle-card">
+          <div class="principle-icon"><i class="fa-solid fa-compass"></i></div>
+          <h3>Strategic Direction</h3>
+          <p>Paving the way for our evolution into an active strategic financial investor</p>
+        </div>
+        <div class="principle-card">
+          <div class="principle-icon"><i class="fa-solid fa-seedling"></i></div>
+          <h3>Supporting Development</h3>
+          <p>Contributing through our investments to support the development journey in the Kingdom</p>
+        </div>
+        <div class="principle-card">
+          <div class="principle-icon"><i class="fa-solid fa-arrows-to-dot"></i></div>
+          <h3>Strategic Alignment</h3>
+          <p>Aligning investments with strategic plans and key investment pillars</p>
+        </div>
+        <div class="principle-card">
+          <div class="principle-icon"><i class="fa-solid fa-industry"></i></div>
+          <h3>Key Sectors</h3>
+          <p>Focusing on key sectors with promising growth potential and high returns</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ INVESTMENT TYPES ════════════ -->
+<section class="inv-types" id="inv-types">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Our Investment Portfolio</span>
+      <h2 class="section-title">Types of Investments</h2>
+      <p class="section-sub">We provide a comprehensive suite of investment solutions designed to meet the objectives of institutional investors and individuals alike.</p>
+    </div>
+
+    <div class="inv-grid">
+
+      <!-- Institutional Investments -->
+      <div class="inv-card">
+        <div class="inv-card-head">
+          <div class="inv-card-icon"><i class="fa-solid fa-building-columns"></i></div>
+          <h3>Institutional Investments</h3>
+          <p>For decades, we have served as a cornerstone for companies and communities on the path to prosperity and flourishing.</p>
+        </div>
+        <div class="inv-card-body">
+          <p class="inv-features-title">Key Features</p>
+          <ul class="inv-features">
+            <li><i class="fa-solid fa-check"></i> Concentrated focus in targeted sectors</li>
+            <li><i class="fa-solid fa-check"></i> Anticipating promising investment horizons</li>
+            <li><i class="fa-solid fa-check"></i> Entry into new and emerging sectors</li>
+            <li><i class="fa-solid fa-check"></i> Priority given to key economic sectors</li>
+          </ul>
+          <p class="inv-features-title">Sectors</p>
+          <div class="inv-sectors">
+            <span class="inv-sector">Healthcare</span>
+            <span class="inv-sector">Logistics</span>
+            <span class="inv-sector">Education</span>
+            <span class="inv-sector">Hospitality</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Direct Investment -->
+      <div class="inv-card">
+        <div class="inv-card-head">
+          <div class="inv-card-icon"><i class="fa-solid fa-rocket"></i></div>
+          <h3>Direct Investment</h3>
+          <p>A flexible approach enabling the establishment of industry-leading companies and the application of tailored strategies for long-term value creation.</p>
+        </div>
+        <div class="inv-card-body">
+          <p class="inv-features-title">Key Features</p>
+          <ul class="inv-features">
+            <li><i class="fa-solid fa-check"></i> Founding industry-leading companies</li>
+            <li><i class="fa-solid fa-check"></i> High flexibility in execution</li>
+            <li><i class="fa-solid fa-check"></i> Applying customized strategies</li>
+            <li><i class="fa-solid fa-check"></i> Creating long-term value</li>
+          </ul>
+          <p class="inv-features-title">Sectors</p>
+          <div class="inv-sectors">
+            <span class="inv-sector">Manufacturing</span>
+            <span class="inv-sector">Services</span>
+            <span class="inv-sector">Trade</span>
+            <span class="inv-sector">Technology</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Indirect Investment -->
+      <div class="inv-card">
+        <div class="inv-card-head">
+          <div class="inv-card-icon"><i class="fa-solid fa-network-wired"></i></div>
+          <h3>Indirect Investment</h3>
+          <p>A diversification strategy with risk distribution, focused on innovation and strengthening economic sector growth.</p>
+        </div>
+        <div class="inv-card-body">
+          <p class="inv-features-title">Key Features</p>
+          <ul class="inv-features">
+            <li><i class="fa-solid fa-check"></i> Diversification and risk distribution</li>
+            <li><i class="fa-solid fa-check"></i> Supporting the innovation journey</li>
+            <li><i class="fa-solid fa-check"></i> Strengthening economic sector growth</li>
+            <li><i class="fa-solid fa-check"></i> Promising investment opportunities</li>
+          </ul>
+          <p class="inv-features-title">Sectors</p>
+          <div class="inv-sectors">
+            <span class="inv-sector">Funds</span>
+            <span class="inv-sector">Securities</span>
+            <span class="inv-sector">Partnerships</span>
+            <span class="inv-sector">Joint Ventures</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Real Estate -->
+      <div class="inv-card">
+        <div class="inv-card-head">
+          <div class="inv-card-icon"><i class="fa-solid fa-city"></i></div>
+          <h3>Real Estate Sector</h3>
+          <p>Strategic investments in real estate projects that support sustainable urban development across the Kingdom.</p>
+        </div>
+        <div class="inv-card-body">
+          <p class="inv-features-title">Key Features</p>
+          <ul class="inv-features">
+            <li><i class="fa-solid fa-check"></i> Premium real estate projects</li>
+            <li><i class="fa-solid fa-check"></i> Sustainable property development</li>
+            <li><i class="fa-solid fa-check"></i> Strategic prime locations</li>
+            <li><i class="fa-solid fa-check"></i> Stable and secure returns</li>
+          </ul>
+          <p class="inv-features-title">Sectors</p>
+          <div class="inv-sectors">
+            <span class="inv-sector">Residential</span>
+            <span class="inv-sector">Commercial</span>
+            <span class="inv-sector">Industrial</span>
+            <span class="inv-sector">Hospitality</span>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /inv-grid -->
+  </div>
+</section>
+
+<!-- ════════════ SUCCESS STORIES ════════════ -->
+<section class="success">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Success Stories</span>
+      <h2 class="section-title" style="color:var(--white);">A Successful Journey Spanning Decades</h2>
+      <p class="section-sub" style="color:rgba(255,255,255,0.6);">
+        Musharaka Financial is a leading Saudi company in responsible and sustainable investment — a distinguished track record of achievements and strategic investments that have created real economic growth and broad community development.
+      </p>
+    </div>
+
+    <div class="achievements">
+      <div class="achievement"><i class="fa-solid fa-trophy"></i>Distinguished Track Record</div>
+      <div class="achievement"><i class="fa-solid fa-chess-king"></i>Strategic Investments</div>
+      <div class="achievement"><i class="fa-solid fa-chart-line"></i>Real Economic Growth</div>
+      <div class="achievement"><i class="fa-solid fa-people-group"></i>Community Development</div>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-num">48+</div>
+        <div class="stat-label">Years of Experience</div>
+        <div class="stat-desc">A continuous and successful investment journey</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">100+</div>
+        <div class="stat-label">Successful Investments</div>
+        <div class="stat-desc">Across diverse and promising sectors</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">&#8734;</div>
+        <div class="stat-label">Sustainable Value</div>
+        <div class="stat-desc">For shareholders and society together</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ STRATEGIC FOCUS ════════════ -->
+<section class="focus">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Our Approach</span>
+      <h2 class="section-title">Strategic Focus</h2>
+      <p class="section-sub">Three core pillars that form the heart of our investment philosophy and define our path toward sustainable growth.</p>
+    </div>
+
+    <div class="focus-grid">
+      <div class="focus-card">
+        <div class="focus-icon"><i class="fa-solid fa-bullseye"></i></div>
+        <h3>Key Sectors</h3>
+        <p>We prioritize key sectors such as healthcare, logistics, education, and hospitality to achieve the highest possible value from our investments.</p>
+      </div>
+      <div class="focus-card">
+        <div class="focus-icon"><i class="fa-solid fa-clock-rotate-left"></i></div>
+        <h3>Deep Expertise</h3>
+        <p>We draw on our extensive experience in the sectors and fields we operate in to make well-considered and successful investment decisions.</p>
+      </div>
+      <div class="focus-card">
+        <div class="focus-icon"><i class="fa-solid fa-binoculars"></i></div>
+        <h3>Strategic Opportunities</h3>
+        <p>We explore strategic opportunities in other sectors with promising growth potential to expand our diverse investment portfolio.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ CTA ════════════ -->
+<section class="cta-section">
+  <div class="container">
+    <h2>Looking for an <span>Investment Opportunity?</span></h2>
+    <p>Contact us today and discover the exceptional investment opportunities that align with your financial goals and aspirations.</p>
+
+    <div class="hero-cta">
+      <a href="open-account.html" class="btn-gold">
+        <i class="fa-solid fa-user-plus"></i>
+        Open Your Account Now
+      </a>
+      <a href="account-requirements.html" class="btn-outline-white">
+        <i class="fa-solid fa-list-check"></i>
+        Account Requirements
+      </a>
+    </div>
+
+    <div class="cta-box">
+      <h3>
+        <i class="fa-brands fa-whatsapp" style="color:#25d366; margin-right:6px;"></i>
+        Contact via WhatsApp
+      </h3>
+      <p>For investment inquiries — if you have any questions about investment opportunities or our investment strategies, do not hesitate to reach out to us.</p>
+      <a href="https://wa.me/966582062882" class="btn-wa" target="_blank" rel="noopener">
+        <i class="fa-brands fa-whatsapp"></i>
+        Contact via WhatsApp
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ FOOTER ════════════ -->
+<footer class="page-footer">
+  <p>&copy; 2025 Musharaka Financial &mdash; All rights reserved</p>
+  <div style="display:flex; gap:20px; flex-wrap:wrap;">
+    <a href="index.htm">Home</a>
+    <a href="account-requirements.html">Account Requirements</a>
+    <a href="open-account.html">Open Account &mdash; Individuals</a>
+    <a href="open-account-entity.html">Open Account &mdash; Corporates</a>
+  </div>
+</footer>
+
+<!-- Floating buttons (mobile) -->
+<div class="float-wa">
+  <a href="https://wa.me/966582062882" class="wa" target="_blank" rel="noopener" aria-label="WhatsApp">
+    <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+    <span class="sr-only">WhatsApp</span>
+  </a>
+  <a href="tel:+966582062882" class="tel" aria-label="Phone call">
+    <i class="fa-solid fa-phone-volume" aria-hidden="true"></i>
+    <span class="sr-only">Phone</span>
+  </a>
+</div>
+
+<!-- smooth scroll for anchor links -->
+<script>
+document.querySelectorAll('a[href^="#"]').forEach(function(a){
+  a.addEventListener('click', function(e){
+    var target = document.querySelector(this.getAttribute('href'));
+    if(target){ e.preventDefault(); target.scrollIntoView({behavior:'smooth', block:'start'}); }
+  });
+});
+</script>
+
+</body>
+</html>

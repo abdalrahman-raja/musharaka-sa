@@ -1,0 +1,10 @@
+.claude/
+backend/node_modules/
+node_modules/
+*.env
+*.local
+*.log
+.DS_Store
+Thumbs.db
+*.bak
+*.tmp

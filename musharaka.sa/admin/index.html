@@ -1,0 +1,1402 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>لوحة التحكم | مشاركة المالية</title>
+  <link rel="icon" href="../wp-content/uploads/2025/03/faviconV2.png" sizes="32x32">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="../wp-content/litespeed/css/a0062117fd9d72362afee7da555070cd.css">
+  <style>
+    /* ════════════════════════════════════
+       VARIABLES & RESET
+    ════════════════════════════════════ */
+    :root {
+      --gold:      #b5985a;
+      --gold-l:    #eed3a6;
+      --gold-d:    #8c7340;
+      --gold-pale: rgba(181,152,90,0.12);
+      --sidebar:   #16120e;
+      --sidebar-2: #1f1a13;
+      --dark:      #231f20;
+      --dark-2:    #2a2520;
+      --bg:        #f4f0e8;
+      --bg-2:      #ebe5d8;
+      --white:     #ffffff;
+      --text:      #1e1a16;
+      --muted:     #7a6f62;
+      --border:    #e0d8cb;
+      --success:   #22863a;
+      --warning:   #b45309;
+      --danger:    #c0392b;
+      --info:      #1565c0;
+      --sidebar-w: 260px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 15px; }
+    body {
+      font-family: 'Tajawal', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      direction: rtl;
+    }
+    @font-face { font-family:'Tajawal'; src:url('../wp-content/themes/musharka-theme/assets/fonts/arabic-fonts/tajawal-regular.woff2') format('woff2'); font-weight:400; }
+    @font-face { font-family:'Tajawal'; src:url('../wp-content/themes/musharka-theme/assets/fonts/arabic-fonts/tajawal-medium.woff2') format('woff2'); font-weight:500; }
+    @font-face { font-family:'Tajawal'; src:url('../wp-content/themes/musharka-theme/assets/fonts/arabic-fonts/tajawal-bold.woff2') format('woff2'); font-weight:700; }
+    @font-face { font-family:'Tajawal'; src:url('../wp-content/themes/musharka-theme/assets/fonts/arabic-fonts/tajawal-extrabold.woff2') format('woff2'); font-weight:800; }
+
+    /* ════════════════════════════════════
+       LOGIN PAGE
+    ════════════════════════════════════ */
+    #loginPage {
+      min-height: 100vh;
+      display: flex;
+      background: var(--dark);
+    }
+    #loginPage .login-visual {
+      flex: 0 0 45%;
+      background: url('../wp-content/uploads/2025/04/ad0dd98ee54f5c1cc0ad82aed29e0605.png') center/cover no-repeat;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #loginPage .login-visual::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(160deg, rgba(22,18,14,0.94) 0%, rgba(22,18,14,0.70) 60%, rgba(181,152,90,0.2) 100%);
+    }
+    #loginPage .login-visual-content {
+      position: relative; z-index: 1; text-align: center; padding: 40px;
+    }
+    #loginPage .login-visual-content img { height: 72px; margin-bottom: 28px; }
+    #loginPage .login-visual-content h2 {
+      color: var(--gold-l); font-size: 1.7rem; font-weight: 800; margin-bottom: 12px;
+    }
+    #loginPage .login-visual-content p {
+      color: rgba(255,255,255,0.6); font-size: 0.9rem; line-height: 1.8;
+    }
+    #loginPage .login-form-side {
+      flex: 1;
+      display: flex; align-items: center; justify-content: center;
+      padding: 40px;
+      background: var(--dark);
+    }
+    .login-box {
+      width: 100%; max-width: 400px;
+    }
+    .login-box h1 {
+      color: var(--white); font-size: 1.6rem; font-weight: 800; margin-bottom: 6px;
+    }
+    .login-box .sub {
+      color: rgba(255,255,255,0.5); font-size: 0.88rem; margin-bottom: 36px;
+    }
+    .login-box .form-group { margin-bottom: 20px; }
+    .login-box label {
+      display: block; color: rgba(255,255,255,0.7); font-size: 0.85rem;
+      font-weight: 600; margin-bottom: 7px;
+    }
+    .login-box input {
+      width: 100%;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: var(--white);
+      padding: 12px 16px;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      font-family: inherit;
+      transition: border-color 0.2s;
+      outline: none;
+    }
+    .login-box input:focus { border-color: var(--gold); }
+    .login-box input::placeholder { color: rgba(255,255,255,0.3); }
+    .login-box .btn-login {
+      width: 100%;
+      background: var(--gold);
+      color: #fff;
+      border: none;
+      padding: 14px;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 700;
+      font-family: inherit;
+      cursor: pointer;
+      transition: background 0.2s;
+      margin-top: 8px;
+    }
+    .login-box .btn-login:hover { background: var(--gold-d); }
+    .login-box .btn-login:disabled { opacity: 0.6; cursor: not-allowed; }
+    #loginError {
+      display: none;
+      background: rgba(192,57,43,0.15);
+      border: 1px solid rgba(192,57,43,0.4);
+      color: #e74c3c;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 0.87rem;
+      margin-bottom: 16px;
+    }
+
+    /* ════════════════════════════════════
+       MAIN LAYOUT
+    ════════════════════════════════════ */
+    #appPage { display: none; min-height: 100vh; }
+    .app-layout { display: flex; min-height: 100vh; }
+
+    /* ── SIDEBAR ── */
+    .sidebar {
+      width: var(--sidebar-w);
+      background: var(--sidebar);
+      display: flex; flex-direction: column;
+      position: fixed; top: 0; right: 0; bottom: 0;
+      z-index: 50;
+      transition: transform 0.3s;
+      overflow-y: auto;
+    }
+    .sidebar-logo {
+      padding: 24px 20px 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .sidebar-logo img { height: 48px; }
+    .sidebar-logo .version {
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.3);
+      margin-top: 6px;
+    }
+    .sidebar-section { margin-top: 8px; }
+    .sidebar-section-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: rgba(255,255,255,0.28);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 12px 20px 6px;
+    }
+    .nav-item {
+      display: flex; align-items: center; gap: 11px;
+      padding: 10px 20px;
+      color: rgba(255,255,255,0.6);
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      border-radius: 0;
+      transition: background 0.15s, color 0.15s;
+      border-right: 3px solid transparent;
+      position: relative;
+    }
+    .nav-item:hover { background: rgba(255,255,255,0.05); color: rgba(255,255,255,0.9); }
+    .nav-item.active {
+      background: var(--gold-pale);
+      color: var(--gold-l);
+      border-right-color: var(--gold);
+    }
+    .nav-item i { width: 18px; text-align: center; font-size: 0.95rem; flex-shrink: 0; }
+    .nav-badge {
+      margin-right: auto;
+      background: var(--danger);
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 100px;
+      min-width: 20px;
+      text-align: center;
+    }
+    .sidebar-footer {
+      margin-top: auto;
+      padding: 16px 20px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .admin-profile {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.05);
+      margin-bottom: 12px;
+    }
+    .admin-avatar {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: var(--gold-pale);
+      border: 1px solid var(--gold);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--gold-l);
+      font-weight: 700;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+    }
+    .admin-info .name { color: var(--white); font-size: 0.85rem; font-weight: 600; }
+    .admin-info .role { color: rgba(255,255,255,0.4); font-size: 0.72rem; }
+    .btn-logout {
+      width: 100%;
+      background: rgba(192,57,43,0.15);
+      border: 1px solid rgba(192,57,43,0.3);
+      color: #e74c3c;
+      padding: 8px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-family: inherit;
+      cursor: pointer;
+      transition: background 0.2s;
+      display: flex; align-items: center; justify-content: center; gap: 7px;
+    }
+    .btn-logout:hover { background: rgba(192,57,43,0.28); }
+
+    /* ── MAIN CONTENT ── */
+    .main-content {
+      flex: 1;
+      margin-right: var(--sidebar-w);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* ── TOPBAR ── */
+    .topbar {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 0 28px;
+      height: 60px;
+      display: flex; align-items: center; justify-content: space-between;
+      position: sticky; top: 0; z-index: 40;
+    }
+    .topbar-title {
+      font-size: 1.05rem; font-weight: 700; color: var(--text);
+      display: flex; align-items: center; gap: 10px;
+    }
+    .topbar-title i { color: var(--gold); }
+    .topbar-actions { display: flex; align-items: center; gap: 14px; }
+    .topbar-time { color: var(--muted); font-size: 0.82rem; }
+
+    /* ── PAGES ── */
+    .page { display: none; padding: 28px; }
+    .page.active { display: block; }
+
+    /* ════════════════════════════════════
+       STATS CARDS
+    ════════════════════════════════════ */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+    .stat-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px 22px;
+      position: relative;
+      overflow: hidden;
+    }
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--card-color, var(--gold));
+    }
+    .stat-card .icon {
+      width: 44px; height: 44px;
+      border-radius: 10px;
+      background: var(--card-pale, var(--gold-pale));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.15rem;
+      color: var(--card-color, var(--gold));
+      margin-bottom: 14px;
+    }
+    .stat-card .value {
+      font-size: 1.9rem; font-weight: 800; color: var(--text); line-height: 1;
+      margin-bottom: 4px;
+    }
+    .stat-card .label { font-size: 0.82rem; color: var(--muted); font-weight: 500; }
+    .stat-card .change {
+      position: absolute; top: 18px; left: 18px;
+      font-size: 0.72rem; font-weight: 600;
+      background: rgba(34,134,58,0.12);
+      color: var(--success);
+      padding: 2px 8px; border-radius: 100px;
+    }
+
+    /* ════════════════════════════════════
+       CHARTS ROW
+    ════════════════════════════════════ */
+    .charts-row {
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+    .chart-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 22px 24px;
+    }
+    .chart-card h3 {
+      font-size: 0.95rem; font-weight: 700; color: var(--text); margin-bottom: 20px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .chart-card h3 i { color: var(--gold); }
+    .bar-chart { display: flex; align-items: flex-end; gap: 8px; height: 120px; }
+    .bar-wrap { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 5px; }
+    .bar {
+      width: 100%; border-radius: 5px 5px 0 0;
+      background: var(--gold);
+      opacity: 0.8;
+      transition: opacity 0.2s;
+      min-height: 4px;
+    }
+    .bar:hover { opacity: 1; }
+    .bar-label { font-size: 0.68rem; color: var(--muted); }
+    .donut-chart { display: flex; flex-direction: column; gap: 12px; padding-top: 8px; }
+    .donut-item { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+    .donut-label { display: flex; align-items: center; gap: 8px; font-size: 0.84rem; color: var(--text); }
+    .donut-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+    .donut-val { font-size: 0.9rem; font-weight: 700; color: var(--text); }
+    .donut-bar-wrap { flex: 1; height: 6px; background: var(--bg-2); border-radius: 100px; overflow: hidden; }
+    .donut-bar { height: 100%; border-radius: 100px; }
+
+    /* ════════════════════════════════════
+       TABLES
+    ════════════════════════════════════ */
+    .table-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+    .table-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 22px;
+      border-bottom: 1px solid var(--border);
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .table-header h3 {
+      font-size: 0.95rem; font-weight: 700; color: var(--text);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .table-header h3 i { color: var(--gold); }
+    .table-controls { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+    .search-box {
+      display: flex; align-items: center; gap: 8px;
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: 8px; padding: 7px 12px;
+      font-size: 0.85rem;
+    }
+    .search-box input {
+      background: none; border: none; outline: none;
+      font-family: inherit; font-size: 0.85rem; color: var(--text); width: 180px;
+    }
+    .search-box i { color: var(--muted); }
+    .filter-select {
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: 8px; padding: 7px 10px;
+      font-family: inherit; font-size: 0.85rem; color: var(--text); outline: none;
+    }
+    .btn-sm {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--gold); color: #fff;
+      border: none; padding: 7px 14px; border-radius: 8px;
+      font-family: inherit; font-size: 0.82rem; font-weight: 600; cursor: pointer;
+      transition: background 0.15s;
+    }
+    .btn-sm:hover { background: var(--gold-d); }
+    .btn-sm.outline {
+      background: transparent; border: 1px solid var(--border); color: var(--text);
+    }
+    .btn-sm.outline:hover { background: var(--bg-2); }
+    .btn-sm.danger { background: var(--danger); }
+    .btn-sm.danger:hover { background: #a93226; }
+    .btn-sm.success { background: var(--success); }
+
+    table { width: 100%; border-collapse: collapse; }
+    thead tr { background: var(--bg); }
+    th {
+      padding: 11px 16px; text-align: right;
+      font-size: 0.78rem; font-weight: 700;
+      color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em;
+      border-bottom: 1px solid var(--border);
+    }
+    td {
+      padding: 13px 16px;
+      font-size: 0.87rem; color: var(--text);
+      border-bottom: 1px solid var(--border);
+      vertical-align: middle;
+    }
+    tr:last-child td { border-bottom: none; }
+    tbody tr:hover { background: var(--bg); }
+
+    .badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 100px;
+      font-size: 0.72rem;
+      font-weight: 700;
+    }
+    .badge.pending  { background: rgba(180,83,9,0.12);  color: var(--warning); }
+    .badge.reviewing{ background: rgba(21,101,192,0.12); color: var(--info); }
+    .badge.approved { background: rgba(34,134,58,0.12);  color: var(--success); }
+    .badge.rejected { background: rgba(192,57,43,0.12);  color: var(--danger); }
+    .badge.unread   { background: rgba(192,57,43,0.12);  color: var(--danger); }
+    .badge.read     { background: rgba(34,134,58,0.12);  color: var(--success); }
+    .badge.replied  { background: rgba(181,152,90,0.15); color: var(--gold-d); }
+    .badge.individual { background: rgba(21,101,192,0.1); color: var(--info); }
+    .badge.entity     { background: rgba(181,152,90,0.15); color: var(--gold-d); }
+
+    .action-btns { display: flex; gap: 6px; align-items: center; }
+    .icon-btn {
+      width: 30px; height: 30px; border-radius: 7px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--muted);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; font-size: 0.8rem;
+      transition: background 0.15s, color 0.15s;
+    }
+    .icon-btn:hover { background: var(--gold); color: #fff; border-color: var(--gold); }
+    .icon-btn.del:hover { background: var(--danger); border-color: var(--danger); color: #fff; }
+
+    .ref-badge {
+      font-family: monospace;
+      background: var(--bg-2);
+      padding: 2px 8px;
+      border-radius: 5px;
+      font-size: 0.78rem;
+      color: var(--muted);
+      letter-spacing: 0.02em;
+    }
+
+    .pagination {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 22px;
+      border-top: 1px solid var(--border);
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+    .page-btns { display: flex; gap: 6px; }
+    .page-btn {
+      width: 32px; height: 32px; border-radius: 7px;
+      border: 1px solid var(--border);
+      background: var(--white);
+      cursor: pointer; font-family: inherit; font-size: 0.82rem;
+      transition: background 0.15s;
+    }
+    .page-btn:hover, .page-btn.active {
+      background: var(--gold); color: #fff; border-color: var(--gold);
+    }
+    .page-btn:disabled { opacity: 0.4; cursor: default; }
+
+    /* ════════════════════════════════════
+       MODAL
+    ════════════════════════════════════ */
+    .modal-overlay {
+      display: none; position: fixed; inset: 0; z-index: 100;
+      background: rgba(0,0,0,0.5);
+      align-items: center; justify-content: center;
+    }
+    .modal-overlay.show { display: flex; }
+    .modal {
+      background: var(--white);
+      border-radius: 16px;
+      width: 92%; max-width: 620px;
+      max-height: 88vh;
+      overflow-y: auto;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    }
+    .modal-head {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--border);
+    }
+    .modal-head h3 { font-size: 1rem; font-weight: 700; color: var(--text); }
+    .modal-close {
+      width: 32px; height: 32px; border-radius: 8px;
+      border: 1px solid var(--border); background: var(--bg);
+      cursor: pointer; font-size: 1rem; color: var(--muted);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .modal-close:hover { background: var(--danger); color: #fff; border-color: var(--danger); }
+    .modal-body { padding: 24px; }
+    .detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
+    .detail-item label { display: block; font-size: 0.74rem; font-weight: 700; color: var(--muted); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.04em; }
+    .detail-item span { font-size: 0.9rem; color: var(--text); display: block; }
+    .detail-item.full { grid-column: 1 / -1; }
+    .modal-footer {
+      padding: 16px 24px;
+      border-top: 1px solid var(--border);
+      display: flex; gap: 10px; justify-content: flex-end; flex-wrap: wrap;
+    }
+
+    /* ════════════════════════════════════
+       SETTINGS PAGE
+    ════════════════════════════════════ */
+    .settings-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .settings-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px;
+    }
+    .settings-card h3 {
+      font-size: 0.95rem; font-weight: 700; color: var(--text);
+      margin-bottom: 20px;
+      display: flex; align-items: center; gap: 8px; padding-bottom: 14px;
+      border-bottom: 1px solid var(--border);
+    }
+    .settings-card h3 i { color: var(--gold); }
+    .form-group { margin-bottom: 16px; }
+    .form-group label { display: block; font-size: 0.82rem; font-weight: 600; color: var(--muted); margin-bottom: 6px; }
+    .form-group input {
+      width: 100%; background: var(--bg); border: 1px solid var(--border);
+      padding: 10px 14px; border-radius: 9px;
+      font-family: inherit; font-size: 0.9rem; color: var(--text); outline: none;
+      transition: border-color 0.2s;
+    }
+    .form-group input:focus { border-color: var(--gold); }
+    .btn-save {
+      background: var(--gold); color: #fff; border: none;
+      padding: 10px 22px; border-radius: 9px;
+      font-family: inherit; font-size: 0.9rem; font-weight: 700; cursor: pointer;
+      display: inline-flex; align-items: center; gap: 7px;
+      transition: background 0.2s;
+    }
+    .btn-save:hover { background: var(--gold-d); }
+
+    /* ════════════════════════════════════
+       LOG
+    ════════════════════════════════════ */
+    .log-list { list-style: none; }
+    .log-item {
+      display: flex; gap: 14px; padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .log-item:last-child { border-bottom: none; }
+    .log-icon {
+      width: 32px; height: 32px; border-radius: 8px;
+      background: var(--gold-pale); color: var(--gold);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.85rem; flex-shrink: 0;
+    }
+    .log-info strong { display: block; font-size: 0.87rem; color: var(--text); }
+    .log-info span { font-size: 0.78rem; color: var(--muted); }
+
+    /* ════════════════════════════════════
+       TOAST
+    ════════════════════════════════════ */
+    #toast {
+      position: fixed; bottom: 24px; left: 24px; z-index: 200;
+      background: var(--dark); color: #fff;
+      padding: 12px 20px; border-radius: 10px;
+      font-size: 0.88rem; font-weight: 500;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+      display: none;
+      align-items: center; gap: 10px;
+      max-width: 340px;
+    }
+    #toast.show { display: flex; }
+    #toast.success { border-right: 3px solid var(--success); }
+    #toast.error   { border-right: 3px solid var(--danger); }
+    #toast.info    { border-right: 3px solid var(--gold); }
+
+    /* ════════════════════════════════════
+       EMPTY STATE
+    ════════════════════════════════════ */
+    .empty-state {
+      text-align: center; padding: 60px 20px;
+      color: var(--muted);
+    }
+    .empty-state i { font-size: 3rem; margin-bottom: 14px; opacity: 0.4; display: block; }
+    .empty-state p { font-size: 0.9rem; }
+
+    /* ════════════════════════════════════
+       LOADING SPINNER
+    ════════════════════════════════════ */
+    .spinner {
+      width: 32px; height: 32px; border-radius: 50%;
+      border: 3px solid var(--border);
+      border-top-color: var(--gold);
+      animation: spin 0.8s linear infinite;
+      margin: 40px auto;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ════════════════════════════════════
+       RESPONSIVE
+    ════════════════════════════════════ */
+    @media (max-width: 900px) {
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+      .charts-row { grid-template-columns: 1fr; }
+      .settings-grid { grid-template-columns: 1fr; }
+      .detail-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      :root { --sidebar-w: 0px; }
+      .sidebar { transform: translateX(100%); }
+      .sidebar.open { transform: translateX(0); }
+      .stats-grid { grid-template-columns: 1fr; }
+      .topbar { padding: 0 16px; }
+      .page { padding: 16px; }
+    }
+
+    #loginPage { display: flex; }
+  </style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════
+     LOGIN PAGE
+════════════════════════════════════ -->
+<div id="loginPage">
+  <div class="login-visual">
+    <div class="login-visual-content">
+      <img src="../wp-content/uploads/2025/04/ad0dd98ee54f5c1cc0ad82aed29e0605-153x86-c-default.png" alt="مشاركة المالية">
+      <h2>لوحة التحكم الإدارية</h2>
+      <p>منصة إدارة متكاملة للإشراف على طلبات العملاء، الرسائل، والمحتوى</p>
+    </div>
+  </div>
+  <div class="login-form-side">
+    <div class="login-box">
+      <h1>تسجيل الدخول</h1>
+      <p class="sub">أدخل بيانات حسابك للوصول إلى لوحة التحكم</p>
+      <div id="loginError"></div>
+      <div class="form-group">
+        <label>اسم المستخدم</label>
+        <input type="text" id="username" placeholder="admin" autocomplete="username">
+      </div>
+      <div class="form-group">
+        <label>كلمة المرور</label>
+        <input type="password" id="password" placeholder="••••••••" autocomplete="current-password">
+      </div>
+      <button class="btn-login" id="loginBtn" onclick="doLogin()">
+        <i class="fa-solid fa-right-to-bracket"></i> دخول
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════
+     MAIN APP
+════════════════════════════════════ -->
+<div id="appPage">
+  <div class="app-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-logo">
+        <img src="../wp-content/uploads/2025/04/ad0dd98ee54f5c1cc0ad82aed29e0605-153x86-c-default.png" alt="">
+        <div class="version">لوحة التحكم v1.0</div>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-section-label">الرئيسية</div>
+        <div class="nav-item active" onclick="showPage('dashboard')">
+          <i class="fa-solid fa-gauge-high"></i> لوحة التحكم
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-section-label">إدارة الطلبات</div>
+        <div class="nav-item" onclick="showPage('accounts')">
+          <i class="fa-solid fa-file-signature"></i> طلبات الحسابات
+          <span class="nav-badge" id="pendingBadge">0</span>
+        </div>
+        <div class="nav-item" onclick="showPage('messages')">
+          <i class="fa-solid fa-envelope"></i> الرسائل والاستفسارات
+          <span class="nav-badge" id="unreadBadge">0</span>
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-section-label">النظام</div>
+        <div class="nav-item" onclick="showPage('log')">
+          <i class="fa-solid fa-clock-rotate-left"></i> سجل النشاطات
+        </div>
+        <div class="nav-item" onclick="showPage('settings')">
+          <i class="fa-solid fa-gear"></i> الإعدادات
+        </div>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="admin-profile">
+          <div class="admin-avatar" id="avatarInitial">A</div>
+          <div class="admin-info">
+            <div class="name" id="adminNameDisplay">مدير النظام</div>
+            <div class="role" id="adminRoleDisplay">مسؤول</div>
+          </div>
+        </div>
+        <button class="btn-logout" onclick="doLogout()">
+          <i class="fa-solid fa-right-from-bracket"></i> تسجيل الخروج
+        </button>
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <div class="main-content">
+      <!-- TOPBAR -->
+      <div class="topbar">
+        <div class="topbar-title">
+          <i class="fa-solid fa-gauge-high" id="topbarIcon"></i>
+          <span id="topbarTitle">لوحة التحكم</span>
+        </div>
+        <div class="topbar-actions">
+          <div class="topbar-time" id="topbarClock"></div>
+          <a href="../ar/index.htm" target="_blank" class="btn-sm outline">
+            <i class="fa-solid fa-globe"></i> عرض الموقع
+          </a>
+        </div>
+      </div>
+
+      <!-- ── DASHBOARD PAGE ── -->
+      <div class="page active" id="page-dashboard">
+        <div class="stats-grid" id="statsGrid">
+          <div class="stat-card" style="--card-color:#b5985a; --card-pale:rgba(181,152,90,0.1);">
+            <div class="icon"><i class="fa-solid fa-file-signature"></i></div>
+            <div class="value" id="s-total">-</div>
+            <div class="label">إجمالي الطلبات</div>
+          </div>
+          <div class="stat-card" style="--card-color:#b45309; --card-pale:rgba(180,83,9,0.1);">
+            <div class="icon"><i class="fa-solid fa-hourglass-half"></i></div>
+            <div class="value" id="s-pending">-</div>
+            <div class="label">طلبات معلقة</div>
+          </div>
+          <div class="stat-card" style="--card-color:#22863a; --card-pale:rgba(34,134,58,0.1);">
+            <div class="icon"><i class="fa-solid fa-circle-check"></i></div>
+            <div class="value" id="s-approved">-</div>
+            <div class="label">طلبات مقبولة</div>
+          </div>
+          <div class="stat-card" style="--card-color:#1565c0; --card-pale:rgba(21,101,192,0.1);">
+            <div class="icon"><i class="fa-solid fa-envelope-open"></i></div>
+            <div class="value" id="s-messages">-</div>
+            <div class="label">رسائل واردة</div>
+          </div>
+        </div>
+
+        <div class="charts-row">
+          <div class="chart-card">
+            <h3><i class="fa-solid fa-chart-bar"></i> الطلبات (آخر 7 أيام)</h3>
+            <div class="bar-chart" id="barChart"><div class="spinner"></div></div>
+          </div>
+          <div class="chart-card">
+            <h3><i class="fa-solid fa-chart-pie"></i> توزيع الطلبات</h3>
+            <div class="donut-chart" id="donutChart"></div>
+          </div>
+        </div>
+
+        <div class="table-card">
+          <div class="table-header">
+            <h3><i class="fa-solid fa-clock"></i> آخر الطلبات</h3>
+            <button class="btn-sm" onclick="showPage('accounts')">عرض الكل</button>
+          </div>
+          <div id="recentTable"><div class="spinner"></div></div>
+        </div>
+      </div>
+
+      <!-- ── ACCOUNTS PAGE ── -->
+      <div class="page" id="page-accounts">
+        <div class="table-card">
+          <div class="table-header">
+            <h3><i class="fa-solid fa-file-signature"></i> طلبات فتح الحسابات</h3>
+            <div class="table-controls">
+              <div class="search-box">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="accSearch" placeholder="بحث..." oninput="debounce(loadAccounts, 400)()">
+              </div>
+              <select class="filter-select" id="accStatus" onchange="loadAccounts()">
+                <option value="">كل الحالات</option>
+                <option value="pending">معلق</option>
+                <option value="reviewing">قيد المراجعة</option>
+                <option value="approved">مقبول</option>
+                <option value="rejected">مرفوض</option>
+              </select>
+              <select class="filter-select" id="accType" onchange="loadAccounts()">
+                <option value="">كل الأنواع</option>
+                <option value="individual">أفراد</option>
+                <option value="entity">كيانات</option>
+              </select>
+              <button class="btn-sm outline" onclick="loadAccounts()"><i class="fa-solid fa-rotate"></i></button>
+            </div>
+          </div>
+          <div id="accountsTable"><div class="spinner"></div></div>
+          <div class="pagination" id="accPagination" style="display:none">
+            <span id="accPageInfo"></span>
+            <div class="page-btns">
+              <button class="page-btn" id="accPrev" onclick="changePage('acc', -1)">&#8249;</button>
+              <button class="page-btn" id="accNext" onclick="changePage('acc', 1)">&#8250;</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── MESSAGES PAGE ── -->
+      <div class="page" id="page-messages">
+        <div class="table-card">
+          <div class="table-header">
+            <h3><i class="fa-solid fa-envelope"></i> الرسائل والاستفسارات</h3>
+            <div class="table-controls">
+              <select class="filter-select" id="msgStatus" onchange="loadMessages()">
+                <option value="">كل الرسائل</option>
+                <option value="unread">غير مقروءة</option>
+                <option value="read">مقروءة</option>
+                <option value="replied">تم الرد</option>
+              </select>
+              <button class="btn-sm outline" onclick="loadMessages()"><i class="fa-solid fa-rotate"></i></button>
+            </div>
+          </div>
+          <div id="messagesTable"><div class="spinner"></div></div>
+          <div class="pagination" id="msgPagination" style="display:none">
+            <span id="msgPageInfo"></span>
+            <div class="page-btns">
+              <button class="page-btn" id="msgPrev" onclick="changePage('msg', -1)">&#8249;</button>
+              <button class="page-btn" id="msgNext" onclick="changePage('msg', 1)">&#8250;</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── LOG PAGE ── -->
+      <div class="page" id="page-log">
+        <div class="table-card">
+          <div class="table-header">
+            <h3><i class="fa-solid fa-clock-rotate-left"></i> سجل النشاطات</h3>
+            <button class="btn-sm outline" onclick="loadLog()"><i class="fa-solid fa-rotate"></i></button>
+          </div>
+          <div style="padding:16px 22px;"><ul class="log-list" id="logList"><div class="spinner"></div></ul></div>
+        </div>
+      </div>
+
+      <!-- ── SETTINGS PAGE ── -->
+      <div class="page" id="page-settings">
+        <div class="settings-grid">
+          <div class="settings-card">
+            <h3><i class="fa-solid fa-sliders"></i> إعدادات الموقع</h3>
+            <div id="settingsForm"><div class="spinner"></div></div>
+            <button class="btn-save" onclick="saveSettings()">
+              <i class="fa-solid fa-floppy-disk"></i> حفظ الإعدادات
+            </button>
+          </div>
+          <div class="settings-card">
+            <h3><i class="fa-solid fa-lock"></i> تغيير كلمة المرور</h3>
+            <div class="form-group">
+              <label>كلمة المرور الحالية</label>
+              <input type="password" id="currentPass" placeholder="••••••••">
+            </div>
+            <div class="form-group">
+              <label>كلمة المرور الجديدة</label>
+              <input type="password" id="newPass" placeholder="••••••••">
+            </div>
+            <div class="form-group">
+              <label>تأكيد كلمة المرور الجديدة</label>
+              <input type="password" id="confirmPass" placeholder="••••••••">
+            </div>
+            <button class="btn-save" onclick="changePassword()">
+              <i class="fa-solid fa-key"></i> تغيير كلمة المرور
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /main-content -->
+  </div><!-- /app-layout -->
+</div><!-- /appPage -->
+
+<!-- ════════════════════════════════════
+     DETAIL MODAL
+════════════════════════════════════ -->
+<div class="modal-overlay" id="detailModal">
+  <div class="modal">
+    <div class="modal-head">
+      <h3 id="modalTitle">تفاصيل الطلب</h3>
+      <button class="modal-close" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+    <div class="modal-footer" id="modalFooter"></div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div id="toast"></div>
+
+<script>
+/* ════════════════════════════════════
+   CONFIG
+════════════════════════════════════ */
+const API = 'http://localhost:3001/api';
+let TOKEN = localStorage.getItem('msh_token');
+let accPage = 1, msgPage = 1;
+const LIMIT = 15;
+
+/* ════════════════════════════════════
+   INIT
+════════════════════════════════════ */
+window.addEventListener('DOMContentLoaded', () => {
+  if (TOKEN) {
+    showApp();
+  }
+  // Clock
+  setInterval(() => {
+    document.getElementById('topbarClock').textContent =
+      new Date().toLocaleString('ar-SA', { hour:'2-digit', minute:'2-digit', second:'2-digit', hour12:true });
+  }, 1000);
+  // Enter key on login
+  document.getElementById('password').addEventListener('keydown', e => {
+    if (e.key === 'Enter') doLogin();
+  });
+});
+
+function showApp() {
+  document.getElementById('loginPage').style.display = 'none';
+  document.getElementById('appPage').style.display = 'block';
+  const payload = parseJWT(TOKEN);
+  if (payload) {
+    document.getElementById('adminNameDisplay').textContent = payload.name || 'Admin';
+    document.getElementById('adminRoleDisplay').textContent = payload.role === 'superadmin' ? 'مسؤول رئيسي' : 'مسؤول';
+    document.getElementById('avatarInitial').textContent = (payload.name || 'A')[0];
+  }
+  loadDashboard();
+}
+
+/* ════════════════════════════════════
+   AUTH
+════════════════════════════════════ */
+async function doLogin() {
+  const btn  = document.getElementById('loginBtn');
+  const err  = document.getElementById('loginError');
+  const user = document.getElementById('username').value.trim();
+  const pass = document.getElementById('password').value;
+  err.style.display = 'none';
+  if (!user || !pass) { showErr('أدخل اسم المستخدم وكلمة المرور.'); return; }
+  btn.disabled = true; btn.textContent = 'جارٍ الدخول...';
+  try {
+    const res  = await apiFetch('/admin/login', 'POST', { username: user, password: pass }, false);
+    TOKEN = res.token;
+    localStorage.setItem('msh_token', TOKEN);
+    showApp();
+  } catch (e) {
+    showErr(e.message || 'بيانات الدخول غير صحيحة.');
+  } finally {
+    btn.disabled = false; btn.innerHTML = '<i class="fa-solid fa-right-to-bracket"></i> دخول';
+  }
+}
+
+function showErr(msg) {
+  const el = document.getElementById('loginError');
+  el.textContent = msg;
+  el.style.display = 'block';
+}
+
+function doLogout() {
+  TOKEN = null;
+  localStorage.removeItem('msh_token');
+  document.getElementById('appPage').style.display = 'none';
+  document.getElementById('loginPage').style.display = 'flex';
+}
+
+/* ════════════════════════════════════
+   NAVIGATION
+════════════════════════════════════ */
+const pageNames = {
+  dashboard: { title: 'لوحة التحكم', icon: 'fa-gauge-high' },
+  accounts:  { title: 'طلبات الحسابات', icon: 'fa-file-signature' },
+  messages:  { title: 'الرسائل', icon: 'fa-envelope' },
+  log:       { title: 'سجل النشاطات', icon: 'fa-clock-rotate-left' },
+  settings:  { title: 'الإعدادات', icon: 'fa-gear' },
+};
+
+function showPage(name) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('page-' + name).classList.add('active');
+
+  // highlight sidebar
+  document.querySelectorAll('.nav-item').forEach(n => {
+    if (n.getAttribute('onclick')?.includes(`'${name}'`)) n.classList.add('active');
+  });
+
+  const meta = pageNames[name];
+  document.getElementById('topbarTitle').textContent = meta.title;
+  document.getElementById('topbarIcon').className = 'fa-solid ' + meta.icon;
+
+  if (name === 'dashboard') loadDashboard();
+  if (name === 'accounts')  loadAccounts();
+  if (name === 'messages')  loadMessages();
+  if (name === 'log')       loadLog();
+  if (name === 'settings')  loadSettings();
+}
+
+/* ════════════════════════════════════
+   API HELPER
+════════════════════════════════════ */
+async function apiFetch(endpoint, method = 'GET', body = null, auth = true) {
+  const headers = { 'Content-Type': 'application/json' };
+  if (auth && TOKEN) headers['Authorization'] = 'Bearer ' + TOKEN;
+  const opts = { method, headers };
+  if (body) opts.body = JSON.stringify(body);
+  const res  = await fetch(API + endpoint, opts);
+  const data = await res.json();
+  if (!res.ok || !data.success) throw new Error(data.error || 'Request failed');
+  return data;
+}
+
+function parseJWT(token) {
+  try { return JSON.parse(atob(token.split('.')[1])); } catch { return null; }
+}
+
+/* ════════════════════════════════════
+   DASHBOARD
+════════════════════════════════════ */
+async function loadDashboard() {
+  try {
+    const { stats, weekData } = await apiFetch('/admin/stats');
+    document.getElementById('s-total').textContent    = stats.totalRequests;
+    document.getElementById('s-pending').textContent  = stats.pendingReq;
+    document.getElementById('s-approved').textContent = stats.approvedReq;
+    document.getElementById('s-messages').textContent = stats.totalMessages;
+    document.getElementById('pendingBadge').textContent = stats.pendingReq || '';
+    document.getElementById('unreadBadge').textContent  = stats.unreadMessages || '';
+
+    renderBarChart(weekData);
+    renderDonut(stats);
+    loadRecentAccounts();
+  } catch(e) { showToast('خطأ في تحميل الإحصاءات', 'error'); }
+}
+
+function renderBarChart(data) {
+  const el = document.getElementById('barChart');
+  if (!data.length) { el.innerHTML = '<div class="empty-state"><i class="fa-solid fa-chart-bar"></i><p>لا توجد بيانات</p></div>'; return; }
+  const max = Math.max(...data.map(d => d.count), 1);
+  el.innerHTML = data.map(d => {
+    const h = Math.max((d.count / max) * 110, 4);
+    const day = new Date(d.day).toLocaleDateString('ar-SA', { weekday: 'short' });
+    return `<div class="bar-wrap">
+      <div class="bar" style="height:${h}px" title="${d.count} طلب"></div>
+      <div class="bar-label">${day}<br>${d.count}</div>
+    </div>`;
+  }).join('');
+}
+
+function renderDonut(stats) {
+  const total = stats.totalRequests || 1;
+  const items = [
+    { label: 'معلق',   val: stats.pendingReq,   color: '#b45309', pct: (stats.pendingReq/total*100).toFixed(0) },
+    { label: 'مراجعة', val: stats.reviewingReq, color: '#1565c0', pct: (stats.reviewingReq/total*100).toFixed(0) },
+    { label: 'مقبول',  val: stats.approvedReq,  color: '#22863a', pct: (stats.approvedReq/total*100).toFixed(0) },
+    { label: 'مرفوض',  val: stats.rejectedReq,  color: '#c0392b', pct: (stats.rejectedReq/total*100).toFixed(0) },
+    { label: 'أفراد',  val: stats.individuals,  color: '#b5985a', pct: (stats.individuals/total*100).toFixed(0) },
+    { label: 'كيانات', val: stats.entities,      color: '#8c7340', pct: (stats.entities/total*100).toFixed(0) },
+  ];
+  document.getElementById('donutChart').innerHTML = items.map(i => `
+    <div class="donut-item">
+      <div class="donut-label"><div class="donut-dot" style="background:${i.color}"></div>${i.label}</div>
+      <div class="donut-bar-wrap"><div class="donut-bar" style="width:${i.pct}%;background:${i.color}"></div></div>
+      <div class="donut-val">${i.val}</div>
+    </div>`).join('');
+}
+
+async function loadRecentAccounts() {
+  try {
+    const { data } = await apiFetch('/admin/accounts?limit=6');
+    const el = document.getElementById('recentTable');
+    if (!data.length) { el.innerHTML = `<div class="empty-state"><i class="fa-solid fa-inbox"></i><p>لا توجد طلبات بعد</p></div>`; return; }
+    el.innerHTML = `<table><thead><tr>
+      <th>رقم الطلب</th><th>الاسم / الجهة</th><th>النوع</th><th>الجوال</th><th>الحالة</th><th>التاريخ</th><th>إجراء</th>
+    </tr></thead><tbody>${data.map(r => `<tr>
+      <td><span class="ref-badge">${r.ref_no}</span></td>
+      <td>${r.full_name || r.entity_name || '-'}</td>
+      <td><span class="badge ${r.type}">${r.type==='individual'?'أفراد':'كيانات'}</span></td>
+      <td dir="ltr">${r.phone || '-'}</td>
+      <td><span class="badge ${r.status}">${statusLabel(r.status)}</span></td>
+      <td>${fmtDate(r.submitted_at)}</td>
+      <td><button class="icon-btn" onclick="viewAccount(${r.id})" title="عرض"><i class="fa-solid fa-eye"></i></button></td>
+    </tr>`).join('')}</tbody></table>`;
+  } catch(e) { console.error(e); }
+}
+
+/* ════════════════════════════════════
+   ACCOUNTS
+════════════════════════════════════ */
+async function loadAccounts() {
+  const search = document.getElementById('accSearch').value;
+  const status = document.getElementById('accStatus').value;
+  const type   = document.getElementById('accType').value;
+  let url = `/admin/accounts?page=${accPage}&limit=${LIMIT}`;
+  if (search) url += `&search=${encodeURIComponent(search)}`;
+  if (status) url += `&status=${status}`;
+  if (type)   url += `&type=${type}`;
+  document.getElementById('accountsTable').innerHTML = '<div class="spinner"></div>';
+  try {
+    const { data, total } = await apiFetch(url);
+    const el = document.getElementById('accountsTable');
+    if (!data.length) {
+      el.innerHTML = `<div class="empty-state"><i class="fa-solid fa-inbox"></i><p>لا توجد طلبات</p></div>`;
+      document.getElementById('accPagination').style.display = 'none'; return;
+    }
+    el.innerHTML = `<table><thead><tr>
+      <th>رقم الطلب</th><th>الاسم / الجهة</th><th>النوع</th><th>الجوال</th><th>البريد</th><th>الحالة</th><th>التاريخ</th><th>إجراءات</th>
+    </tr></thead><tbody>${data.map(r => `<tr>
+      <td><span class="ref-badge">${r.ref_no}</span></td>
+      <td><strong>${r.full_name || r.entity_name || '-'}</strong></td>
+      <td><span class="badge ${r.type}">${r.type==='individual'?'أفراد':'كيانات'}</span></td>
+      <td dir="ltr">${r.phone || '-'}</td>
+      <td>${r.email || '-'}</td>
+      <td><span class="badge ${r.status}">${statusLabel(r.status)}</span></td>
+      <td>${fmtDate(r.submitted_at)}</td>
+      <td><div class="action-btns">
+        <button class="icon-btn" onclick="viewAccount(${r.id})" title="عرض"><i class="fa-solid fa-eye"></i></button>
+        <button class="icon-btn del" onclick="deleteAccount(${r.id})" title="حذف"><i class="fa-solid fa-trash"></i></button>
+      </div></td>
+    </tr>`).join('')}</tbody></table>`;
+
+    const pages = Math.ceil(total / LIMIT);
+    document.getElementById('accPagination').style.display = 'flex';
+    document.getElementById('accPageInfo').textContent = `عرض ${data.length} من ${total} طلب — صفحة ${accPage} من ${pages}`;
+    document.getElementById('accPrev').disabled = accPage <= 1;
+    document.getElementById('accNext').disabled = accPage >= pages;
+  } catch(e) { document.getElementById('accountsTable').innerHTML = `<div class="empty-state"><p>خطأ في التحميل</p></div>`; }
+}
+
+async function viewAccount(id) {
+  try {
+    const { data: r } = await apiFetch(`/admin/accounts/${id}`);
+    const isEntity = r.type === 'entity';
+    document.getElementById('modalTitle').textContent = `طلب ${isEntity ? 'كيانات' : 'أفراد'} — ${r.ref_no}`;
+    document.getElementById('modalBody').innerHTML = `
+      <div class="detail-grid">
+        ${isEntity ? `
+          <div class="detail-item"><label>اسم الجهة</label><span>${r.entity_name||'-'}</span></div>
+          <div class="detail-item"><label>نوع الجهة</label><span>${r.entity_type||'-'}</span></div>
+          <div class="detail-item"><label>رقم السجل التجاري</label><span>${r.cr_number||'-'}</span></div>
+          <div class="detail-item"><label>رقم الضريبة</label><span>${r.vat_number||'-'}</span></div>
+          <div class="detail-item"><label>اسم المفوض</label><span>${r.auth_person||'-'}</span></div>
+          <div class="detail-item"><label>هوية المفوض</label><span>${r.auth_id||'-'}</span></div>
+          <div class="detail-item"><label>جوال المفوض</label><span dir="ltr">${r.auth_phone||'-'}</span></div>
+        ` : `
+          <div class="detail-item"><label>الاسم الكامل</label><span>${r.full_name||'-'}</span></div>
+          <div class="detail-item"><label>رقم الهوية</label><span>${r.national_id||'-'}</span></div>
+          <div class="detail-item"><label>الجنسية</label><span>${r.nationality||'-'}</span></div>
+          <div class="detail-item"><label>تاريخ الميلاد</label><span>${r.dob||'-'}</span></div>
+          <div class="detail-item"><label>مصدر الدخل</label><span>${r.income_source||'-'}</span></div>
+          <div class="detail-item"><label>الدخل السنوي</label><span>${r.annual_income||'-'}</span></div>
+          <div class="detail-item"><label>هدف الاستثمار</label><span>${r.investment_goal||'-'}</span></div>
+          <div class="detail-item"><label>مستوى المخاطرة</label><span>${r.risk_level||'-'}</span></div>
+        `}
+        <div class="detail-item"><label>الجوال</label><span dir="ltr">${r.phone||'-'}</span></div>
+        <div class="detail-item"><label>البريد الإلكتروني</label><span>${r.email||'-'}</span></div>
+        <div class="detail-item"><label>المنصة الرقمية</label><span>${r.wallet_platform||'-'}</span></div>
+        <div class="detail-item"><label>عنوان المحفظة</label><span dir="ltr" style="font-family:monospace;font-size:0.78rem;word-break:break-all">${r.wallet_address||'-'}</span></div>
+        <div class="detail-item"><label>الحالة</label><span class="badge ${r.status}">${statusLabel(r.status)}</span></div>
+        <div class="detail-item"><label>تاريخ التقديم</label><span>${fmtDate(r.submitted_at)}</span></div>
+        ${r.notes ? `<div class="detail-item full"><label>ملاحظات</label><span>${r.notes}</span></div>` : ''}
+      </div>
+      <div class="form-group">
+        <label>تحديث الحالة</label>
+        <select class="filter-select" id="statusSelect" style="width:100%">
+          ${['pending','reviewing','approved','rejected'].map(s =>
+            `<option value="${s}" ${r.status===s?'selected':''}>${statusLabel(s)}</option>`
+          ).join('')}
+        </select>
+      </div>
+      <div class="form-group">
+        <label>ملاحظات المسؤول</label>
+        <input type="text" id="notesInput" value="${r.notes||''}" placeholder="أضف ملاحظة...">
+      </div>`;
+    document.getElementById('modalFooter').innerHTML = `
+      <button class="btn-sm success" onclick="updateAccount(${id})"><i class="fa-solid fa-check"></i> حفظ</button>
+      <button class="btn-sm outline" onclick="closeModal()">إغلاق</button>
+      ${r.phone ? `<a class="btn-sm" style="background:#25d366" href="https://wa.me/${r.phone.replace(/\D/g,'')}" target="_blank"><i class="fa-brands fa-whatsapp"></i> واتساب</a>` : ''}`;
+    document.getElementById('detailModal').classList.add('show');
+  } catch(e) { showToast('خطأ في تحميل التفاصيل', 'error'); }
+}
+
+async function updateAccount(id) {
+  const status = document.getElementById('statusSelect').value;
+  const notes  = document.getElementById('notesInput').value;
+  try {
+    await apiFetch(`/admin/accounts/${id}`, 'PATCH', { status, notes });
+    showToast('تم تحديث الطلب بنجاح', 'success');
+    closeModal();
+    loadAccounts();
+    loadDashboard();
+  } catch(e) { showToast('خطأ في التحديث', 'error'); }
+}
+
+async function deleteAccount(id) {
+  if (!confirm('هل أنت متأكد من حذف هذا الطلب؟')) return;
+  try {
+    await apiFetch(`/admin/accounts/${id}`, 'DELETE');
+    showToast('تم الحذف', 'success');
+    loadAccounts();
+    loadDashboard();
+  } catch(e) { showToast('خطأ في الحذف', 'error'); }
+}
+
+/* ════════════════════════════════════
+   MESSAGES
+════════════════════════════════════ */
+async function loadMessages() {
+  const status = document.getElementById('msgStatus').value;
+  let url = `/admin/messages?page=${msgPage}&limit=${LIMIT}`;
+  if (status) url += `&status=${status}`;
+  document.getElementById('messagesTable').innerHTML = '<div class="spinner"></div>';
+  try {
+    const { data, total } = await apiFetch(url);
+    const el = document.getElementById('messagesTable');
+    if (!data.length) {
+      el.innerHTML = `<div class="empty-state"><i class="fa-solid fa-envelope-open"></i><p>لا توجد رسائل</p></div>`;
+      document.getElementById('msgPagination').style.display = 'none'; return;
+    }
+    el.innerHTML = `<table><thead><tr>
+      <th>الاسم</th><th>الجوال</th><th>الموضوع</th><th>الرسالة</th><th>الحالة</th><th>التاريخ</th><th>إجراءات</th>
+    </tr></thead><tbody>${data.map(m => `<tr>
+      <td><strong>${m.name}</strong></td>
+      <td dir="ltr">${m.phone||'-'}</td>
+      <td>${m.subject||'-'}</td>
+      <td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${m.message}">${m.message}</td>
+      <td><span class="badge ${m.status}">${msgStatusLabel(m.status)}</span></td>
+      <td>${fmtDate(m.received_at)}</td>
+      <td><div class="action-btns">
+        <button class="icon-btn" onclick="markMessage(${m.id},'read')" title="تحديد مقروء"><i class="fa-solid fa-envelope-open"></i></button>
+        <button class="icon-btn" onclick="markMessage(${m.id},'replied')" title="تم الرد"><i class="fa-solid fa-reply"></i></button>
+        ${m.phone ? `<a class="icon-btn" href="https://wa.me/${m.phone.replace(/\D/g,'')}" target="_blank" title="واتساب" style="background:#25d366;color:#fff;border-color:#25d366"><i class="fa-brands fa-whatsapp"></i></a>` : ''}
+        <button class="icon-btn del" onclick="deleteMessage(${m.id})" title="حذف"><i class="fa-solid fa-trash"></i></button>
+      </div></td>
+    </tr>`).join('')}</tbody></table>`;
+
+    const pages = Math.ceil(total / LIMIT);
+    document.getElementById('msgPagination').style.display = 'flex';
+    document.getElementById('msgPageInfo').textContent = `عرض ${data.length} من ${total} — صفحة ${msgPage} من ${pages}`;
+    document.getElementById('msgPrev').disabled = msgPage <= 1;
+    document.getElementById('msgNext').disabled = msgPage >= pages;
+  } catch(e) { document.getElementById('messagesTable').innerHTML = `<div class="empty-state"><p>خطأ في التحميل</p></div>`; }
+}
+
+async function markMessage(id, status) {
+  try {
+    await apiFetch(`/admin/messages/${id}`, 'PATCH', { status });
+    loadMessages(); loadDashboard();
+  } catch(e) { showToast('خطأ', 'error'); }
+}
+
+async function deleteMessage(id) {
+  if (!confirm('حذف هذه الرسالة؟')) return;
+  try {
+    await apiFetch(`/admin/messages/${id}`, 'DELETE');
+    showToast('تم الحذف', 'success'); loadMessages();
+  } catch(e) { showToast('خطأ', 'error'); }
+}
+
+/* ════════════════════════════════════
+   LOG
+════════════════════════════════════ */
+async function loadLog() {
+  try {
+    const { data } = await apiFetch('/admin/log');
+    const el = document.getElementById('logList');
+    if (!data.length) { el.innerHTML = `<li class="empty-state"><i class="fa-solid fa-list"></i><p>لا توجد نشاطات</p></li>`; return; }
+    el.innerHTML = data.map(l => `
+      <li class="log-item">
+        <div class="log-icon"><i class="fa-solid fa-circle-dot"></i></div>
+        <div class="log-info">
+          <strong>${actionLabel(l.action)} ${l.detail ? '— ' + l.detail : ''}</strong>
+          <span>${l.admin_name||'زائر'} · ${fmtDate(l.logged_at)}</span>
+        </div>
+      </li>`).join('');
+  } catch(e) { showToast('خطأ في تحميل السجل', 'error'); }
+}
+
+/* ════════════════════════════════════
+   SETTINGS
+════════════════════════════════════ */
+async function loadSettings() {
+  try {
+    const { data } = await apiFetch('/admin/settings');
+    document.getElementById('settingsForm').innerHTML = data.map(s => `
+      <div class="form-group">
+        <label>${s.label}</label>
+        <input type="text" data-key="${s.key}" value="${s.value||''}">
+      </div>`).join('');
+  } catch(e) { showToast('خطأ في تحميل الإعدادات', 'error'); }
+}
+
+async function saveSettings() {
+  const inputs = document.querySelectorAll('#settingsForm input');
+  const settings = Array.from(inputs).map(i => ({ key: i.dataset.key, value: i.value }));
+  try {
+    await apiFetch('/admin/settings', 'PUT', { settings });
+    showToast('تم حفظ الإعدادات', 'success');
+  } catch(e) { showToast('خطأ في الحفظ', 'error'); }
+}
+
+async function changePassword() {
+  const curr = document.getElementById('currentPass').value;
+  const nw   = document.getElementById('newPass').value;
+  const conf = document.getElementById('confirmPass').value;
+  if (!curr || !nw || !conf) { showToast('جميع الحقول مطلوبة', 'error'); return; }
+  if (nw !== conf) { showToast('كلمتا المرور غير متطابقتين', 'error'); return; }
+  try {
+    await apiFetch('/admin/change-password', 'POST', { current_password: curr, new_password: nw });
+    showToast('تم تغيير كلمة المرور بنجاح', 'success');
+    document.getElementById('currentPass').value = '';
+    document.getElementById('newPass').value = '';
+    document.getElementById('confirmPass').value = '';
+  } catch(e) { showToast(e.message || 'خطأ', 'error'); }
+}
+
+/* ════════════════════════════════════
+   PAGINATION
+════════════════════════════════════ */
+function changePage(which, dir) {
+  if (which === 'acc') { accPage += dir; if (accPage < 1) accPage = 1; loadAccounts(); }
+  if (which === 'msg') { msgPage += dir; if (msgPage < 1) msgPage = 1; loadMessages(); }
+}
+
+/* ════════════════════════════════════
+   MODAL
+════════════════════════════════════ */
+function closeModal() { document.getElementById('detailModal').classList.remove('show'); }
+document.getElementById('detailModal').addEventListener('click', e => {
+  if (e.target === document.getElementById('detailModal')) closeModal();
+});
+
+/* ════════════════════════════════════
+   TOAST
+════════════════════════════════════ */
+let toastTimer;
+function showToast(msg, type = 'info') {
+  const el = document.getElementById('toast');
+  const icons = { success: 'fa-circle-check', error: 'fa-circle-xmark', info: 'fa-circle-info' };
+  el.innerHTML = `<i class="fa-solid ${icons[type]||icons.info}"></i> ${msg}`;
+  el.className = 'show ' + type;
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove('show'), 3500);
+}
+
+/* ════════════════════════════════════
+   HELPERS
+════════════════════════════════════ */
+function fmtDate(s) {
+  if (!s) return '-';
+  return new Date(s).toLocaleDateString('ar-SA', { year:'numeric', month:'short', day:'numeric', hour:'2-digit', minute:'2-digit' });
+}
+function statusLabel(s) {
+  return { pending:'معلق', reviewing:'قيد المراجعة', approved:'مقبول', rejected:'مرفوض' }[s] || s;
+}
+function msgStatusLabel(s) {
+  return { unread:'غير مقروء', read:'مقروء', replied:'تم الرد' }[s] || s;
+}
+function actionLabel(a) {
+  return {
+    admin_login:'تسجيل دخول', submit_individual:'تقديم طلب أفراد',
+    submit_entity:'تقديم طلب كيانات', contact_message:'رسالة جديدة',
+    update_account:'تحديث طلب', delete_account:'حذف طلب',
+    update_message:'تحديث رسالة', delete_message:'حذف رسالة',
+    update_settings:'تحديث الإعدادات', change_password:'تغيير كلمة مرور',
+  }[a] || a;
+}
+function debounce(fn, delay) {
+  let t;
+  return (...args) => { clearTimeout(t); t = setTimeout(() => fn(...args), delay); };
+}
+</script>
+</body>
+</html>

