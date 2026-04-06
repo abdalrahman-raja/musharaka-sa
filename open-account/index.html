@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>فتح حساب استثماري | مشاركة المالية</title>
+  <style>
+    :root {
+      --gold:        #b5985a;
+      --gold-light:  #eed3a6;
+      --gold-dark:   #8c7340;
+      --dark:        #1a1a1a;
+      --dark-2:      #231f20;
+      --bg:          #f5f0e8;
+      --white:       #ffffff;
+      --text-muted:  #6c6c6c;
+      --border:      #ddd0b8;
+      --error:       #c0392b;
+      --success:     #1e8449;
+      --warning:     #f39c12;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      height: 100%;
+      font-family: 'Tajawal', sans-serif;
+      background-color: var(--dark-2);
+      color: var(--dark);
+      direction: rtl;
+    }
+
+    .form-container {
+      max-width: 680px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 50px 40px 60px;
+      background: var(--bg);
+      min-height: 100vh;
+      position: relative;
+    }
+
+    .step { display: none; animation: fadeIn 0.4s ease-out; }
+    .step.active { display: block; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .form-header { margin-bottom: 36px; }
+    .form-header h1 { font-size: 1.9rem; font-weight: 800; color: var(--dark); line-height: 1.3; }
+    .form-header p { margin-top: 8px; color: var(--text-muted); font-size: 0.95rem; }
+
+    .section-title { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; margin-top: 32px; }
+    .section-number { width: 32px; height: 32px; border-radius: 50%; background: var(--gold); color: var(--white); font-size: 0.85rem; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .section-title h2 { font-size: 1.05rem; font-weight: 700; color: var(--dark); flex: 1; }
+
+    .input-group { margin-bottom: 24px; }
+    .input-group label { display: block; font-size: 0.9rem; font-weight: 700; color: var(--dark); margin-bottom: 8px; }
+    .input-group input, .input-group select, .input-group textarea {
+      width: 100%; padding: 14px 16px; border-radius: 12px; border: 1.5px solid var(--border); background: var(--white); font-family: 'Tajawal', sans-serif; font-size: 0.95rem; transition: all 0.2s;
+    }
+    .input-group input:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 4px rgba(181,152,90,0.1); }
+
+    /* ID Type Cards */
+    .id-types-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px; }
+    .id-type-card {
+      background: var(--white); border: 1.5px solid var(--border); border-radius: 16px; padding: 20px 12px; text-align: center; cursor: pointer; transition: all 0.25s; display: flex; flex-direction: column; align-items: center; gap: 12px;
+    }
+    .id-type-card:hover { border-color: var(--gold-light); transform: translateY(-2px); }
+    .id-type-card.active { border-color: var(--gold); background: rgba(181,152,90,0.05); box-shadow: 0 8px 20px rgba(181,152,90,0.15); }
+    .id-type-icon { width: 60px; height: 40px; object-fit: contain; border-radius: 4px; }
+    .id-type-card span { font-size: 0.85rem; font-weight: 700; color: var(--dark); }
+
+    /* KYC & Face Styles */
+    .kyc-sides { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; }
+    .kyc-side { display: flex; flex-direction: column; gap: 12px; }
+    .kyc-preview { width: 100%; height: 180px; border-radius: 12px; border: 2px dashed var(--border); background: var(--white); display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; cursor: pointer; }
+    .kyc-preview img { width: 100%; height: 100%; object-fit: cover; display: none; }
+    .kyc-preview-placeholder { display: flex; flex-direction: column; align-items: center; gap: 8px; color: var(--text-muted); text-align: center; font-size: 0.8rem; }
+    .btn-action { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 10px; border-radius: 10px; font-family: 'Tajawal', sans-serif; font-size: 0.85rem; font-weight: 600; cursor: pointer; border: none; transition: 0.2s; }
+    .btn-gold { background: var(--gold); color: var(--white); }
+    .btn-outline { background: var(--white); color: var(--dark); border: 1.5px solid var(--border); }
+
+    /* Face Modal */
+    .face-modal { display: none; position: fixed; inset: 0; background: rgba(26,26,26,0.95); z-index: 1000; align-items: center; justify-content: center; flex-direction: column; }
+    .face-modal.show { display: flex; }
+    .face-box { background: var(--dark-2); border-radius: 20px; padding: 24px; max-width: 500px; width: 95%; display: flex; flex-direction: column; align-items: center; gap: 16px; }
+    .face-video-container { position: relative; width: 100%; border-radius: 12px; overflow: hidden; background: #000; }
+    #faceVideo { width: 100%; display: block; max-height: 320px; object-fit: cover; }
+    .face-circle-overlay { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 180px; height: 180px; border: 3px solid var(--gold); border-radius: 50%; pointer-events: none; }
+    .movement-indicators { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; width: 100%; }
+    .movement-indicator { aspect-ratio: 1; border-radius: 8px; background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.3); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
+    .movement-indicator.active { background: var(--gold); border-color: var(--gold); }
+    .movement-indicator.completed { background: var(--success); border-color: var(--success); }
+
+    /* Navigation */
+    .nav-buttons { display: flex; gap: 12px; margin-top: 32px; }
+    .btn-next { flex: 1; padding: 16px; background: var(--gold); color: var(--white); border: none; border-radius: 12px; font-family: 'Tajawal', sans-serif; font-size: 1rem; font-weight: 700; cursor: pointer; }
+    .btn-prev { padding: 16px 24px; background: var(--white); color: var(--dark); border: 1.5px solid var(--border); border-radius: 12px; font-family: 'Tajawal', sans-serif; font-size: 1rem; font-weight: 600; cursor: pointer; }
+
+    /* Success Page */
+    .success-card { text-align: center; padding: 40px 20px; }
+    .success-icon { width: 80px; height: 80px; background: var(--success); color: var(--white); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 40px; margin: 0 auto 24px; }
+    .success-card h2 { font-size: 1.6rem; margin-bottom: 16px; color: var(--dark); }
+    .success-card p { color: var(--text-muted); line-height: 1.6; }
+
+    /* Loading Overlay */
+    .loading-overlay { display: none; position: fixed; inset: 0; background: rgba(255,255,255,0.8); z-index: 2000; align-items: center; justify-content: center; flex-direction: column; gap: 16px; }
+    .spinner { width: 40px; height: 40px; border: 4px solid rgba(181,152,90,0.1); border-top-color: var(--gold); border-radius: 50%; animation: spin 1s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .toast-error { position: fixed; bottom: -100px; left: 50%; transform: translateX(-50%); background: var(--error); color: var(--white); padding: 16px 24px; border-radius: 10px; z-index: 3000; transition: 0.3s; }
+    .toast-error.show { bottom: 20px; }
+
+    @media (max-width: 600px) { .form-container { padding: 24px 16px; } .kyc-sides { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+<div class="loading-overlay" id="loadingOverlay">
+  <div class="spinner"></div>
+  <p>جاري إرسال طلبك...</p>
+</div>
+
+<div class="toast-error" id="toastError"></div>
+
+<div class="form-container">
+  
+  <!-- STEP 1: Personal Data -->
+  <div class="step active" id="step1">
+    <div class="form-header">
+      <h1>فتح حساب استثماري</h1>
+      <p>الخطوة 1: البيانات الشخصية</p>
+    </div>
+    
+    <div class="section-title">
+      <div class="section-number">١</div>
+      <h2>المعلومات الأساسية</h2>
+    </div>
+
+    <div class="input-group">
+      <label>الاسم الكامل (كما في الهوية)</label>
+      <input type="text" id="fullName" placeholder="أدخل اسمك الثلاثي">
+    </div>
+
+    <div class="input-group">
+      <label>رقم الجوال</label>
+      <input type="tel" id="phone" placeholder="05xxxxxxxx">
+    </div>
+
+    <div class="input-group">
+      <label>البريد الإلكتروني</label>
+      <input type="email" id="email" placeholder="example@mail.com">
+    </div>
+
+    <div class="input-group">
+      <label>الجنسية</label>
+      <select id="nationality">
+        <option value="سعودي">سعودي</option>
+        <option value="مقيم">مقيم</option>
+        <option value="أخرى">أخرى</option>
+      </select>
+    </div>
+
+    <div class="nav-buttons">
+      <button type="button" class="btn-next" onclick="goToStep(2)">التالي: وثيقة الهوية</button>
+    </div>
+  </div>
+
+  <!-- STEP 2: ID Documents -->
+  <div class="step" id="step2">
+    <div class="form-header">
+      <h1>فتح حساب استثماري</h1>
+      <p>الخطوة 2: وثيقة الهوية</p>
+    </div>
+
+    <div class="section-title">
+      <div class="section-number">٢</div>
+      <h2>اختر نوع الوثيقة</h2>
+    </div>
+
+    <div class="id-types-grid">
+      <div class="id-type-card active" onclick="selectIdType('national_id', this)">
+        <img src="assets/id_card.jpg" class="id-type-icon" alt="هوية">
+        <span>هوية وطنية</span>
+      </div>
+      <div class="id-type-card" onclick="selectIdType('passport', this)">
+        <img src="assets/passport.png" class="id-type-icon" alt="جواز">
+        <span>جواز سفر</span>
+      </div>
+      <div class="id-type-card" onclick="selectIdType('residence', this)">
+        <img src="assets/residence.jpg" class="id-type-icon" alt="إقامة">
+        <span>بطاقة إقامة</span>
+      </div>
+    </div>
+
+    <div class="kyc-sides">
+      <div class="kyc-side">
+        <label style="font-size:0.85rem; font-weight:700;">الوجه الأمامي (مطلوب)</label>
+        <div class="kyc-preview" id="frontPreview">
+          <img id="frontImg" src="">
+          <div class="kyc-preview-placeholder" id="frontPlaceholder">
+            <span>📷 لم يتم الرفع</span>
+          </div>
+        </div>
+        <div style="display:flex; gap:5px;">
+          <button class="btn-action btn-gold" style="flex:1;" onclick="openKYCCamera('front')">📷 تصوير</button>
+          <label class="btn-action btn-outline" style="flex:1; cursor:pointer;">
+            📂 رفع <input type="file" id="idFrontInput" accept="image/*" style="display:none;" onchange="handleFile(this, 'front')">
+          </label>
+        </div>
+      </div>
+      <div class="kyc-side">
+        <label style="font-size:0.85rem; font-weight:700;">الوجه الخلفي (اختياري)</label>
+        <div class="kyc-preview" id="backPreview">
+          <img id="backImg" src="">
+          <div class="kyc-preview-placeholder" id="backPlaceholder">
+            <span>📷 لم يتم الرفع</span>
+          </div>
+        </div>
+        <div style="display:flex; gap:5px;">
+          <button class="btn-action btn-gold" style="flex:1;" onclick="openKYCCamera('back')">📷 تصوير</button>
+          <label class="btn-action btn-outline" style="flex:1; cursor:pointer;">
+            📂 رفع <input type="file" id="idBackInput" accept="image/*" style="display:none;" onchange="handleFile(this, 'back')">
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-buttons">
+      <button type="button" class="btn-prev" onclick="goToStep(1)">السابق</button>
+      <button type="button" class="btn-next" onclick="goToStep(3)">التالي: التحقق من الوجه</button>
+    </div>
+  </div>
+
+  <!-- STEP 3: Face Verification -->
+  <div class="step" id="step3">
+    <div class="form-header">
+      <h1>فتح حساب استثماري</h1>
+      <p>الخطوة 3: التحقق من الوجه</p>
+    </div>
+
+    <div class="section-title">
+      <div class="section-number">٣</div>
+      <h2>تصوير الوجه 360 درجة</h2>
+    </div>
+
+    <div class="face-preview" id="facePreview" style="height:240px;">
+      <img id="faceImg" src="">
+      <div class="face-preview-placeholder" id="facePlaceholder">
+        <span style="font-size:2rem;">🤳</span>
+        <span>اضغط على الزر أدناه لبدء التحقق الحي</span>
+      </div>
+    </div>
+
+    <div style="margin-top:20px; display:flex; flex-direction:column; gap:10px;">
+      <button class="btn-action btn-gold" style="padding:15px;" onclick="openFaceVerification()">📷 بدء التحقق الحي (Liveness)</button>
+      <label class="btn-action btn-outline" style="padding:15px; cursor:pointer;">
+        📂 رفع صورة وجه جاهزة <input type="file" id="faceInput" accept="image/*" style="display:none;" onchange="handleFile(this, 'face')">
+      </label>
+    </div>
+
+    <div class="nav-buttons">
+      <button type="button" class="btn-prev" onclick="goToStep(2)">السابق</button>
+      <button type="button" class="btn-next" id="submitBtn" onclick="finalSubmit()">إرسال الطلب الآن</button>
+    </div>
+  </div>
+
+  <!-- STEP 4: Success -->
+  <div class="step" id="step4">
+    <div class="success-card">
+      <div class="success-icon">✓</div>
+      <h2>تم استلام طلبك بنجاح!</h2>
+      <p>شكراً لك على ثقتك بمشاركة المالية. لقد تم استلام بياناتك ووثائقك بنجاح.</p>
+      <p style="margin-top:15px; font-weight:700; color:var(--gold-dark);">سيتم التواصل معك من قبل فريق الدعم الفني قريباً من أجل إكمال الإجراءات.</p>
+      <button class="btn-next" style="margin-top:30px;" onclick="location.reload()">إغلاق</button>
+    </div>
+  </div>
+
+</div>
+
+<!-- Modals & Scripts -->
+<div class="face-modal" id="faceModal">
+  <div class="face-box">
+    <h3 id="modalTitle">التحقق من الوجه</h3>
+    <div id="instructionText" style="color:var(--gold-light); text-align:center; font-size:0.9rem;">جاري التحميل...</div>
+    <div class="face-video-container">
+      <video id="videoElement" playsinline autoplay muted style="width:100%;"></video>
+      <div class="face-circle-overlay" id="overlay"></div>
+    </div>
+    <div class="movement-indicators" id="indicators">
+      <div class="movement-indicator" data-m="front">👀</div>
+      <div class="movement-indicator" data-m="left">⬅️</div>
+      <div class="movement-indicator" data-m="right">➡️</div>
+      <div class="movement-indicator" data-m="up">⬆️</div>
+      <div class="movement-indicator" data-m="down">⬇️</div>
+    </div>
+    <div id="timer" style="color:var(--white); font-weight:700;">0s</div>
+    <div style="display:flex; gap:10px; width:100%;">
+      <button class="btn-action btn-gold" id="startRecordBtn" style="flex:1;">🔴 ابدأ</button>
+      <button class="btn-action btn-outline" onclick="closeModal()" style="color:white; border-color:white;">إلغاء</button>
+    </div>
+  </div>
+</div>
+
+<script src="kyc-advanced.js"></script>
+<script src="face-verification.js"></script>
+
+<script>
+  let currentStep = 1;
+  let selectedIdType = 'national_id';
+  let files = { front: null, back: null, face: null, video: null };
+  let stream = null;
+  let recorder = null;
+  let chunks = [];
+
+  function goToStep(step) {
+    if (step > currentStep) {
+      if (currentStep === 1 && !validateStep1()) return;
+      if (currentStep === 2 && !validateStep2()) return;
+    }
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+    document.getElementById('step' + step).classList.add('active');
+    currentStep = step;
+    window.scrollTo(0,0);
+  }
+
+  function validateStep1() {
+    const name = document.getElementById('fullName').value;
+    const phone = document.getElementById('phone').value;
+    if (!name || !phone) { showToast('يرجى إكمال البيانات الأساسية'); return false; }
+    return true;
+  }
+
+  function validateStep2() {
+    if (!files.front) { showToast('يرجى تصوير أو رفع الوجه الأمامي للهوية'); return false; }
+    return true;
+  }
+
+  function selectIdType(type, el) {
+    selectedIdType = type;
+    document.querySelectorAll('.id-type-card').forEach(c => c.classList.remove('active'));
+    el.classList.add('active');
+  }
+
+  function handleFile(input, side) {
+    if (input.files && input.files[0]) {
+      files[side] = input.files[0];
+      const reader = new FileReader();
+      reader.onload = e => {
+        document.getElementById(side + 'Img').src = e.target.result;
+        document.getElementById(side + 'Img').style.display = 'block';
+        document.getElementById(side + 'Placeholder').style.display = 'none';
+      };
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+
+  async function openKYCCamera(side) {
+    try {
+      const mediaStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } });
+      const video = document.createElement('video');
+      video.srcObject = mediaStream;
+      video.play();
+      
+      // Simple capture UI (In production, use a modal)
+      setTimeout(() => {
+        const canvas = document.createElement('canvas');
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        canvas.getContext('2d').drawImage(video, 0, 0);
+        canvas.toBlob(blob => {
+          files[side] = new File([blob], side + ".jpg", { type: "image/jpeg" });
+          document.getElementById(side + 'Img').src = canvas.toDataURL('image/jpeg');
+          document.getElementById(side + 'Img').style.display = 'block';
+          document.getElementById(side + 'Placeholder').style.display = 'none';
+          mediaStream.getTracks().forEach(t => t.stop());
+        }, 'image/jpeg');
+      }, 2000);
+      showToast('جاري فتح الكاميرا والالتقاط...');
+    } catch (e) { showToast('خطأ في الكاميرا: ' + e.message); }
+  }
+
+  async function openFaceVerification() {
+    document.getElementById('faceModal').classList.add('show');
+    try {
+      stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' } });
+      document.getElementById('videoElement').srcObject = stream;
+      document.getElementById('instructionText').textContent = 'جاهز للبدء. اضغط "ابدأ" واتبع الحركات';
+      
+      document.getElementById('startRecordBtn').onclick = startFaceRecording;
+    } catch (e) { showToast('خطأ في الكاميرا: ' + e.message); }
+  }
+
+  function startFaceRecording() {
+    chunks = [];
+    recorder = new MediaRecorder(stream, { mimeType: 'video/webm' });
+    recorder.ondataavailable = e => chunks.push(e.data);
+    recorder.onstop = handleVideoStop;
+    recorder.start();
+    
+    document.getElementById('startRecordBtn').disabled = true;
+    let movements = ['front', 'left', 'right', 'up', 'down'];
+    let idx = 0;
+    
+    const interval = setInterval(() => {
+      if (idx < movements.length) {
+        const m = movements[idx];
+        document.getElementById('instructionText').textContent = getInstruction(m);
+        document.querySelectorAll('.movement-indicator').forEach(i => i.classList.remove('active'));
+        document.querySelector(`[data-m="${m}"]`).classList.add('active');
+        idx++;
+      } else {
+        clearInterval(interval);
+        recorder.stop();
+      }
+    }, 2000);
+  }
+
+  function getInstruction(m) {
+    const map = { front: 'انظر للأمام', left: 'حرك رأسك لليسار', right: 'حرك رأسك لليمين', up: 'حرك رأسك للأعلى', down: 'حرك رأسك للأسفل' };
+    return map[m];
+  }
+
+  function handleVideoStop() {
+    const blob = new Blob(chunks, { type: 'video/webm' });
+    files.video = new File([blob], "face_verification.webm", { type: "video/webm" });
+    
+    // Take a snapshot for preview
+    const video = document.getElementById('videoElement');
+    const canvas = document.createElement('canvas');
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+    canvas.getContext('2d').drawImage(video, 0, 0);
+    files.face = new File([blob], "face.jpg", { type: "image/jpeg" }); // Simplified
+    
+    document.getElementById('faceImg').src = canvas.toDataURL('image/jpeg');
+    document.getElementById('faceImg').style.display = 'block';
+    document.getElementById('facePlaceholder').style.display = 'none';
+    
+    closeModal();
+    showToast('تم التحقق من الوجه بنجاح');
+  }
+
+  function closeModal() {
+    if (stream) stream.getTracks().forEach(t => t.stop());
+    document.getElementById('faceModal').classList.remove('show');
+    document.getElementById('startRecordBtn').disabled = false;
+  }
+
+  async function finalSubmit() {
+    document.getElementById('loadingOverlay').style.display = 'flex';
+    
+    const formData = new FormData();
+    formData.append('fullName', document.getElementById('fullName').value);
+    formData.append('phone', document.getElementById('phone').value);
+    formData.append('email', document.getElementById('email').value);
+    formData.append('nationality', document.getElementById('nationality').value);
+    formData.append('idType', selectedIdType);
+    
+    if (files.front) formData.append('idFront', files.front);
+    if (files.back) formData.append('idBack', files.back);
+    if (files.face) formData.append('faceImage', files.face);
+    if (files.video) formData.append('faceVideo', files.video);
+
+    try {
+      const response = await fetch('http://localhost:5000/api/submit-form', {
+        method: 'POST',
+        body: formData
+      });
+      const result = await response.json();
+      if (result.success) {
+        goToStep(4);
+      } else {
+        showToast('خطأ: ' + result.message);
+      }
+    } catch (e) {
+      showToast('فشل الاتصال بالخادم. تأكد من تشغيل server.py');
+    } finally {
+      document.getElementById('loadingOverlay').style.display = 'none';
+    }
+  }
+
+  function showToast(msg) {
+    const t = document.getElementById('toastError');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 4000);
+  }
+</script>
+</body>
+</html>

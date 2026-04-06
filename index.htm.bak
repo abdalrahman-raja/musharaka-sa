@@ -125,7 +125,7 @@
 <span>افتح حساب استثماري الآن</span>
 <i class="fa-solid fa-angle-down "></i>
 <i class="fa-solid fa-angle-up"></i></div><ul class="dropdown-menu dropdown-menuo" aria-labelledby="primary-dropdown-desktop"><li>
-<a class="dropdown-item" href="https://online.musharaka.sa/auth/login/MQ%3D%3D" target="_blank">العملاء الأفراد</a></li><li>
+<a class="dropdown-item" href="open-account.html" target="_blank">العملاء الأفراد</a></li><li>
 <a class="dropdown-item" href="%D8%AD%D8%B3%D8%A7%D8%A8%D8%A7%D8%AA-%D8%A7%D9%84%D9%83%D9%8A%D8%A7%D9%86%D8%A7%D8%AA/index.htm" target="">العملاء الكيانات</a></li><li>
 <a class="dropdown-item" href="%D8%A7%D9%84%D9%85%D8%B3%D8%AA%D8%AB%D9%85%D8%B1-%D8%A7%D9%84%D8%A3%D8%AC%D9%86%D8%A8%D9%8A/index.htm" target=""> المستثمر الأجنبي الغير مقيم</a></li></ul></div><div class="dropdown dropdown-primary"><div class="dropdown-toggle" type="button" id="secondary-dropdown-desktop" data-bs-toggle="dropdown" aria-expanded="false">
 <span>تداول مشاركة</span>
@@ -213,7 +213,7 @@ en
 <span>افتح حساب استثماري الآن</span>
 <i class="fa-solid fa-angle-down "></i>
 <i class="fa-solid fa-angle-left"></i></div><ul class="mobile-dropdown-menu" aria-labelledby="primary-dropdown-desktop"><li>
-<a class="dropdown-item" href="https://online.musharaka.sa/auth/login/MQ%3D%3D" target="_blank">العملاء الأفراد</a></li><li>
+<a class="dropdown-item" href="open-account.html" target="_blank">العملاء الأفراد</a></li><li>
 <a class="dropdown-item" href="%D8%AD%D8%B3%D8%A7%D8%A8%D8%A7%D8%AA-%D8%A7%D9%84%D9%83%D9%8A%D8%A7%D9%86%D8%A7%D8%AA/index.htm" target="_blank">العملاء الكيانات</a></li><li>
 <a class="dropdown-item" href="%D8%A7%D9%84%D9%85%D8%B3%D8%AA%D8%AB%D9%85%D8%B1-%D8%A7%D9%84%D8%A3%D8%AC%D9%86%D8%A8%D9%8A/index.htm" target="_blank"> المستثمر الأجنبي الغير مقيم</a></li></ul></div><div id='dropdown-mobile-menu-secondary' class="dropdown-mobile-menu  hide-drop-items"><div class="mobile-dropdown-toggle" type="button" id="secondary-dropdown-mobile" data-bs-toggle="dropdown" aria-expanded="false">
 <span>تداول مشاركة</span>
@@ -434,7 +434,7 @@ en
 </g>
 </svg></span><div class="container h-100 py-5"><div class="row h-100 align-items-center justify-content-center gy-5"><div class="section-content col-md-6"><h2 class="title titleFont">شراكة كلها ثقة</h2>
 <span class="description">نسخّر معرفتنا الشاملة بالسوق وما نملكه من خبرة دولية وشبكة واسعة من الشركاء حول العالم إلى جانب سجلّنا الحافل بالنجاحات الممتدّة لأجل تشكيل حلول مبتكرة تضمن حماية أموال عملائنا واستمرارية نموّها</span>
-<a class="myBtn myBtn-default" href="https://online.musharaka.sa/auth/login/MQ%3D%3D" title="افتح حسابك الاستثماري" target="_self">
+<a class="myBtn myBtn-default" href="open-account.html" title="افتح حسابك الاستثماري" target="_self">
 <span>افتح حسابك الاستثماري</span>
 <svg class="arrow" xmlns="http://www.w3.org/2000/svg" width="13" height="12" viewbox="0 0 13 12" fill="none">
 <path d="M11.8491 10.9497L1.94959 1.05025M1.94959 1.05025V10.9497M1.94959 1.05025H11.8491" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -1082,7 +1082,7 @@ en
 <a href="%D8%B9%D9%86-%D9%85%D8%B4%D8%A7%D8%B1%D9%83%D9%87-%D8%A7%D9%84%D9%85%D8%A7%D9%84%D9%8A%D9%87/%D9%85%D9%86%D8%A7%D8%A8%D8%B9-%D9%82%D9%88%D8%AA%D9%86%D8%A7/index.htm">منابع قوتنا</a></li><li class="footer-menu-item">
 <a href="%D8%B9%D9%86-%D9%85%D8%B4%D8%A7%D8%B1%D9%83%D9%87-%D8%A7%D9%84%D9%85%D8%A7%D9%84%D9%8A%D9%87/%D8%A7%D9%84%D8%B1%D8%A4%D9%8A%D9%87-%D9%88-%D8%A7%D9%84%D8%B1%D8%B3%D8%A7%D9%84%D9%87-%D9%88-%D8%A7%D9%84%D9%82%D9%8A%D9%85/index.htm">الرؤية و الرسالة و القيم</a></li><li class="footer-menu-item">
 <a href="%D8%B9%D9%86-%D9%85%D8%B4%D8%A7%D8%B1%D9%83%D9%87-%D8%A7%D9%84%D9%85%D8%A7%D9%84%D9%8A%D9%87/%D8%A7%D9%84%D8%AA%D9%82%D8%A7%D8%B1%D9%8A%D8%B1/index.htm">التقارير</a></li></ul></div></div><div class="footer-column"><div><h3 class="footer-menu-title">افتح حساب استثماري</h3><ul class="footer-menu"><li class="footer-menu-item">
-<a href="https://online.musharaka.sa/auth/login/MQ%3D%3D">اضغط هنا لفتح حسابك الاستثماري أونلاين</a></li></ul></div><div><h3 class="footer-menu-title">روابط مفيدة</h3><ul class="footer-menu"><li class="footer-menu-item">
+<a href="open-account.html">اضغط هنا لفتح حسابك الاستثماري أونلاين</a></li></ul></div><div><h3 class="footer-menu-title">روابط مفيدة</h3><ul class="footer-menu"><li class="footer-menu-item">
 <a href="https://cma.org.sa/Pages/default.aspx">هيئة السوق المالية</a></li><li class="footer-menu-item">
 <a href="https://www.tadawul.com.sa/wps/portal">السوق المالية السعودية (تداول)</a></li><li class="footer-menu-item">
 <a href="https://www.aml.gov.sa/ar-sa/Pages/Home.aspx?ReturnUrl=%2f_layouts%2f15%2fAuthenticate.aspx%3fSource%3d%252F&Source=%2F">اللجنة الدائمة لمكافحة غسل الأموال</a></li><li class="footer-menu-item">
