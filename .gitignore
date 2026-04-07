@@ -1,30 +1,44 @@
 # Dependencies
 node_modules/
-package-lock.json
 
 # Database files
 *.db
+*.sqlite
+*.sqlite3
 *.db-shm
 *.db-wal
 
-# Temporary scripts and tools
-*.py
-*.ps1
-*.exe
-download-tajawal.js
-index.htm
-webcopy-origin.txt
+# Environment variables
+.env
+.env.local
+.env.production
 
-# IDE and OS files
-.vscode/
-.idea/
-.DS_Store
-Thumbs.db
-
-# Build output
+# Build outputs
 dist/
 build/
 
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS generated files
+Thumbs.db
+.DS_Store
+
 # Logs
+logs/
 *.log
 npm-debug.log*
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+
+# WordPress auto-generated content
+wp-json/
+
+# AI assistant files
+.zencoder/
