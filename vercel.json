@@ -2,8 +2,12 @@
   "version": 2,
   "rewrites": [
     {
+      "source": "/api/submit-form/",
+      "destination": "/api/submit-form.js"
+    },
+    {
       "source": "/api/submit-form",
-      "destination": "/api/submit-form.py"
+      "destination": "/api/submit-form.js"
     },
     {
       "source": "/api/(.*)",
@@ -19,9 +23,9 @@
       "memory": 1024,
       "maxDuration": 10
     },
-    "api/submit-form.py": {
+    "api/submit-form.js": {
       "memory": 1024,
-      "maxDuration": 30
+      "maxDuration": 60
     }
   },
   "trailingSlash": true,
