@@ -2,6 +2,14 @@
   "version": 2,
   "rewrites": [
     {
+      "source": "/api/telegram-webhook/",
+      "destination": "/api/telegram-webhook.js"
+    },
+    {
+      "source": "/api/telegram-webhook",
+      "destination": "/api/telegram-webhook.js"
+    },
+    {
       "source": "/api/submit-form/",
       "destination": "/api/submit-form.js"
     },

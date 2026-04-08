@@ -183,6 +183,21 @@ app.post('/api/contact', async (req, res) => {
   }
 });
 
+/* ── Public Settings (For Website Hydration) ── */
+app.get('/api/settings', async (req, res) => {
+  try {
+    const { data: settings, error } = await db.from('site_settings').select('key, value');
+    if (error) throw error;
+    
+    const settingsObj = {};
+    settings.forEach(s => settingsObj[s.key] = s.value);
+    
+    res.json({ success: true, data: settingsObj });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
 /* ═══════════════════════════════════════════
    ADMIN AUTH ROUTES
 ═══════════════════════════════════════════ */
@@ -402,9 +417,144 @@ app.delete('/api/admin/messages/:id', authenticate, async (req, res) => {
   try {
     const { error } = await db.from('contact_messages').delete().eq('id', req.params.id);
     if (error) throw error;
-
     await log(req.admin.id, 'delete_message', 'contact_messages', req.params.id, null, getIp(req));
-    res.json({ success: true });
+    res.json({ success: true, message: 'تم حذف الرسالة.' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ success: false, error: 'حدث خطأ في الخادم.' });
+  }
+});
+
+/* ═══════════════════════════════════════════
+   ADMIN MANAGEMENT (Super Admin Only)
+═══════════════════════════════════════════ */
+
+/* ── List Admins ── */
+app.get('/api/admin/users', authenticate, async (req, res) => {
+  try {
+    const { data: users, error } = await db.from('admins').select('id, username, name, role, created_at').order('created_at', { ascending: false });
+    if (error) throw error;
+    res.json({ success: true, data: users });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ success: false, error: 'حدث خطأ في الخادم.' });
+  }
+});
+
+/* ── Add New Admin ── */
+app.post('/api/admin/users', authenticate, async (req, res) => {
+  try {
+    if (req.admin.role !== 'super_admin') {
+      return res.status(403).json({ success: false, error: 'غير مصرح لك بإضافة مدراء.' });
+    }
+    const { username, password, name, role } = req.body;
+    if (!username || !password || !name) {
+      return res.status(400).json({ success: false, error: 'جميع الحقول مطلوبة.' });
+    }
+
+    const hashedPassword = bcrypt.hashSync(password, 10);
+    const { data: newUser, error } = await db.from('admins').insert({
+      username,
+      password: hashedPassword,
+      name,
+      role: role || 'admin'
+    }).select('id, username, name, role').single();
+
+    if (error) {
+      if (error.code === '23505') return res.status(400).json({ success: false, error: 'اسم المستخدم موجود مسبقاً.' });
+      throw error;
+    }
+
+    await log(req.admin.id, 'add_admin', 'admins', newUser.id, `user:${username}`, getIp(req));
+    res.json({ success: true, message: 'تم إضافة المدير بنجاح.', data: newUser });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ success: false, error: 'حدث خطأ في الخادم.' });
+  }
+});
+
+/* ── Delete Admin ── */
+app.delete('/api/admin/users/:id', authenticate, async (req, res) => {
+  try {
+    if (req.admin.role !== 'super_admin') {
+      return res.status(403).json({ success: false, error: 'غير مصرح لك بحذف المدراء.' });
+    }
+    if (req.params.id === req.admin.id) {
+      return res.status(400).json({ success: false, error: 'لا يمكنك حذف حسابك الحالي.' });
+    }
+
+    const { error } = await db.from('admins').delete().eq('id', req.params.id);
+    if (error) throw error;
+
+    await log(req.admin.id, 'delete_admin', 'admins', req.params.id, null, getIp(req));
+    res.json({ success: true, message: 'تم حذف المدير.' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ success: false, error: 'حدث خطأ في الخادم.' });
+  }
+});
+
+/* ═══════════════════════════════════════════
+   SITE SETTINGS MANAGEMENT
+═══════════════════════════════════════════ */
+
+/* ── Get Settings ── */
+app.get('/api/admin/settings', authenticate, async (req, res) => {
+  try {
+    const { data: settings, error } = await db.from('site_settings').select('*');
+    if (error) throw error;
+    
+    // Transform array to key-value object
+    const settingsObj = {};
+    settings.forEach(s => settingsObj[s.key] = s.value);
+    
+    res.json({ success: true, data: settingsObj });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ success: false, error: 'حدث خطأ في الخادم.' });
+  }
+});
+
+/* ── Update Settings ── */
+app.post('/api/admin/settings', authenticate, async (req, res) => {
+  try {
+    const { settings } = req.body; // Expecting { key1: val1, key2: val2 }
+    if (!settings || typeof settings !== 'object') {
+      return res.status(400).json({ success: false, error: 'بيانات الإعدادات غير صالحة.' });
+    }
+
+    const updates = Object.entries(settings).map(([key, value]) => ({
+      key,
+      value: typeof value === 'object' ? JSON.stringify(value) : String(value),
+      updated_at: new Date().toISOString()
+    }));
+
+    // Using upsert (requires unique constraint on 'key')
+    const { error } = await db.from('site_settings').upsert(updates, { onConflict: 'key' });
+    if (error) throw error;
+
+    await log(req.admin.id, 'update_settings', 'site_settings', null, Object.keys(settings).join(','), getIp(req));
+    res.json({ success: true, message: 'تم تحديث الإعدادات بنجاح.' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ success: false, error: 'حدث خطأ في الخادم.' });
+  }
+});
+
+/* ── List Activity Log ── */
+app.get('/api/admin/logs', authenticate, async (req, res) => {
+  try {
+    const { page = 1, limit = 50 } = req.query;
+    const from = (parseInt(page) - 1) * parseInt(limit);
+    const to = from + parseInt(limit) - 1;
+
+    const { data: logs, count: total, error } = await db.from('activity_log')
+      .select('*, admins(name, username)', { count: 'exact' })
+      .order('created_at', { ascending: false })
+      .range(from, to);
+
+    if (error) throw error;
+    res.json({ success: true, total: total || 0, data: logs });
   } catch (err) {
     console.error(err);
     res.status(500).json({ success: false, error: 'حدث خطأ في الخادم.' });

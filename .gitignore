@@ -36,6 +36,8 @@ npm-debug.log*
 *.tmp
 *.temp
 *.bak
+*.crdownload
+*.pdf
 
 # WordPress auto-generated content
 wp-json/

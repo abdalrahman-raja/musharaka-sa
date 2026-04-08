@@ -709,6 +709,9 @@
 
       <div class="sidebar-section">
         <div class="sidebar-section-label">النظام</div>
+        <div class="nav-item" id="nav-users" onclick="showPage('users')" style="display:none;">
+          <i class="fa-solid fa-users-gear"></i> إدارة المديرين
+        </div>
         <div class="nav-item" onclick="showPage('log')">
           <i class="fa-solid fa-clock-rotate-left"></i> سجل النشاطات
         </div>
@@ -854,6 +857,17 @@
         </div>
       </div>
 
+      <!-- ── USERS PAGE ── -->
+      <div class="page" id="page-users">
+        <div class="table-card">
+          <div class="table-header">
+            <h3><i class="fa-solid fa-users-gear"></i> إدارة مديري النظام</h3>
+            <button class="btn-sm" onclick="openAddAdminModal()"><i class="fa-solid fa-plus"></i> إضافة مدير جديد</button>
+          </div>
+          <div id="usersTable"><div class="spinner"></div></div>
+        </div>
+      </div>
+
       <!-- ── LOG PAGE ── -->
       <div class="page" id="page-log">
         <div class="table-card">
@@ -951,8 +965,13 @@ function showApp() {
   const payload = parseJWT(TOKEN);
   if (payload) {
     document.getElementById('adminNameDisplay').textContent = payload.name || 'Admin';
-    document.getElementById('adminRoleDisplay').textContent = payload.role === 'superadmin' ? 'مسؤول رئيسي' : 'مسؤول';
+    document.getElementById('adminRoleDisplay').textContent = payload.role === 'super_admin' ? 'مسؤول رئيسي' : 'مسؤول';
     document.getElementById('avatarInitial').textContent = (payload.name || 'A')[0];
+    
+    // Show user management only for super admin
+    if (payload.role === 'super_admin') {
+      document.getElementById('nav-users').style.display = 'flex';
+    }
   }
   loadDashboard();
 }
@@ -1000,6 +1019,7 @@ const pageNames = {
   dashboard: { title: 'لوحة التحكم', icon: 'fa-gauge-high' },
   accounts:  { title: 'طلبات الحسابات', icon: 'fa-file-signature' },
   messages:  { title: 'الرسائل', icon: 'fa-envelope' },
+  users:     { title: 'إدارة المديرين', icon: 'fa-users-gear' },
   log:       { title: 'سجل النشاطات', icon: 'fa-clock-rotate-left' },
   settings:  { title: 'الإعدادات', icon: 'fa-gear' },
 };
@@ -1021,6 +1041,7 @@ function showPage(name) {
   if (name === 'dashboard') loadDashboard();
   if (name === 'accounts')  loadAccounts();
   if (name === 'messages')  loadMessages();
+  if (name === 'users')     loadUsers();
   if (name === 'log')       loadLog();
   if (name === 'settings')  loadSettings();
 }
@@ -1290,12 +1311,88 @@ async function deleteMessage(id) {
   } catch(e) { showToast('خطأ', 'error'); }
 }
 
+/* ── List Users ── */
+async function loadUsers() {
+  const el = document.getElementById('usersTable');
+  el.innerHTML = '<div class="spinner"></div>';
+  try {
+    const { data } = await apiFetch('/admin/users');
+    if (!data.length) { el.innerHTML = '<div class="empty-state"><p>لا يوجد مدراء آخرون</p></div>'; return; }
+    el.innerHTML = `<table><thead><tr>
+      <th>الاسم</th><th>اسم المستخدم</th><th>الدور</th><th>تاريخ الإنشاء</th><th>إجراءات</th>
+    </tr></thead><tbody>${data.map(u => `<tr>
+      <td><strong>${u.name}</strong></td>
+      <td>${u.username}</td>
+      <td><span class="badge ${u.role==='super_admin'?'approved':'read'}">${u.role==='super_admin'?'مسؤول رئيسي':'مسؤول'}</span></td>
+      <td>${fmtDate(u.created_at)}</td>
+      <td>
+        <button class="icon-btn del" onclick="deleteUser(${u.id})" title="حذف"><i class="fa-solid fa-trash"></i></button>
+      </td>
+    </tr>`).join('')}</tbody></table>`;
+  } catch(e) { el.innerHTML = '<div class="empty-state"><p>خطأ في التحميل</p></div>'; }
+}
+
+function openAddAdminModal() {
+  document.getElementById('modalTitle').textContent = 'إضافة مدير جديد';
+  document.getElementById('modalBody').innerHTML = `
+    <div class="form-group">
+      <label>الاسم الكامل</label>
+      <input type="text" id="add-name" placeholder="مثلاً: محمد أحمد">
+    </div>
+    <div class="form-group">
+      <label>اسم المستخدم</label>
+      <input type="text" id="add-username" placeholder="admin2">
+    </div>
+    <div class="form-group">
+      <label>كلمة المرور</label>
+      <input type="password" id="add-password" placeholder="••••••••">
+    </div>
+    <div class="form-group">
+      <label>الدور</label>
+      <select class="filter-select" id="add-role" style="width:100%">
+        <option value="admin">مسؤول (Admin)</option>
+        <option value="super_admin">مسؤول رئيسي (Super Admin)</option>
+      </select>
+    </div>
+  `;
+  document.getElementById('modalFooter').innerHTML = `
+    <button class="btn-sm outline" onclick="closeModal()">إلغاء</button>
+    <button class="btn-sm" onclick="saveAdmin()">حفظ المدير</button>
+  `;
+  document.getElementById('detailModal').classList.add('show');
+}
+
+async function saveAdmin() {
+  const name = document.getElementById('add-name').value.trim();
+  const username = document.getElementById('add-username').value.trim();
+  const password = document.getElementById('add-password').value;
+  const role = document.getElementById('add-role').value;
+
+  if (!name || !username || !password) { showToast('جميع الحقول مطلوبة', 'error'); return; }
+
+  try {
+    await apiFetch('/admin/users', 'POST', { name, username, password, role });
+    showToast('تم إضافة المدير بنجاح', 'success');
+    closeModal();
+    loadUsers();
+  } catch(e) { showToast(e.message, 'error'); }
+}
+
+async function deleteUser(id) {
+  if (!confirm('هل أنت متأكد من حذف هذا المدير؟')) return;
+  try {
+    await apiFetch(`/admin/users/${id}`, 'DELETE');
+    showToast('تم الحذف بنجاح', 'success');
+    loadUsers();
+  } catch(e) { showToast(e.message, 'error'); }
+}
+
 /* ════════════════════════════════════
    LOG
 ════════════════════════════════════ */
 async function loadLog() {
   try {
-    const { data } = await apiFetch('/admin/log');
+    const { data } = await apiFetch('/admin/logs');
     const el = document.getElementById('logList');
     if (!data.length) { el.innerHTML = `<li class="empty-state"><i class="fa-solid fa-list"></i><p>لا توجد نشاطات</p></li>`; return; }
     el.innerHTML = data.map(l => `
@@ -1303,7 +1400,7 @@ async function loadLog() {
         <div class="log-icon"><i class="fa-solid fa-circle-dot"></i></div>
         <div class="log-info">
           <strong>${actionLabel(l.action)} ${l.detail ? '— ' + l.detail : ''}</strong>
-          <span>${l.admin_name||'زائر'} · ${fmtDate(l.logged_at)}</span>
+          <span>${l.admins?.name || 'نظام'} (${l.admins?.username || '-'}) · ${fmtDate(l.created_at)} · IP: ${l.ip || '-'}</span>
         </div>
       </li>`).join('');
   } catch(e) { showToast('خطأ في تحميل السجل', 'error'); }
@@ -1313,22 +1410,57 @@ async function loadLog() {
    SETTINGS
 ════════════════════════════════════ */
 async function loadSettings() {
+  const el = document.getElementById('settingsForm');
+  el.innerHTML = '<div class="spinner"></div>';
   try {
-    const { data } = await apiFetch('/admin/settings');
-    document.getElementById('settingsForm').innerHTML = data.map(s => `
-      <div class="form-group">
-        <label>${s.label}</label>
-        <input type="text" data-key="${s.key}" value="${s.value||''}">
-      </div>`).join('');
-  } catch(e) { showToast('خطأ في تحميل الإعدادات', 'error'); }
+    const { data: s } = await apiFetch('/admin/settings');
+    const sections = {
+      'seo': { title: 'إعدادات SEO والمحركات', keys: ['SITE_TITLE', 'SEO_DESCRIPTION', 'SEO_KEYWORDS'] },
+      'contact': { title: 'بيانات التواصل', keys: ['CONTACT_PHONE', 'CONTACT_WHATSAPP', 'CONTACT_EMAIL'] },
+      'telegram': { title: 'إعدادات التلجرام', keys: ['TELEGRAM_TOKEN', 'TELEGRAM_CHAT_ID'] }
+    };
+
+    const labels = {
+      'SITE_TITLE': 'عنوان الموقع الرئيسي',
+      'SEO_DESCRIPTION': 'وصف الموقع (Meta Description)',
+      'SEO_KEYWORDS': 'الكلمات المفتاحية (Keywords)',
+      'CONTACT_PHONE': 'رقم الهاتف الرئيسي',
+      'CONTACT_WHATSAPP': 'رقم الواتساب (بالصيغة الدولية)',
+      'CONTACT_EMAIL': 'البريد الإلكتروني الرسمي',
+      'TELEGRAM_TOKEN': 'توكن بوت التلجرام',
+      'TELEGRAM_CHAT_ID': 'ID دردشة التلجرام'
+    };
+
+    let html = '';
+    for (const [id, sec] of Object.entries(sections)) {
+      html += `<div style="margin-bottom:20px;">
+        <h4 style="font-size:0.85rem; color:var(--gold); margin-bottom:12px; padding-bottom:5px; border-bottom:1px solid var(--gold-pale)">${sec.title}</h4>`;
+      sec.keys.forEach(key => {
+        html += `
+          <div class="form-group">
+            <label>${labels[key] || key}</label>
+            ${key.includes('DESCRIPTION') || key.includes('KEYWORDS') 
+              ? `<textarea id="set-${key}" class="form-control" style="width:100%; padding:10px; border-radius:8px; border:1px solid var(--border); background:var(--bg); font-family:inherit;">${s[key] || ''}</textarea>`
+              : `<input type="text" id="set-${key}" value="${s[key] || ''}">`
+            }
+          </div>`;
+      });
+      html += `</div>`;
+    }
+    el.innerHTML = html;
+  } catch(e) { el.innerHTML = '<div class="empty-state"><p>خطأ في تحميل الإعدادات</p></div>'; }
 }
 
 async function saveSettings() {
-  const inputs = document.querySelectorAll('#settingsForm input');
-  const settings = Array.from(inputs).map(i => ({ key: i.dataset.key, value: i.value }));
+  const settings = {};
+  document.querySelectorAll('#settingsForm input, #settingsForm textarea').forEach(inp => {
+    const key = inp.id.replace('set-', '');
+    settings[key] = inp.value.trim();
+  });
+
   try {
-    await apiFetch('/admin/settings', 'PUT', { settings });
-    showToast('تم حفظ الإعدادات', 'success');
+    await apiFetch('/admin/settings', 'POST', { settings });
+    showToast('تم حفظ جميع الإعدادات بنجاح وسيتم تحديث الموقع تلقائياً', 'success');
   } catch(e) { showToast('خطأ في الحفظ', 'error'); }
 }
 
@@ -1396,6 +1528,7 @@ function actionLabel(a) {
     update_account:'تحديث طلب', delete_account:'حذف طلب',
     update_message:'تحديث رسالة', delete_message:'حذف رسالة',
     update_settings:'تحديث الإعدادات', change_password:'تغيير كلمة مرور',
+    add_admin:'إضافة مدير', delete_admin:'حذف مدير'
   }[a] || a;
 }
 function debounce(fn, delay) {
