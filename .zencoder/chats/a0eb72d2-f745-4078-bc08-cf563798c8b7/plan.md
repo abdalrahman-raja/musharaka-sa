@@ -42,12 +42,32 @@ Migrate the project's data storage from SQLite to Supabase to ensure data persis
 4. Ensure `open-account/server.py` correctly handles its own logic or interacts with the new database if needed (primarily uses Telegram).
 5. Add configuration instructions for Supabase API URL and Key.
 
-### [x] Step: Vercel Deployment Configuration
+### [x] Step: Dynamic Admin Dashboard & Site Control
 
-Configure the project for a seamless deployment on Vercel.
+Enhanced the admin dashboard to provide full control over the site settings and SEO.
 
-1. Update `vercel.json` to handle multiple backends (Node.js and Python) using Serverless Functions.
-2. Ensure all API paths are correctly routed to the respective functions.
-3. Optimize project structure for Vercel's `api/` directory if necessary.
-4. Test locally with `vercel dev` if possible, otherwise verify all configurations.
-5. Provide a final checklist for the user to complete the deployment on Vercel Dashboard.
+1.  Implemented `api/site-settings.js` to manage website configuration (SEO, Contact, Telegram) in Supabase.
+2.  Updated `admin/index.html` with UI sections for managing administrators and site settings.
+3.  Created `assets/js/site-manager.js` to dynamically update the frontend (titles, meta tags, phone numbers) based on database settings.
+4.  Integrated `site-manager.js` into main entry files (`index.htm`, `en/index.htm`).
+5.  Added IP logging and activity tracking for administrative actions.
+
+### [x] Step: Telegram Bot Interactive PDF Generation
+
+Implement interactive Telegram bot responses to generate PDF contracts from form submissions.
+
+1. Update the form submission handler to include "inline keyboard" buttons in the Telegram notification.
+2. Add a "Generate PDF" button to the Telegram message.
+3. Implement a webhook or callback handler to receive and process the user's response.
+4. Integrate a PDF generation library (e.g., `pdf-lib`) to fill data into a pre-defined PDF template.
+5. Map specific form fields to their corresponding locations in the PDF template.
+6. Send the generated PDF file back to the user via the Telegram bot.
+
+### [x] Step: Arabic Support in PDF Generation
+
+Optimize the Telegram Bot PDF Generation for full Arabic support.
+
+1. Embed the Tajawal font (or a suitable Arabic .ttf font) into the PDF generation process.
+2. Ensure the PDF layout correctly renders Arabic text (Right-to-Left).
+3. Update the PDF contract with a professional layout for both individual and corporate requests.
+4. Integrate `arabic-reshaper` and `fontkit` for correct character connections and font handling.
