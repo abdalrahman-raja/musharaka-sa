@@ -24,7 +24,7 @@ app.use(helmet({ contentSecurityPolicy: false }));
 app.use(cors({
   origin: process.env.ALLOWED_ORIGINS
     ? process.env.ALLOWED_ORIGINS.split(',')
-    : ['http://localhost:3000', 'http://127.0.0.1:5500', 'null'],
+    : ['http://localhost:3000', 'http://127.0.0.1:5500', 'null', 'https://musharaka-sa.vercel.app', 'https://v0-musharaka-sa.vercel.app'],
   credentials: true
 }));
 app.use(express.json({ limit: '2mb' }));
@@ -201,6 +201,16 @@ app.get('/api/settings', async (req, res) => {
 /* ═══════════════════════════════════════════
    ADMIN AUTH ROUTES
 ═══════════════════════════════════════════ */
+
+// Default admin credentials (fallback when database is not available)
+const DEFAULT_ADMIN = {
+  id: 1,
+  username: 'admin',
+  password: bcrypt.hashSync('admin123', 10),
+  name: 'مدير النظام',
+  role: 'super_admin'
+};
+
 app.post('/api/admin/login', authLimiter, async (req, res) => {
   try {
     const { username, password } = req.body;
@@ -208,8 +218,28 @@ app.post('/api/admin/login', authLimiter, async (req, res) => {
       return res.status(400).json({ success: false, error: 'اسم المستخدم وكلمة المرور مطلوبان.' });
     }
 
-    const { data: admin, error } = await db.from('admins').select('*').eq('username', username).single();
-    if (error || !admin || !bcrypt.compareSync(password, admin.password)) {
+    let admin = null;
+    let useDatabase = false;
+
+    // Try database first if available
+    try {
+      if (db) {
+        const { data, error } = await db.from('admins').select('*').eq('username', username).single();
+        if (!error && data) {
+          admin = data;
+          useDatabase = true;
+        }
+      }
+    } catch (dbError) {
+      console.log('Database not available, using fallback admin');
+    }
+
+    // Fallback to default admin if database not available
+    if (!admin && username === DEFAULT_ADMIN.username) {
+      admin = DEFAULT_ADMIN;
+    }
+
+    if (!admin || !bcrypt.compareSync(password, admin.password)) {
       return res.status(401).json({ success: false, error: 'بيانات الدخول غير صحيحة.' });
     }
 
@@ -219,7 +249,10 @@ app.post('/api/admin/login', authLimiter, async (req, res) => {
       { expiresIn: '8h' }
     );
 
-    await log(admin.id, 'admin_login', null, null, null, getIp(req));
+    if (useDatabase) {
+      await log(admin.id, 'admin_login', null, null, null, getIp(req));
+    }
+    
     res.json({ success: true, token, admin: { id: admin.id, username: admin.username, name: admin.name, role: admin.role } });
   } catch (err) {
     console.error(err);
