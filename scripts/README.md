@@ -58,6 +58,59 @@ node scripts/create-first-admin.js
 
 ---
 
+### 2. Test Blob Storage Connection
+
+**File:** `test-blob-storage.js`
+
+This script tests the Supabase Blob Storage connection and verifies that file upload/listing operations work correctly.
+
+#### When to Use:
+- After setting up blob storage configuration
+- To verify environment variables are correct
+- To troubleshoot storage connectivity issues
+
+#### Prerequisites:
+1. Ensure `.env` file has Supabase credentials with `MUSHARAKA_` prefix
+2. Dependencies are installed (`npm install`)
+
+#### How to Run:
+
+```bash
+node scripts/test-blob-storage.js
+```
+
+#### What It Tests:
+1. ✅ Environment variables are configured
+2. ✅ File upload functionality
+3. ✅ File listing functionality
+4. ✅ Connection to Supabase storage
+
+#### Output Example:
+```
+Testing Blob Storage Connection...
+
+✓ Checking environment variables...
+✓ Environment variables configured
+
+✓ Testing file upload...
+✓ Upload successful!
+  Path: test/test-file.txt
+  URL: https://xxxxx.supabase.co/storage/v1/object/public/musharaka-uploads/test/test-file.txt
+
+✓ Testing file listing...
+✓ Files listed successfully!
+  Found 1 files
+
+✓ Blob storage test complete!
+```
+
+#### Troubleshooting:
+- **"Environment variables not set"**: Check `.env` file has `MUSHARAKA_SUPABASE_URL` and `MUSHARAKA_SUPABASE_SERVICE_ROLE_KEY`
+- **"Upload failed"**: Verify bucket exists and permissions are correct
+- **"Connection error"**: Check your internet connection and Supabase URL
+
+---
+
 ## 🔐 Security Notes
 
 1. **Never commit actual credentials to version control**
@@ -73,8 +126,8 @@ node scripts/create-first-admin.js
 ### Error: "Missing Supabase credentials"
 **Solution:** Make sure your `.env` file has:
 ```env
-SUPABASE_URL=https://your-project.supabase.co
-SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
+MUSHARAKA_SUPABASE_URL=https://your-project.supabase.co
+MUSHARAKA_SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
 ```
 
 ### Error: "relation 'admins' does not exist"
@@ -82,6 +135,12 @@ SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
 
 ### Error: "Admin user already exists"
 **Solution:** The admin was already created. Use those credentials or reset the password from the admin panel.
+
+### Error: "Blob storage connection failed"
+**Solution:** 
+1. Verify `.env` has correct Supabase credentials
+2. Check that the bucket `musharaka-uploads` exists
+3. Run `node scripts/test-blob-storage.js` to diagnose
 
 ---
 
@@ -104,5 +163,8 @@ Then run the script again.
 
 - Backend Server: `backend/server.js`
 - API Service: `api/index.js`
+- Database Config: `api/database.js`
+- Blob Storage: `api/blob-storage.js`
 - Admin Panel: `admin/index.html`
-- Environment Config: `backend/.env`, `api/.env`
+- Environment Config: `.env`, `.env.example`
+- Setup Guides: `BLOB_STORAGE_SETUP.md`, `BLOB_STORAGE_SETUP_AR.md`
